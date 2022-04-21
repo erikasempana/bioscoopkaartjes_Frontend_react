@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import BasicCounter from "./pages/basic/Counter/classComponent";
 import BasicReact from "./pages/basic/React";
-import SignIn from "./pages/signin";
+import SignIn from "./pages/signin/signin";
 
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
       <Routes>
         <Route path="basic/counter" element={<BasicCounter />} />
         <Route path="basic/react" element={<BasicReact />} />
-        <Route path="login" element={<SignIn />} />
+        <Route path="signin" element={<SignIn />} />
       </Routes>
     </BrowserRouter>
   );
