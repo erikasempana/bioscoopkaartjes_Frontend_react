@@ -1,0 +1,58 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Mulish:wght@400;600;700&family=Open+Sans&display=swap");
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+/* NAVBAR */
+.moviedetail_menu {
+  width: 100%;
+  padding: 2% 4%;
+  box-sizing: border-box;
+  position: fixed;
+  display: block;
+  background-color: white;
+  z-index: 2;
+}
+
+.moviedetail_nav-right {
+  float: right;
+  display: flex;
+  box-sizing: border-box;
+}
+
+.moviedetail_nav-profile-img {
+  order: 1;
+}
+
+.moviedetail_nav-search {
+  padding-top: 5px;
+  padding-right: 20px;
+  box-sizing: border-box;
+}
+
+.moviedetail_nav-search form {
+  margin: auto;
+  max-width: 300px;
+}
+
+.moviedetail_nav-right form input {
+  border-radius: 25px;
+  border: 1px solid rgba(222, 222, 222, 1);
+  padding: 10px 60px 10px 24px;
+  box-sizing: border-box;
+  color: #a0a3bd;
+  background-color: #fff;
+  /* display: none; */
+}
+
+.moviedetail_nav-right form button {
+  border-radius: 5px;
+  border: 1px solid;
+  background-color: #fff;
+  font-size: 14px;
+  color: #fff;
+  box-sizing: border-box;
+  padding-top: 15px;
+}

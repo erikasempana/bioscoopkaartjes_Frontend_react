@@ -1,5 +1,10 @@
 import React, { useState } from "react";
-import { useSearchParams, useLocation, useParams, useNavigate } from "react-router-dom";
+import {
+  useSearchParams,
+  useLocation,
+  useParams,
+  useNavigate,
+} from "react-router-dom";
 
 export default function Detail() {
   const navigate = useNavigate();
@@ -16,7 +21,7 @@ export default function Detail() {
 
   const [dataOrder, setDataOrder] = useState({
     movieId: params.id,
-    dateBooking: new Date().toISOString().split("T")[0]
+    dateBooking: new Date().toISOString().split("T")[0],
   });
 
   const listSchedule = [
@@ -25,15 +30,15 @@ export default function Detail() {
       premiere: "Ebu.id",
       price: "50000",
       movieName: "Spiderman",
-      time: ["10:00", "12:00"]
+      time: ["10:00", "12:00"],
     },
     {
       id: 2,
       premiere: "CineOne",
       price: "60000",
       movieName: "Batman",
-      time: ["13:00", "15:00"]
-    }
+      time: ["13:00", "15:00"],
+    },
   ];
 
   console.log(dataOrder);
@@ -72,7 +77,12 @@ export default function Detail() {
             {item.time.map((itemTime) => (
               <button
                 key={itemTime}
-                onClick={() => changeDataBooking({ timeBooking: itemTime, scheduleId: item.id })}
+                onClick={() =>
+                  changeDataBooking({
+                    timeBooking: itemTime,
+                    scheduleId: item.id,
+                  })
+                }
               >
                 {itemTime}
               </button>
