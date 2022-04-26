@@ -2,6 +2,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 function Navbar() {
+  // bisa panggil JSON.parse untuk panggil list data
   const navigate = useNavigate();
   const handleLogout = () => {
     navigate("/login");

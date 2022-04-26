@@ -4,6 +4,10 @@ import axios from "../../../utils/axios";
 import Pagination from "react-paginate";
 
 function Home() {
+  
+//memberi title header, masukin di bawah tulisan function
+
+  document.title = "Tickitz | Home"; 
   const limit = 6;
   const [page, setPage] = useState(1);
   const [data, setData] = useState([]);

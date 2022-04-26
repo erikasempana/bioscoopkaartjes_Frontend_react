@@ -1,0 +1,423 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Mulish:wght@400;600;700&family=Open+Sans&display=swap");
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* STYLE */
+
+body {
+  width: 100%;
+  background-color: rgb(211, 210, 210);
+}
+
+.container {
+  width: 100%;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+/* NAVBAR */
+
+nav {
+  width: 100%;
+  overflow: hidden;
+  padding-top: 2%;
+  padding-left: 2%;
+  padding-bottom: 2%;
+  box-sizing: border-box;
+  position: fixed;
+  display: block;
+  background-color: white;
+  z-index: 2;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  font-family: "Mulish";
+  font-size: 16px;
+  display: block;
+  padding: 20px 20px 20px 40px;
+  text-decoration: none;
+  color: rgba(65, 65, 65, 1);
+}
+
+li a:hover:not(.active) {
+  text-decoration: underline;
+}
+
+.active {
+  font-size: 14px;
+  float: right;
+  height: 10px;
+  border-radius: 5px;
+  color: white;
+  background-color: rgba(95, 46, 234, 1);
+}
+
+.nav-right {
+  float: right;
+  display: flex;
+}
+
+.nav-profile-img {
+  order: 1;
+}
+
+.nav-search {
+  padding-top: 5px;
+  padding-right: 20px;
+  box-sizing: border-box;
+}
+
+.nav-search form {
+  margin: auto;
+  max-width: 300px;
+}
+
+.nav-right form input {
+  border-radius: 25px;
+  border: 1px solid rgba(222, 222, 222, 1);
+  padding: 10px 60px 10px 24px;
+  box-sizing: border-box;
+  color: #a0a3bd;
+  background-color: #fff;
+  display: none;
+}
+
+.nav-right form button {
+  /* border-radius: 5px; */
+  border: 1px solid;
+  background-color: #fff;
+  font-size: 14px;
+  color: #fff;
+  box-sizing: border-box;
+  padding-top: 15px;
+}
+
+/* END OF NAVBAR */
+
+/* MAIN */
+.main-pos {
+  width: 100%;
+  margin-top: 50px;
+  z-index: 1;
+}
+.content {
+  background: #f5f6f8;
+  font-family: "MUlish";
+}
+
+.img-top {
+  width: 100%;
+}
+
+.line-border {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  border-bottom: 1px solid #dedede;
+  width: 100%;
+}
+
+.btn-1 {
+  height: 40px;
+  width: 134px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #f7f7fc;
+  background: #5f2eea;
+  border: none;
+  border-radius: 4px;
+  line-height: 30px;
+  vertical-align: middle;
+  box-shadow: 0px 8px 24px rgba(95, 46, 234, 0.24);
+}
+.btn-2 {
+  height: 40px;
+  width: 134px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #5f2eea;
+  background-color: white;
+  line-height: 30px;
+  vertical-align: middle;
+  border: none;
+}
+
+.set-box {
+  background: #eff0f6;
+  border-color: #eff0f6;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 28px;
+  letter-spacing: 0.25px;
+  color: #4e4b66;
+}
+
+.set-box:hover {
+  background: #eff0f6;
+  border-color: #eff0f6;
+  color: #4e4b66;
+}
+
+.set-box:active {
+  background: #eff0f6;
+  border-color: #eff0f6;
+  color: #4e4b66;
+}
+
+.location {
+  display: flex;
+}
+
+.iconmap {
+  font-size: 19px;
+  color: rgba(65, 65, 65, 1);
+}
+
+/* END OF MAIN */
+
+/* FOOTER */
+.container-footer {
+  width: 100%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 2%;
+  box-sizing: border-box;
+}
+
+/* upper footer */
+.upper-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  justify-items: center;
+  padding: 2%;
+}
+
+.brand {
+  flex: 4;
+  float: left;
+}
+
+.brand-image {
+  padding-bottom: 10px;
+}
+
+.brand-desc {
+  font-family: "Mulish";
+  font-size: 16px;
+}
+
+.explore {
+  flex: 2;
+  padding-top: 10px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  font-family: "Mulish";
+  font-size: 16px;
+  align-self: flex-start;
+  justify-content: left;
+}
+
+.explore-title {
+  padding-bottom: 20px;
+  box-sizing: border-box;
+  font-weight: 700;
+}
+
+.wrap-explore a {
+  text-decoration: none;
+  box-sizing: border-box;
+  color: rgba(78, 75, 102, 1);
+  font-size: 16px;
+}
+
+.wrap-explore a:hover {
+  text-decoration: underline;
+}
+
+.sponsor {
+  flex: 3;
+  padding-top: 10px;
+  box-sizing: border-box;
+  font-family: "Mulish";
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.sponsor-title {
+  padding-bottom: 20px;
+  box-sizing: border-box;
+}
+
+.follow {
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  padding-top: 10px;
+  box-sizing: border-box;
+  font-family: "Mulish";
+  font-size: 16px;
+}
+
+.follow-title {
+  padding-bottom: 20px;
+  box-sizing: border-box;
+  font-weight: 700;
+}
+
+.wrap-follow {
+  font-family: "Mulish";
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+}
+
+.wrap-set {
+  display: inline-flex;
+  align-items: center;
+  padding-bottom: 8px;
+  padding-top: 0;
+  box-sizing: border-box;
+}
+
+.wrap-set span {
+  padding-left: 10px;
+  font-family: "Mulish";
+  font-size: 16px;
+  color: rgba(78, 75, 102, 1);
+}
+
+/* lower footer */
+.lower-footer {
+  text-align: center;
+  font-family: "Mulish";
+  font-size: 14px;
+  color: rgba(78, 75, 102, 1);
+}
+
+@media only screen and (max-width: 768px) {
+  nav {
+    /* line-height: 30px; */
+    /* width: 80%; */
+    padding: 2px;
+  }
+  .menu li a {
+    display: none;
+  }
+  nav.active {
+    display: none;
+  }
+
+  .link1,
+  .link2,
+  .active {
+    display: none;
+  }
+
+  .upper-footer {
+    display: flex;
+    margin: auto;
+    flex-direction: column;
+    justify-content: space-between;
+    justify-items: flex-end;
+  }
+
+  .brand-desc {
+    font-family: "Mulish";
+    font-size: 12px;
+  }
+  .wrap-explore a {
+    font-size: 12px;
+  }
+  .wrap-set span {
+    font-size: 12px;
+  }
+  .wrap-set img {
+    height: 20px;
+  }
+  .wrap-sponsor img {
+    height: 30px;
+  }
+
+  .lower-footer {
+    font-size: 12px;
+  }
+
+  .explore-title {
+    padding-top: 25px;
+    padding-bottom: 10px;
+  }
+  .sponsor-title {
+    padding-top: 15px;
+    padding-bottom: 10px;
+  }
+
+  .follow-title {
+    padding-top: 15px;
+    padding-bottom: 10px;
+  }
+}
