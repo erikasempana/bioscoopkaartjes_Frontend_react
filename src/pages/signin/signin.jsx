@@ -1,46 +1,41 @@
 import React from "react";
 import "./signin.css";
+import Tickitz1 from "../../assets/img/tickitz1.png";
+import Tickitz2 from "../../assets/img/Tickitz2.png";
 
 function SignIn() {
-
-  
   return (
     <>
-      <div className="container">
-        <div className="banner">
-          <div className="banner-filter">
-            <div className="banner-box">
-              <div className="banner-box__tag">
-                <div className="tag-line">
+      {/* SISI KIRI */}
+      <div className="signin_container">
+        <div className="signin_banner">
+          <div className="signin_banner-filter">
+            <div className="signin_banner-box">
+              <div className="signin_banner-box__tag">
+                <div className="signin_tag-line">
                   <span>wait, watch, wow!</span>
                 </div>
               </div>
-              <div className="banner-box__tickitz">
+              <div className="signin_banner-box__tickitz">
                 <div className="tickitz-image">
-                  <img
-                    src="../../assets/img/tickitz1.png"
-                    className="tickitz-image__accs"
-                    alt=""
-                  />
+                  <img src={Tickitz1} className="tickitz-image__accs" alt="" />
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div className="brand">
-          <img
-            src="../../assets/img/Tickitz2.png"
-            className="brand__image"
-            alt=""
-          />
-        </div>
+
+        {/* SISI KANAN */}
         <div className="box-signin">
+          <div className="signin_brand">
+            <img src={Tickitz2} className="signin_brand__image" alt="" />
+          </div>
           <div className="box-signin2">
-            <div className="title">Sign In</div>
-            <div className="title__desc">
+            <div className="signin_title">Sign In</div>
+            <div className="signin_title__desc">
               Sign in with your data that you entered during your registration
             </div>
-            <form>
+            <form className="signin_form">
               <div className="form-satu">
                 <label for="email">Email</label>
                 <br />
@@ -51,10 +46,10 @@ function SignIn() {
                 />
               </div>
               <br />
-              <div className="form-dua">
+              <div className="signin_form-dua">
                 <label for="password">Password</label>
                 <br />
-                <div className="form-dua__box">
+                <div className="signin_form-dua__box">
                   <input
                     type="password"
                     placeholder="Write your password"
@@ -71,10 +66,10 @@ function SignIn() {
                 Sign In
               </button>
             </form>
-            <div className="link">
+            <div className="signin_link">
               Forgot your password ? <a href="url">Reset now</a>
             </div>
-            <div className="link">
+            <div className="signin_link">
               Don't have an account ? <a href="url">Sign Up</a>
             </div>
           </div>

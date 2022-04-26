@@ -8,7 +8,7 @@ import BasicOrder from "./pages/basic/Order";
 import SignIn from "./pages/signin/signin";
 import Home from "./pages/home/home";
 import ViewAll from "./pages/viewall/viewall";
-import MovieDetail from "./pages/moviedetail/moviedetail";
+import Detail from "./pages/detail/detail";
 
 function App() {
   return (
@@ -26,7 +26,7 @@ function App() {
         <Route path="login" element={<SignIn />} />
         <Route path="home" element={<Home />} />
         <Route path="viewall" element={<ViewAll />} />
-        <Route path="moviedetail" element={<MovieDetail />} />
+        <Route path="detail" element={<Detail />} />
       </Routes>
     </BrowserRouter>
   );
