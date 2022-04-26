@@ -7,116 +7,21 @@
 
 /* STYLE */
 
-body {
+.viewall_container {
   width: 100%;
-  background-color: rgb(211, 210, 210);
-}
-
-.container {
-  /* width: 100%; */
   background-color: white;
   display: flex;
   flex-direction: column;
 }
 
-/* NAVBAR */
-
-nav {
-  overflow: hidden;
-  padding: 2% 2% 1%;
-  box-sizing: border-box;
-  position: fixed;
-  display: block;
-  background-color: white;
-  width: 100%;
-}
-
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
-li {
-  float: left;
-}
-
-li a {
-  font-family: "Mulish";
-  font-size: 16px;
-  display: block;
-  padding: 20px 20px 20px 40px;
-  text-decoration: none;
-  color: rgba(65, 65, 65, 1);
-}
-
-li a:hover:not(.active) {
-  text-decoration: underline;
-}
-
-.active {
-  font-size: 14px;
-  float: right;
-  height: 10px;
-  border-radius: 5px;
-  color: white;
-  background-color: rgba(95, 46, 234, 1);
-}
-
-.nav-right {
-  float: right;
-  display: flex;
-}
-
-.nav-profile-img {
-  order: 1;
-}
-
-.nav-search {
-  padding-top: 5px;
-  padding-right: 20px;
-  box-sizing: border-box;
-}
-
-.nav-search form {
-  margin: "auto";
-  max-width: "300px";
-}
-
-.nav-right form input {
-  border-radius: 25px;
-  border: 1px solid rgba(222, 222, 222, 1);
-  padding: 10px 60px 10px 24px;
-  box-sizing: border-box;
-  color: #a0a3bd;
-  background-color: #fff;
-}
-
-.nav-right form button {
-  /* border-radius: 5px; */
-  border: 1px solid;
-  background-color: #fff;
-  font-size: 14px;
-  color: #fff;
-  box-sizing: border-box;
-  padding-top: 15px;
-}
-
-.fa fa-search {
-  font-size: 19px;
-  color: rgba(65, 65, 65, 1);
-}
-
-/* END OF NAVBAR */
-
 /* MAIN */
-.main {
+.viewall_main {
   width: 100%;
   background-color: #d6d8e7;
   padding-top: 200px;
 }
 
-.guide {
+.viewall_guide {
   width: 100%;
   padding-left: 5%;
   padding-right: 3%;
@@ -126,18 +31,18 @@ li a:hover:not(.active) {
   justify-content: space-between;
 }
 
-.guide-left {
+.viewall_guide-left {
   font-family: "Mulish", sans-serif;
   font-size: 24px;
   font-weight: 700;
   color: rgba(0, 0, 0, 1);
 }
 
-.guide-right {
+.viewall_guide-right {
   display: flex;
 }
 
-.guide-right .input1 {
+.viewall_guide-right .viewall_input1 {
   width: 100px;
   height: 40px;
   padding: 5px;
@@ -149,7 +54,7 @@ li a:hover:not(.active) {
   margin-right: 10px;
 }
 
-.guide-right .input2 {
+.viewall_guide-right .viewall_input2 {
   width: 200px;
   height: 40px;
   margin-top: 5px;
@@ -162,7 +67,7 @@ li a:hover:not(.active) {
 }
 
 /* MONTH BUTTON */
-.container-month {
+.viewall_container-month {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -176,14 +81,14 @@ li a:hover:not(.active) {
   white-space: nowrap;
 }
 
-.month {
+.viewall_month {
   width: 135%;
   margin: auto;
   display: flex;
   justify-content: space-evenly;
 }
 
-.month button {
+.viewall_month button {
   /* flex: 2; */
   width: 200px;
   height: 42px;
@@ -198,7 +103,7 @@ li a:hover:not(.active) {
   cursor: pointer;
 }
 
-.month button:hover {
+.viewall_month button:hover {
   background-color: #5f2eea;
   color: #fff;
 }
@@ -206,7 +111,7 @@ li a:hover:not(.active) {
 
 /* VIEW ALL MOVIE */
 
-.viewall-movie {
+.viewall_movie {
   width: 100%;
   margin: auto;
   display: flex;
@@ -254,7 +159,7 @@ li a:hover:not(.active) {
   overflow-x: auto;
 }
 
-.card {
+.viewall_card {
   /* display: flex; */
   /* flex-direction: column; */
   /* flex: 1; */
@@ -265,21 +170,21 @@ li a:hover:not(.active) {
   align-items: center;
 }
 
-.card .header {
+.viewall_card .viewall_header {
   border: 1px solid rgba(255, 255, 255, 1);
   padding: 5px;
 }
-.card .header img {
+.viewall_card .viewall_header img {
   width: 100%;
 }
 
-.card .content {
+.viewall_card .content {
   text-align: center;
   padding-bottom: 20px;
   padding: 15px;
 }
 
-.card .content h3 {
+.viewall_card .viewall_content h3 {
   font-family: "Mulish", sans-serif;
   font-size: 18px;
   font-weight: 700;
@@ -287,7 +192,7 @@ li a:hover:not(.active) {
   margin-bottom: 10px;
 }
 
-.card .content p {
+.viewall_card .viewall_content p {
   font-family: "Open Sans", sans-serif;
   font-size: 12px;
   font-weight: 400;
@@ -295,7 +200,7 @@ li a:hover:not(.active) {
   margin-bottom: 50px;
 }
 
-.card button {
+.viewall_card button {
   width: 160px;
   font-family: "Mulish", sans-serif;
   font-size: 14px;
@@ -307,20 +212,20 @@ li a:hover:not(.active) {
   box-sizing: border-box;
 }
 
-.content button:hover {
+.viewall_content button:hover {
   background-color: #5f2eea;
   color: #fff;
 }
 /* END OF VIEW ALL MOVIE */
 
 /* BUTTON PAGE */
-.button-page {
+.viewall_button-page {
   display: flex;
   justify-content: center;
   padding: 50px;
 }
 
-.button-page button {
+.viewall_button-page button {
   width: 42px;
   height: 42px;
   margin-right: 5px;
@@ -334,11 +239,11 @@ li a:hover:not(.active) {
   cursor: pointer;
 }
 
-.button-page button a {
+.viewall_button-page button a {
   text-decoration: none;
 }
 
-.button-page button:hover {
+.viewall_button-page button:hover {
   background-color: #5f2eea;
   color: #fff;
 }
