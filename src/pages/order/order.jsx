@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useLocation /*useNavigate*/ } from "react-router-dom";
+import { useLocation /*useNavigate*/, useNavigate } from "react-router-dom";
 import "./order.css";
 import Navbar from "../../components/Navbar/navbar";
 import Footer from "../../components/Footer/footer";
@@ -7,6 +7,7 @@ import Cineone21 from "../../assets/img/cineone21.png";
 import Seat from "../../components/Seat/index";
 
 function Order() {
+  const navigate = useNavigate();
   const { state } = useLocation();
   const listSeat = ["A", "B", "C", "D", "E", "F", "G"];
   const [selectedSeat, setSelectedSeat] = useState([]);
@@ -26,9 +27,19 @@ function Order() {
     }
   };
 
-  const handleBooking = () => {
-    console.log(state);
-    console.log(selectedSeat);
+  const handleBooking = (event) => {
+    try {
+      console.log(state);
+      console.log(selectedSeat);
+
+      event.preventDefault();
+      // const resultBooking = await axios.post("auth/register", form);
+      // navigate("/login");
+    
+      navigate("/payment");
+    } catch (error) {
+      console.log(error.response);
+    }
   };
   return (
     <>
@@ -100,6 +111,7 @@ function Order() {
                   Change Your Movie
                 </button>
                 <button
+                  type="submit"
                   className="btn  btn-light btn-outline-primary text-center col"
                   onClick={handleBooking}
                 >

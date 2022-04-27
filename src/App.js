@@ -6,10 +6,12 @@ import BasicHome from "./pages/basic/Home";
 import BasicDetail from "./pages/basic/Detail";
 import BasicOrder from "./pages/basic/Order";
 import SignIn from "./pages/signin/signin";
+import SignUp from "./pages/signup/signup";
 import Home from "./pages/home/home";
 import ViewAll from "./pages/viewall/viewall";
 import Detail from "./pages/detail/detail";
 import Order from "./pages/order/order";
+import Payment from "./pages/payment/payment";
 
 function App() {
   return (
@@ -27,8 +29,10 @@ function App() {
         <Route path="login" element={<SignIn />} />
         <Route path="home" element={<Home />} />
         <Route path="viewall" element={<ViewAll />} />
-        <Route path="detail" element={<Detail />} />
+        <Route path="detail/:id" element={<Detail />} />
         <Route path="order" element={<Order />} />
+        <Route path="signup" element={<SignUp />} />
+        <Route path="payment" element={<Payment />} />
       </Routes>
     </BrowserRouter>
   );

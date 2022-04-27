@@ -1,0 +1,30 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Mulish:wght@400;600;700&family=Open+Sans&display=swap");
+
+.payment_container-two {
+  padding: 10% 4% 10% 6%;
+  font-family: "Mulish";
+  background-color: #e5e5e5;
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.payment_personal-info {
+  background-color: white;
+}
+
+.payment-personal-info-danger {
+  background-color: rgba(244, 183, 64, 0.3);
+}
+
+.payment_card-method {
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  margin: auto;
+}
+
+.payment_card-method button {
+  flex: 2;
+  height: 50px;
+  row-gap: 2px;
+}
