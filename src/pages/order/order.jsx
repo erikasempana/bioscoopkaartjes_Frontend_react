@@ -35,7 +35,7 @@ function Order() {
       event.preventDefault();
       // const resultBooking = await axios.post("auth/register", form);
       // navigate("/login");
-    
+
       navigate("/payment");
     } catch (error) {
       console.log(error.response);
