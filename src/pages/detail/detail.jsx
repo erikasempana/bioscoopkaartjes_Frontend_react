@@ -2,8 +2,6 @@ import React from "react";
 import "./detail.css";
 import Footer from "../../components/Footer/footer";
 import Navbar from "../../components/Navbar/navbar";
-import Tickitz2 from "../../assets/img/Tickitz2.png";
-import Elipse from "../../assets/img/Ellipse.png";
 import Spiderman from "../../assets/img/spiderman.png";
 import Ebuid from "../../assets/img/ebuid.png";
 import Cineone from "../../assets/img/cineone21.png";
@@ -14,7 +12,6 @@ export default function Detail() {
     <div className="moviedetail_container">
       {/* NAVBAR */}
       <Navbar />
-    
 
       {/* MAIN */}
       {/* MAIN - MOVIE DETAIL */}

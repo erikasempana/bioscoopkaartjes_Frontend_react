@@ -1,19 +1,40 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Mulish:wght@400;600;700&family=Open+Sans&display=swap");
 
 /* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
+    v2.0 | 20110126
+    License: none (public domain)
+ */
 
+/* STYLE */
 /* NAVBAR */
+
 .moviedetail_menu {
   width: 100%;
   padding: 2% 4%;
   box-sizing: border-box;
   position: fixed;
-  display: block;
+  display: flex;
   background-color: white;
   z-index: 2;
+  justify-content: space-between;
+}
+
+.moviedetail_menu ul li {
+  list-style-type: none;
+  float: left;
+}
+
+.moviedetail_menu ul li a {
+  text-decoration: none;
+  font-family: "Mulish";
+  font-size: 16px;
+  display: block;
+  color: rgba(65, 65, 65, 1);
+  padding: 20px 20px 20px 40px;
+}
+
+.moviedetail_menu li a:hover:not(.active) {
+  text-decoration: underline;
 }
 
 .moviedetail_nav-right {
@@ -44,7 +65,6 @@
   box-sizing: border-box;
   color: #a0a3bd;
   background-color: #fff;
-  /* display: none; */
 }
 
 .moviedetail_nav-right form button {
@@ -55,4 +75,10 @@
   color: #fff;
   box-sizing: border-box;
   padding-top: 15px;
+}
+
+@media only screen and (max-width: 768px) {
+  .moviedetail_menu ul li a {
+    display: none;
+  }
 }

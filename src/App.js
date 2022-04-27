@@ -9,6 +9,7 @@ import SignIn from "./pages/signin/signin";
 import Home from "./pages/home/home";
 import ViewAll from "./pages/viewall/viewall";
 import Detail from "./pages/detail/detail";
+import Order from "./pages/order/order";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="home" element={<Home />} />
         <Route path="viewall" element={<ViewAll />} />
         <Route path="detail" element={<Detail />} />
+        <Route path="order" element={<Order />} />
       </Routes>
     </BrowserRouter>
   );

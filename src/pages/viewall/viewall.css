@@ -62,8 +62,9 @@
   font-family: "Mulish", sans-serif;
   font-size: 16px;
   color: rgba(78, 75, 102, 1);
-  border: 1px solid rgba(78, 75, 102, 1);
+  border: 2px solid white;
   box-sizing: border-box;
+  padding: 6px 12px;
 }
 
 /* MONTH BUTTON */
@@ -75,8 +76,8 @@
   overflow: hidden;
   overflow-x: auto;
   justify-content: flex-end;
-  padding-left: 3%;
-  /* padding-right: 3%; */
+  padding-left: 8%;
+  padding-right: 4%;
   box-sizing: border-box;
   white-space: nowrap;
 }
@@ -178,7 +179,7 @@
   width: 100%;
 }
 
-.viewall_card .content {
+.viewall_card .viewall_content {
   text-align: center;
   padding-bottom: 20px;
   padding: 15px;
@@ -251,125 +252,4 @@
 
 /* END OF MAIN */
 
-/* FOOTER */
-.container-footer {
-  width: 100%;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  padding: 2%;
-  box-sizing: border-box;
-}
-
-/* upper footer */
-.upper-footer {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  justify-items: center;
-  padding: 2%;
-}
-
-.brand {
-  flex: 4;
-  float: left;
-}
-
-.brand-image {
-  padding-bottom: 10px;
-}
-
-.brand-desc {
-  font-family: "Mulish";
-  font-size: 16px;
-}
-
-.explore {
-  flex: 2;
-  padding-top: 10px;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  font-family: "Mulish";
-  font-size: 16px;
-  align-self: flex-start;
-  justify-content: left;
-}
-
-.explore-title {
-  padding-bottom: 20px;
-  box-sizing: border-box;
-  font-weight: 700;
-}
-
-.wrap-explore a {
-  text-decoration: none;
-  box-sizing: border-box;
-  color: rgba(78, 75, 102, 1);
-  font-size: 16px;
-}
-
-.wrap-explore a:hover {
-  text-decoration: underline;
-}
-
-.sponsor {
-  flex: 3;
-  padding-top: 10px;
-  box-sizing: border-box;
-  font-family: "Mulish";
-  font-size: 16px;
-  font-weight: 700;
-}
-
-.sponsor-title {
-  padding-bottom: 20px;
-  box-sizing: border-box;
-}
-
-.follow {
-  flex: 3;
-  display: flex;
-  flex-direction: column;
-  padding-top: 10px;
-  box-sizing: border-box;
-  font-family: "Mulish";
-  font-size: 16px;
-}
-
-.follow-title {
-  padding-bottom: 20px;
-  box-sizing: border-box;
-  font-weight: 700;
-}
-
-.wrap-follow {
-  font-family: "Mulish";
-  font-size: 16px;
-  display: flex;
-  flex-direction: column;
-  align-items: left;
-}
-
-.wrap-set {
-  display: inline-flex;
-  align-items: center;
-  padding-bottom: 8px;
-  padding-top: 0;
-  box-sizing: border-box;
-}
-
-.wrap-set span {
-  padding-left: 10px;
-  font-family: "Mulish";
-  font-size: 16px;
-  color: rgba(78, 75, 102, 1);
-}
-
-/* lower footer */
-.lower-footer {
-  text-align: center;
-  font-family: "Mulish";
-  font-size: 14px;
-  color: rgba(78, 75, 102, 1);
-}
+/* Media query */

@@ -33,14 +33,16 @@ function ViewAll() {
               </form>
             </div>
             <div>
-              <form action="/action_page.php">
+             
+              <div class="form-outline">
                 <input
-                  type="text"
+                  type="search"
+                  id="form1"
+                  className="form-control viewall_input2"
                   placeholder="Search Movie Name"
-                  name="search"
-                  className="viewall_input2"
+                  aria-label="Search"
                 />
-              </form>
+              </div>
             </div>
           </div>
         </div>
