@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { useLocation, /*useNavigate*/ } from "react-router-dom";
+import { useLocation /*useNavigate*/ } from "react-router-dom";
 import Seat from "../../../components/Seat";
 
 export default function Order() {
   const { state } = useLocation();
-  const listSeat = ["A", "B", "C"];
+  const listSeat = ["A", "B", "C", "D", "E", "F", "G"];
   const [selectedSeat, setSelectedSeat] = useState([]);
-  const [reservedSeat, /*setReservedSeat*/] = useState(["A1", "C2", "B11"]);
+  const [reservedSeat /*setReservedSeat*/] = useState(["A1", "C2", "B11"]);
 
   //   PROSES GET SEAT
 

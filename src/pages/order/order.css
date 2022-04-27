@@ -1,0 +1,36 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Mulish:wght@400;600;700&family=Open+Sans&display=swap");
+
+.order-container-dua {
+  padding: 15% 4% 25% 6%;
+  font-family: "Mulish";
+  background-color: #e5e5e5;
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.order_key-available button {
+  background-color: #d6d8e7;
+  border: 2px #d6d8e7;
+}
+
+.order_key-selected button {
+  background-color: #5f2eea;
+  border: 2px #5f2eea;
+}
+
+.order_key-sold button {
+  background-color: #6e7191;
+  border: 2px #6e7191;
+}
+
+.order_info-card {
+    background: none;
+    border: none;
+    font-weight: 700 bolder;
+}
+
+.order_title-movie-selected p{
+    background: none;
+    border: none;
+    font-weight: 700 bolder;
+}

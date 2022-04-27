@@ -35,7 +35,7 @@ export default function Seat(props) {
                   ? "seat__list--selected"
                   : "seat__list--available"
               }`}
-              onClick={()=>handleSeat(item)}
+              onClick={() => handleSeat(item)}
             ></div>
           </div>
         ))}
@@ -51,7 +51,7 @@ export default function Seat(props) {
                   ? "seat__list--selected"
                   : "seat__list--available"
               }`}
-              onClick={()=>handleSeat(item)}
+              onClick={() => handleSeat(item)}
               //   onClick={() => {
               //     reserved.includes(item) ? null : selectedSeat(item);
               //   }}
