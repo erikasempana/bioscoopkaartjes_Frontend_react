@@ -255,7 +255,7 @@ export default function Detail() {
                     </h6>
                   </div>
 
-                  <div className="d-flex justify-content-between">
+                  <div className="row-lg-0 d-flex justify-content-between">
                     <button
                       onClick={handleBookNow}
                       className="btn btn-primary mx-auto moviedetail_btn-1"

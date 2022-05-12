@@ -5,14 +5,14 @@ import Footer from "../../components/Footer/footer";
 import Nearest from "../../assets/img/Nearest.png";
 import Jumbotron3pic from "../../assets/img/jumbotron3pic.png";
 import Movie1 from "../../assets/img/Movie1.png";
-import Movie2 from "../../assets/img/Movie2.png";
-import Movie3 from "../../assets/img/Movie3.png";
+// import Movie2 from "../../assets/img/Movie2.png";
+// import Movie3 from "../../assets/img/Movie3.png";
 import Rectangle2 from "../../assets/img/Rectangle2.png";
-import Rectangle4 from "../../assets/img/Rectangle3.png";
-import Rectangle3 from "../../assets/img/Rectangle4.png";
+// import Rectangle4 from "../../assets/img/Rectangle3.png";
+// import Rectangle3 from "../../assets/img/Rectangle4.png";
 import Member from "../../components/Member/member";
 import axios from "../../utils/axios";
-import { useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -30,7 +30,7 @@ export default function Home() {
     { id: 9, month: "September" },
     { id: 10, month: "October" },
     { id: 11, month: "November" },
-    { id: 12, month: "December" },
+    { id: 12, month: "December" }
   ];
 
   const getNowShowing = async () => {
@@ -46,9 +46,7 @@ export default function Home() {
   const getUpComingMovie = async () => {
     try {
       const params = 5;
-      const resultUpComingMovie = await axios.get(
-        `movie/?searchRelease=${params}`
-      );
+      const resultUpComingMovie = await axios.get(`movie/?searchRelease=${params}`);
       console.log("upcomingmovie", resultUpComingMovie.data.data);
       setUpComingMovie(resultUpComingMovie.data.data);
     } catch (error) {
@@ -97,15 +95,14 @@ export default function Home() {
         <div className="home_now-showing">
           <div className="home_now-showing__link">
             <div className="home_now-showing__left">
-              <a href="#now showing">
+              <a to="/home">
                 <span style={{ textDecoration: "underline" }}>Now Showing</span>
               </a>
             </div>
             <div className="home_now-showing__right">
-              <a href="view all">
-                {" "}
+              <Link to="/viewall">
                 <span>View all</span>
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -133,21 +130,21 @@ export default function Home() {
         <div className="home_upcoming-movie">
           <div className="home_upcoming-movie__link">
             <div className="home_upcoming-movie__left">
-              <a href="#upcomingmovie" className="decorationline">
+              <Link to="/home" className="decorationline">
                 <span>Upcoming Movie</span>
-              </a>
+              </Link>
             </div>
             <div className="home_upcoming-movie__right">
-              <a href="view all" className="decorationline">
+              <Link to="/viewall" className="decorationline">
                 <span>View all</span>
-              </a>
+              </Link>
             </div>
           </div>
 
           <div className="home_container-month">
             <div className="home_month">
               {monthList.map((item) => (
-                <button onClick={() => handleMonth(item.id)}>
+                <button key={item.id} onClick={() => handleMonth(item.id)}>
                   {item.month}
                 </button>
               ))}
@@ -167,16 +164,14 @@ export default function Home() {
 
           <div className="home_upcoming-movie__main">
             {upComingMovie.map((item) => (
-              <div className="home_card">
+              <div className="home_card" key={item.id}>
                 <div className="home_header">
                   <img src={Rectangle2} alt="" />
                 </div>
                 <div className="home_content">
                   <h3>{item.name}</h3>
                   <p>{item.category}</p>
-                  <button onClick={() => handleDetailMovie(item.id)}>
-                    Detail
-                  </button>
+                  <button onClick={() => handleDetailMovie(item.id)}>Detail</button>
                 </div>
               </div>
             ))}

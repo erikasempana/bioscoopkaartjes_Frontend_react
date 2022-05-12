@@ -1,159 +1,190 @@
 import React, { useState } from "react";
 import "./signup.css";
-import axios from "../../utils/axios";
-import Tickitz1 from "../../assets/img/tickitz1.png";
-import Tickitz2 from "../../assets/img/Tickitz2.png";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { register } from "../../stores/action/auth";
+import TickitzBrandOne from "../../assets/img1/tickitz1.png";
+import TickitzBrandTwo from "../../assets/img1/Tickitz2.png";
 
 function SignUp() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
     noTelp: "",
     email: "",
-    password: "",
+    password: ""
   });
   const [message, setMessage] = useState("");
   const [isError, setIsError] = useState(false);
-  console.log(form);
 
   const handleChangeForm = (event) => {
-    // console.log("User sedang mengetik");
-    // console.log(event.target.name);
-    // console.log(event.target.value);
     setForm({ ...form, [event.target.name]: event.target.value });
   };
 
   const handleSubmit = async (event) => {
     try {
+      // console.log("REGISTER IS RUNNING");
       event.preventDefault();
-      const resultRegister = await axios.post("auth/register", form);
-      // navigate("/login");
-      console.log(resultRegister);
-      navigate("/login")
+      const resultRegister = await dispatch(register(form));
+      console.log("msg register", resultRegister.action.payload.data.msg);
+      // // Output = suatu keadaan yang dapat diinfokan ke user bahwa proses sudah selesai
+      setIsError(false);
+      setMessage(resultRegister.action.payload.data.msg);
+      navigate("/login");
     } catch (error) {
       console.log(error.response);
+      setIsError(true);
+      setMessage(error.response.data.msg);
+      setForm({
+        firstName: "",
+        lastName: "",
+        noTelp: "",
+        email: "",
+        password: ""
+      });
     }
+  };
+
+  const handleReset = (event) => {
+    // event.preventDefault();
+    console.log("Reset Form");
+    setForm({
+      firstName: "",
+      lastName: "",
+      noTelp: "",
+      email: "",
+      password: ""
+    });
   };
 
   return (
     <>
-      {/* SISI KIRI */}
-      <div className="signup_container">
-        <div className="signup_banner">
-          <div className="signup_banner-filter">
-            <div className="signup_banner-box">
-              <div className="signup_banner-box__tag">
-                <div className="signup_tag-line">
-                  <span>wait, watch, wow!</span>
-                </div>
-              </div>
-              <div className="signup_banner-box__tickitz">
-                <div className="tickitz-image">
-                  <img src={Tickitz1} className="tickitz-image__accs" alt="" />
-                </div>
+      <section id="signup">
+        <div className="container-xxl signup_container">
+          <div className="row">
+            <div className="col-md-7 signup_banner text-center">
+              <div className="signup_banner-filter d-flex flex-column">
+                <img src={TickitzBrandOne} alt="brand1" />
+                <p style={{ fontSize: "48px", fontWeight: 400, color: "white" }}>
+                  wait, watch, wow!
+                </p>
               </div>
             </div>
-          </div>
-        </div>
-
-        {/* SISI KANAN */}
-        <div className="box-signup">
-          <div className="signup_brand">
-            <img src={Tickitz2} className="signup_brand__image" alt="" />
-          </div>
-          <div className="box-signup2">
-            <div className="signup_title">Sign Up</div>
-            <div className="signup_title__desc">
-              Sign in with your data that you entered during your registration
-            </div>
-            {/* SIGNUP */}
-            <form onSubmit={handleSubmit} className="signup_form">
-              <div className="signup_form-satu">
-                <label for="firstName">First Name</label>
-                <br />
-                <input
-                  type="First Name"
-                  placeholder="Write your first name"
-                  className="signup__input"
-                  name="firstName"
-                  value={form.firstName}
-                  onChange={handleChangeForm}
-                />
+            <div className="col-md-5 m-auto px-5 signup_form">
+              <div className="md-5 fade show">
+                {!message ? null : isError ? (
+                  <div
+                    className="alert alert-danger alert-dismissible fade show text-center"
+                    role="alert"
+                  >
+                    {message}
+                  </div>
+                ) : (
+                  <div
+                    className="alert alert-primary alert-dismissible fade show text-center"
+                    role="alert"
+                  >
+                    {message}
+                  </div>
+                )}
               </div>
-              <br />
-              <div className="signup_form-dua">
-                <label for="lastName"> Last Name</label>
-                <br />
-                <input
-                  type="Last Name"
-                  placeholder="Write your last name"
-                  className="signup__input"
-                  name="lastName"
-                  value={form.lastName}
-                  onChange={handleChangeForm}
-                />
+              <div className="mb-5 signup_form-title">
+                <img className="signup_brand" src={TickitzBrandTwo} alt="brand2" />
+                <h1>Sign Up</h1>
+                <p>Fill your additional details</p>
               </div>
-              <br />
-              <div className="signup_form-tiga">
-                <label for="noTelp">Phone Number</label>
-                <br />
-                <input
-                  type="tel"
-                  placeholder="Write your phone number"
-                  className="signup__input"
-                  name="noTelp"
-                  value={form.noTelp}
-                  onChange={handleChangeForm}
-                />
-              </div>
-              <br />
-              <div className="form-empat">
-                <label for="email">Email</label>
-                <br />
-                <input
-                  type="email"
-                  placeholder="Write your email"
-                  className="signup__input"
-                  name="email"
-                  value={form.email}
-                  onChange={handleChangeForm}
-                />
-              </div>
-              <br />
-              <div className="form-lima">
-                <label for="password">Password</label>
-                <br />
-                <div className="form-lima__box">
+              <form className="signup_form-box" onSubmit={handleSubmit} onReset={handleReset}>
+                <div className="mb-3 signup_input">
+                  <label htmlFor="firstName" className="form-label">
+                    First Name
+                  </label>
                   <input
-                    type="password"
-                    placeholder="Write your password"
-                    className="signup__input"
-                    name="password"
-                    value={form.password}
+                    type="text"
+                    className="form-control border-rounded"
+                    id="firstName"
+                    placeholder="Write your first name"
+                    name="firstName"
+                    value={form.firstName}
                     onChange={handleChangeForm}
                   />
-                  {/* <span className="eye">
-                    <i id="hide1" className="far fa-eye"></i>
-                    <i id="hide2" className="fa fa-eye-slash"></i>
-                  </span> */}
                 </div>
+                <div className="mb-3">
+                  <label htmlFor="lastName" className="form-label">
+                    Last Name
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="lastName"
+                    placeholder="Write your last name"
+                    name="lastName"
+                    value={form.lastName}
+                    onChange={handleChangeForm}
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="noTelp" className="form-label">
+                    Phone Number
+                  </label>
+                  <input
+                    type="tel"
+                    className="form-control"
+                    id="noTelp"
+                    placeholder="Write your phone number"
+                    name="noTelp"
+                    value={form.noTelp}
+                    onChange={handleChangeForm}
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="email" className="form-label">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    className="form-control"
+                    id="email"
+                    aria-describedby="email"
+                    placeholder="Write your email"
+                    name="email"
+                    value={form.email}
+                    onChange={handleChangeForm}
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="password" className="form-label">
+                    Password
+                  </label>
+                  <div className="position-relative input-icon">
+                    <input
+                      type="password"
+                      className="form-control"
+                      id="paswword"
+                      placeholder="Write your password"
+                      name="password"
+                      value={form.password}
+                      onChange={handleChangeForm}
+                    />
+                    <i className="far fa-eye" id="togglePassword"></i>
+                  </div>
+                </div>
+                <div className="d-grid mt-3 pt-3">
+                  <button type="submit" className="btn btn btn-primary">
+                    Sign Up
+                  </button>
+                </div>
+              </form>
+              <div className="signin-link text-center mt-3">
+                <p>
+                  Already have account ? <Link to="/login">Sign In</Link>
+                </p>
               </div>
-              <br />
-              <button type="submit" className="signup-btn">
-                Sign Up
-              </button>
-            </form>
-
-            {/* END OF SIGN UP */}
-
-            <div className="signIn-link">
-              Already have account ? <a href="url">Sign In</a>
             </div>
           </div>
         </div>
-      </div>
+      </section>
     </>
   );
 }

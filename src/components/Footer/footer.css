@@ -1,224 +1,108 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Mulish:wght@400;600;700&family=Open+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;700;800;900&display=swap");
 
-/* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
-
-/* FOOTER */
-.moviedetail_container-footer {
-  width: 100%;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  padding: 4% 5% 1%;
-  box-sizing: border-box;
-  background-color: white;
+body {
+  font-family: "Mulish", sans-serif;
 }
 
-/* upper footer */
-.moviedetail_upper-footer {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  justify-items: center;
-  padding: 0;
-  box-sizing: border-box;
+/* Footer */
+
+#footer {
+  margin-top: 50px;
 }
 
-.moviedetail_brand {
-  flex: 4;
-  float: left;
+footer {
+  color: rgba(110, 113, 145, 1);
 }
 
-.moviedetail_brand-image {
-  padding-bottom: 10px;
-}
-
-.moviedetail_brand-desc {
-  font-family: "Mulish";
-  font-size: 16px;
-}
-
-.moviedetail_explore {
-  flex: 2;
-  padding-top: 10px;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  font-family: "Mulish";
-  font-size: 16px;
-  align-self: flex-start;
-  justify-content: left;
-}
-
-.moviedetail_explore-title {
-  padding-bottom: 20px;
-  box-sizing: border-box;
-  font-weight: 700;
-}
-
-.moviedetail_wrap-explore a {
-  text-decoration: none;
-  box-sizing: border-box;
-  color: rgba(78, 75, 102, 1);
-  font-size: 16px;
-}
-
-.moviedetail_wrap-explore a:hover {
-  text-decoration: underline;
-}
-
-.moviedetail_sponsor {
-  flex: 3;
-  padding-top: 10px;
-  box-sizing: border-box;
-  font-family: "Mulish";
-  font-size: 16px;
-  font-weight: 700;
-}
-
-.moviedetail_sponsor-title {
-  padding-bottom: 20px;
-  box-sizing: border-box;
-}
-
-.moviedetail_follow {
-  flex: 3;
-  display: flex;
-  flex-direction: column;
-  padding-top: 10px;
-  box-sizing: border-box;
-  font-family: "Mulish";
-  font-size: 16px;
-}
-
-.moviedetail_follow-title {
-  padding-bottom: 20px;
-  box-sizing: border-box;
-  font-weight: 700;
-}
-
-.moviedetail_wrap-follow {
-  font-family: "Mulish";
-  font-size: 16px;
-  display: flex;
-  flex-direction: column;
-  align-items: left;
-}
-
-.moviedetail_wrap-set {
-  display: inline-flex;
-  align-items: center;
-  padding-bottom: 8px;
-  padding-top: 0;
-  box-sizing: border-box;
-}
-
-.moviedetail_wrap-set span {
-  padding-left: 10px;
-  font-family: "Mulish";
-  font-size: 16px;
-  color: rgba(78, 75, 102, 1);
-}
-
-/* lower footer */
-.moviedetail_lower-footer {
-  text-align: center;
-  font-family: "Mulish";
+footer a {
   font-size: 14px;
   color: rgba(78, 75, 102, 1);
+  text-decoration: none;
 }
 
-.moviedetail-footer-img {
-  display: none;
+.footer_brand img {
+  width: 170px;
 }
+
+.footer_brand {
+  font-size: 16px;
+}
+
+.footer_copyright p {
+  font-size: 14px;
+}
+
+/* akhir Footer */
 
 @media only screen and (max-width: 768px) {
-  .moviedetail_container-footer {
-    width: 100%;
+  /* footer */
+  .footer_brand img {
+    padding: 20px 10px;
+    display: flex;
+    width: 200px;
   }
 
-  .moviedetail_upper-footer {
+  .footer_brand p {
     display: flex;
-    margin: auto;
-    flex-direction: column;
+    text-align: start;
+    padding: 0 10px;
+  }
+
+  .footer_explore h5 {
+    display: flex;
+    padding: 20px 10px;
+  }
+
+  .footer_explore ul {
+    display: flex;
+    padding-bottom: 5px;
+  }
+
+  .footer_explore ul li a {
+    padding: 0 10px;
+  }
+
+  .footer_sponsor h5 {
+    display: flex;
+    padding: 20px 10px;
+  }
+
+  .footer_sponsor ul {
+    display: flex;
+    align-items: center;
+    padding-bottom: 5px;
+  }
+
+  .footer_sponsor ul li img {
+    padding: 0 10px;
+    height: 40px;
+  }
+
+  .footer_followus h5 {
+    display: flex;
+    padding: 20px 10px;
+  }
+
+  .footer_followus ul {
+    display: flex;
+    padding-bottom: 5px;
+    padding: 0 10px;
     justify-content: space-between;
-    justify-items: flex-end;
   }
 
-  .moviedetail_brand-desc {
-    font-family: "Mulish";
-    font-size: 12px;
+  .footer_folowus ul li img {
+    padding: 0 20px;
+    padding-right: 20px;
   }
 
-  .moviedetail_wrap-explore {
-    display: flex;
-    flex-direction: row;
-  }
-
-  .moviedetail_explore-home {
-    margin-right: 20%;
-  }
-
-  .moviedetail_wrap-explore a {
-    font-size: 12px;
-  }
-
-  .moviedetail_explore-title {
-    padding-top: 25px;
-    padding-bottom: 10px;
-  }
-
-  .moviedetail_wrap-set span {
+  .footer_followus ul li a {
+    padding: 0 10px;
     display: none;
   }
-  .moviedetail_wrap-set {
-    display: flex;
-    height: 20px;
-  }
 
-  .moviedetail_sponsor-title {
-    padding-top: 15px;
-    padding-bottom: 10px;
-  }
-
-  .moviedetail_wrap-sponsor {
-    display: inline-flex;
-  }
-
-  .moviedetail_wrap-sponsor img {
-    height: 50%;
+  .footer_copyright h5 {
     padding: 0;
   }
 
-  .moviedetail_wrap-follow {
-    padding-bottom: 0;
-  }
-
-  .moviedetail_follow-title {
-    padding-top: 15px;
-    padding-bottom: 10px;
-    box-sizing: border-box;
-  }
-
-  .moviedetail_wrap-set {
-    display: none;
-  }
-
-  .moviedetail_wrap-follow img {
-    display: none;
-  }
-
-  .moviedetail_lower-footer {
-    font-size: 12px;
-  }
-
-  .moviedetail-footer-img {
-    display: inline;
-  }
-
-  .moviedetail-footer-img img {
-    padding-right: 10%;
-  }
+  /* Akhir footer */
 }

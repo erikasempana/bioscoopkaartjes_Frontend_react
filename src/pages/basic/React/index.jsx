@@ -6,7 +6,7 @@ function BasicReact() {
   const data = [
     { id: 1, name: "Spiderman" },
     { id: 2, name: "Batman" },
-    { id: 3, name: "Lego" },
+    { id: 3, name: "Lego" }
   ];
   const [email, setEmail] = useState("");
   const [keyword, setKeyword] = useState("");
@@ -101,9 +101,7 @@ function BasicReact() {
       {/* global */}
       <h1 className="heading">Hello World</h1>
       {/* react module */}
-      <h1 className={`${styles.heading} ${styles.textUnderline} text-center`}>
-        Hello World
-      </h1>
+      <h1 className={`${styles.heading} ${styles.textUnderline} text-center`}>Hello World</h1>
       <h1 className={(styles.heading, styles.textUnderline)}>Hello World</h1>
       <h1 className={styles.heading2}>Hello World</h1>
     </>

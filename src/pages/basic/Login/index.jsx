@@ -14,7 +14,7 @@ function Login() {
   const navigate = useNavigate();
   const [form, setForm] = useState({
     email: "",
-    password: "",
+    password: ""
   });
   const [message, setMessage] = useState("");
   const [isError, setIsError] = useState(false);
@@ -39,8 +39,8 @@ function Login() {
       const resultUser = [
         {
           id: 1,
-          name: "Bagus",
-        },
+          name: "Bagus"
+        }
       ];
       // Output = suatu keadaan yang dapat diinfokan ke user bahwa proses sudah selesai
       setIsError(false);
@@ -58,7 +58,7 @@ function Login() {
       setMessage(error.response.data.msg);
       setForm({
         email: "",
-        password: "",
+        password: ""
       });
     }
   };

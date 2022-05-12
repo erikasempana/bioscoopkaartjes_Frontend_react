@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import BasicCounter from "./pages/basic/Counter/classComponent";
 import BasicReact from "./pages/basic/React";
@@ -12,6 +13,7 @@ import ViewAll from "./pages/viewall/viewall";
 import Detail from "./pages/detail/detail";
 import Order from "./pages/order/order";
 import Payment from "./pages/payment/payment";
+import ManageMovie from "./pages/managemovie/managemovie";
 
 function App() {
   return (
@@ -33,6 +35,7 @@ function App() {
         <Route path="order" element={<Order />} />
         <Route path="signup" element={<SignUp />} />
         <Route path="payment" element={<Payment />} />
+        <Route path="managemovie" element={<ManageMovie />} />
       </Routes>
     </BrowserRouter>
   );
