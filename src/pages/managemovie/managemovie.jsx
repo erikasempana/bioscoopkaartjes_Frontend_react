@@ -1,10 +1,51 @@
-import React from "react";
+import React, { useState } from "react";
 import Footer from "../../components/Footer/footer";
 import NavbarAdmin from "../../components/Navbar/navbarAdmin";
 import "./managemovie.css";
+import DefaultImage from "../../assets/img1/default.png";
 import SpidermanImage from "../../assets/img1/spiderman.png";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { postMovie } from "../../stores/action/movie";
 
 function ManageMovie() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [form, setForm] = useState({
+    name: "",
+    category: "",
+    director: "",
+    casts: "",
+    releaseDate: "",
+    duration_hours: "",
+    duration_minutes: "",
+    image: ""
+  });
+  const [image, setImage] = useState(null);
+
+  const handleChangeForm = (event) => {
+    const { name, value, files } = event.target;
+    if (name === "image") {
+      setForm({ ...form, [name]: files[0] });
+      setImage(URL.createObjectURL(files[0]));
+    } else {
+      setForm({ ...form, [name]: value });
+    }
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    // console.log("form yukss", form);
+    const formData = new FormData();
+    for (const data in form) {
+      formData.append(data, form[data]);
+    }
+
+    console.log(postMovie(formData));
+    // dispatch(postMovie(formData));
+    // setImage(null);
+  };
+
   return (
     <>
       <NavbarAdmin />
@@ -18,12 +59,24 @@ function ManageMovie() {
             <div className="col">
               <div className="card p-4">
                 <div className="card-body">
-                  <form>
+                  <form onSubmit={handleSubmit}>
                     <div className="row">
                       <div className="col-lg-4 manage_image-card m-auto">
                         <div className="card" style={{ width: "fit-content" }}>
                           <div className="card-body m-auto manage_image">
-                            <img className="manage_image-movie" src={SpidermanImage} alt="" />
+                            <input
+                              type="file"
+                              name="image"
+                              onChange={(event) => handleChangeForm(event)}
+                            />
+                            {image && (
+                              <img
+                                src={image}
+                                alt="Image Movie Preview"
+                                className="manage_image-movie"
+                              />
+                            )}
+                            {/* <img className="manage_image-movie" src={SpidermanImage} alt="" /> */}
                           </div>
                         </div>
                       </div>
@@ -37,6 +90,9 @@ function ManageMovie() {
                             className="form-control"
                             id="movie-name"
                             placeholder="Movie name..."
+                            name="name"
+                            onChange={(event) => handleChangeForm(event)}
+                            value={form.name}
                           />
                         </div>
                         <div className="mb-3">
@@ -48,6 +104,9 @@ function ManageMovie() {
                             className="form-control"
                             id="director"
                             placeholder="Director..."
+                            value={form.director}
+                            name="director"
+                            onChange={handleChangeForm}
                           />
                         </div>
                         <div className="mb-3">
@@ -59,6 +118,9 @@ function ManageMovie() {
                             className="form-control"
                             id="releasedate"
                             placeholder="dd/mm/yyyy..."
+                            value={form.releaseDate}
+                            name="releaseDate"
+                            onChange={handleChangeForm}
                           />
                         </div>
                       </div>
@@ -72,6 +134,9 @@ function ManageMovie() {
                             className="form-control"
                             id="category"
                             placeholder="Category..."
+                            value={form.category}
+                            name="category"
+                            onChange={handleChangeForm}
                           />
                         </div>
                         <div className="mb-3">
@@ -83,6 +148,9 @@ function ManageMovie() {
                             className="form-control"
                             id="casts"
                             placeholder="Casts..."
+                            value={form.casts}
+                            name="casts"
+                            onChange={handleChangeForm}
                           />
                         </div>
                         <div className="mb-3">
@@ -92,10 +160,13 @@ function ManageMovie() {
                                 Duration Hour
                               </label>
                               <input
-                                type="time-hours"
+                                type="text"
                                 className="form-control"
-                                id="duration-hour"
+                                id="duration_hours"
                                 placeholder="hour..."
+                                value={form.duration}
+                                name="duration_hours"
+                                onChange={handleChangeForm}
                               />
                             </div>
                             <div className="col-6">
@@ -103,10 +174,13 @@ function ManageMovie() {
                                 Duration Minute
                               </label>
                               <input
-                                type="time-minutes"
+                                type="text"
                                 className="form-control"
-                                id="duration-minute"
+                                id="duration_minutes"
                                 placeholder="minute..."
+                                value={form.duration}
+                                name="duration_minutes"
+                                onChange={handleChangeForm}
                               />
                             </div>
                           </div>
@@ -123,6 +197,9 @@ function ManageMovie() {
                           id="synopsis"
                           rows="3"
                           placeholder="Synopsis..."
+                          value={form.synopsis}
+                          name="synopsis"
+                          onChange={handleChangeForm}
                         ></textarea>
                       </div>
                     </div>

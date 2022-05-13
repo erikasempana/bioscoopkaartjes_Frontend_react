@@ -7,7 +7,7 @@ import Footer from "../../components/Footer/footer";
 import Rectangle2 from "../../assets/img/Rectangle2.png";
 import axios from "../../utils/axios";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllMovie } from "../../stores/action/viewAllMovie";
+import { getAllMovie } from "../../stores/action/movie";
 
 function ViewAll() {
   const dispatch = useDispatch();
