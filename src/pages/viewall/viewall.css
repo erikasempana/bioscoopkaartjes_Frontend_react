@@ -5,53 +5,6 @@ body {
   background-color: #d6d8e7;
 }
 
-/* Navbar 1 */
-
-.navbar {
-  font-size: 16px;
-  font-weight: 600;
-  color: rgba(65, 65, 65, 1);
-}
-
-/* brand */
-.navbar-brand img {
-  width: 120px;
-}
-
-/* input search dropdown in navbar */
-.navbar_form-rounded {
-  border-radius: 1rem;
-}
-
-.navbar_input-icons i {
-  position: absolute;
-}
-
-.navbar_input-icon {
-  text-align: center;
-}
-
-.fa-search {
-  color: #9ca3af;
-}
-
-.navbar_dropdown-item {
-  display: inline-block;
-}
-
-.navbar_dropdown-menu {
-  width: 100px;
-  min-width: 300px;
-  border: 0;
-  right: 0;
-}
-
-.navbar_in-dropmenu {
-  display: none;
-}
-
-/* Akhir Navbar 1 */
-
 /* MAIN */
 
 /* View All Filter */
@@ -126,6 +79,11 @@ body {
   background-color: #5f2eea !important;
   color: #fff;
 }
+
+.btn-outline-primary {
+  background-color: #fff !important;
+  color: #5f2eea !important;
+}
 /* Akhir Month */
 
 /* Viewall */
@@ -164,87 +122,7 @@ body {
 
 /* AKHIR MAIN */
 
-/* Footer */
-
-#footer {
-  margin-top: 0px;
-}
-
-footer {
-  color: rgba(110, 113, 145, 1);
-}
-
-footer a {
-  font-size: 14px;
-  color: rgba(78, 75, 102, 1);
-  text-decoration: none;
-}
-
-.footer_brand img {
-  width: 170px;
-}
-
-.footer_brand {
-  font-size: 16px;
-}
-
-.footer_copyright p {
-  font-size: 14px;
-}
-
-/* akhir Footer */
-
 @media (max-width: 767.98px), (max-width: 991.98px) {
-  /* Navbar 1 */
-
-  /* input search when burgermenu */
-  .navbar_in-dropmenu-wrap {
-    display: flex;
-    width: 30px;
-    padding-right: 10px;
-  }
-
-  .navbar_input-icon-show {
-    text-align: center;
-  }
-
-  .navbar_form-rounded-show {
-    border-radius: 5px;
-    padding: 25px;
-  }
-
-  .navbar_in-dropmenu {
-    display: contents;
-    margin: 10px 0;
-    width: 50%;
-  }
-
-  /* input search dropdown in navbar */
-
-  .navbar_dropdown-search {
-    display: none;
-  }
-
-  .navbar_fa-search {
-    display: none;
-  }
-
-  /* menu profile when burgermenu */
-  .navbar-dropdown-profile {
-    display: none;
-  }
-
-  .navbar_item-show {
-    display: content;
-    width: 100%;
-    font-size: 16px;
-    font-weight: 600;
-    font: bold;
-    color: black;
-  }
-
-  /* Akhir Navbar 1 */
-
   /* viewall filter */
 
   .viewall_filter-wrap {
@@ -274,75 +152,4 @@ footer a {
     border-radius: 10px;
   }
   /* Akhir Viewall */
-
-  /* footer */
-  .footer_brand img {
-    padding: 20px 10px;
-    display: flex;
-    width: 200px;
-  }
-
-  .footer_brand p {
-    display: flex;
-    text-align: start;
-    padding: 0 10px;
-  }
-
-  .footer_explore h5 {
-    display: flex;
-    padding: 20px 10px;
-  }
-
-  .footer_explore ul {
-    display: flex;
-    padding-bottom: 5px;
-  }
-
-  .footer_explore ul li a {
-    padding: 0 10px;
-  }
-
-  .footer_sponsor h5 {
-    display: flex;
-    padding: 20px 10px;
-  }
-
-  .footer_sponsor ul {
-    display: flex;
-    align-items: center;
-    padding-bottom: 5px;
-  }
-
-  .footer_sponsor ul li img {
-    padding: 0 10px;
-    height: 40px;
-  }
-
-  .footer_followus h5 {
-    display: flex;
-    padding: 20px 10px;
-  }
-
-  .footer_followus ul {
-    display: flex;
-    padding-bottom: 5px;
-    padding: 0 10px;
-    justify-content: space-between;
-  }
-
-  .footer_folowus ul li img {
-    padding: 0 20px;
-    padding-right: 20px;
-  }
-
-  .footer_followus ul li a {
-    padding: 0 10px;
-    display: none;
-  }
-
-  .footer_copyright h5 {
-    padding: 0;
-  }
-
-  /* Akhir footer */
 }

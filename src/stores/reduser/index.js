@@ -7,6 +7,7 @@ import user from "./user";
 import login from "./login";
 import getAllMovie from "./getAllMovie";
 import postMovie from "./postMovie";
+import setIsLogin from "./isLogin";
 // import pathnya yg di reducer
 //import (nama fungsi) from "./letak folder(namafile)"
 
@@ -16,5 +17,6 @@ export default combineReducers({
   user,
   login,
   getAllMovie,
-  postMovie
+  postMovie,
+  setIsLogin
 });

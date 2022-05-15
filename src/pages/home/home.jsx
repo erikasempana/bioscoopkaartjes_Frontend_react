@@ -1,22 +1,20 @@
 import React, { useEffect, useState } from "react";
 import "./home.css";
-import Navbar from "../../components/Navbar/navbar";
+import Navbar from "../../components/Navbar/navbarAfterLogin";
 import Footer from "../../components/Footer/footer";
-import Nearest from "../../assets/img/Nearest.png";
-import Jumbotron3pic from "../../assets/img/jumbotron3pic.png";
+import Nearest from "../../assets/img1/nearest.png";
+import JumbotroneImage from "../../assets/img1/group.png";
 import Movie1 from "../../assets/img/Movie1.png";
-// import Movie2 from "../../assets/img/Movie2.png";
-// import Movie3 from "../../assets/img/Movie3.png";
 import Rectangle2 from "../../assets/img/Rectangle2.png";
-// import Rectangle4 from "../../assets/img/Rectangle3.png";
-// import Rectangle3 from "../../assets/img/Rectangle4.png";
 import Member from "../../components/Member/member";
 import axios from "../../utils/axios";
 import { Link, useNavigate } from "react-router-dom";
+import dayjs from "dayjs";
 
 export default function Home() {
   const navigate = useNavigate();
   const [nowShowing, setNowShowing] = useState([]);
+  console.log("nowshowing", nowShowing);
   const [upComingMovie, setUpComingMovie] = useState([]);
   const monthList = [
     { id: 1, month: "January" },
@@ -35,8 +33,9 @@ export default function Home() {
 
   const getNowShowing = async () => {
     try {
-      const resultNowShowing = await axios.get("movie/?searchRelease=5");
-      console.log(resultNowShowing.data.data);
+      const month = dayjs().month();
+      const resultNowShowing = await axios.get(`movie/?searchRelease=${month}`);
+      console.log("result", resultNowShowing.data.data);
       setNowShowing(resultNowShowing.data.data);
     } catch (error) {
       console.log(error.response);
@@ -47,7 +46,7 @@ export default function Home() {
     try {
       const params = 5;
       const resultUpComingMovie = await axios.get(`movie/?searchRelease=${params}`);
-      console.log("upcomingmovie", resultUpComingMovie.data.data);
+      // console.log("upcomingmovie", resultUpComingMovie.data.data);
       setUpComingMovie(resultUpComingMovie.data.data);
     } catch (error) {
       console.log(error.response);
@@ -79,153 +78,156 @@ export default function Home() {
         {/* Navbar */}
         <Navbar />
         {/* END OF NAVBAR */}
-
         {/* OPENING */}
-        <div className="home_opening">
-          <div className="home_opening-tagline">
-            <img src={Nearest} alt="" />
+        <section id="home1">
+          <div className="container bg-white">
+            <div className="row m-auto home_hero">
+              <div className="col m-auto home_hero-one">
+                <img src={Nearest} alt="tagline" />
+              </div>
+              <div className="col m-auto home_hero-two">
+                <img src={JumbotroneImage} alt="jumbotroneimage" />
+              </div>
+            </div>
           </div>
-          <div className="home_opening-picture">
-            <img src={Jumbotron3pic} alt="" />
-          </div>
-        </div>
+        </section>
         {/* END OF OPENING */}
 
         {/* MAIN */}
-        <div className="home_now-showing">
-          <div className="home_now-showing__link">
-            <div className="home_now-showing__left">
-              <a to="/home">
-                <span style={{ textDecoration: "underline" }}>Now Showing</span>
-              </a>
-            </div>
-            <div className="home_now-showing__right">
-              <Link to="/viewall">
-                <span>View all</span>
-              </Link>
-            </div>
-          </div>
-
-          <div className="home_now-showing__movie">
-            {nowShowing.map((item) => (
-              <div key={item.id} className="home_movie-image">
-                <img src={Movie1} alt="" />
+        <section id="nowshowing">
+          <div className="container pt-5">
+            <div className="row">
+              <div className="col">
+                <Link to="/home" className="h4">
+                  No<u>w Show</u>ing
+                </Link>
               </div>
-            ))}
-            {/* <div className="home_movie-image">
-              <img src={Movie2} alt="" />
+              <div className="col text-end">
+                <Link to="/viewall" classname="p">
+                  view all
+                </Link>
+              </div>
             </div>
-            <div className="home_movie-image">
-              <img src={Movie3} alt="" />
-            </div>
-            <div className="home_movie-image">
-              <img src={Movie1} alt="" />
-            </div>
-            <div className="home_movie-image">
-              <img src={Movie2} alt="" />
-            </div> */}
-          </div>
-        </div>
-
-        <div className="home_upcoming-movie">
-          <div className="home_upcoming-movie__link">
-            <div className="home_upcoming-movie__left">
-              <Link to="/home" className="decorationline">
-                <span>Upcoming Movie</span>
-              </Link>
-            </div>
-            <div className="home_upcoming-movie__right">
-              <Link to="/viewall" className="decorationline">
-                <span>View all</span>
-              </Link>
-            </div>
-          </div>
-
-          <div className="home_container-month">
-            <div className="home_month">
-              {monthList.map((item) => (
-                <button key={item.id} onClick={() => handleMonth(item.id)}>
-                  {item.month}
-                </button>
+            <div className="d-flex flex-row py-5 justify-content-between nowshowing_overflow-movie">
+              {nowShowing.map((item) => (
+                <div key={item.id} className="wrapper">
+                  <div className="card nowshowing_movie-card" style={{ width: "13rem" }}>
+                    <img
+                      src={process.env.REACT_APP_CLOUDINARY_URL + item.image}
+                      className="card-img-top nowshowing_movie-img"
+                      alt="..."
+                    />
+                    <div className="card-body text-center nowshowing_movie-detail pt-1">
+                      <h5
+                        className="card-title pt-0 fs-5 fw-bolder"
+                        style={{ color: "rgba(20, 20, 43, 1)" }}
+                      >
+                        {item.name}
+                      </h5>
+                      <p className="card-text" style={{ color: "#a0a3bd", fontSize: "15px" }}>
+                        {item.category}
+                      </p>
+                      <a
+                        className="btn btn-outline-primary"
+                        style={{
+                          width: "100%",
+                          border: "2px solid rgba(95, 46, 234, 1)",
+                          color: "rgba(95, 46, 234, 1)"
+                        }}
+                        onClick={() => handleDetailMovie(item.id)}
+                      >
+                        Detail
+                      </a>
+                    </div>
+                  </div>
+                </div>
               ))}
-              {/* <button>Oktober</button>
-              <button>November</button>
-              <button>Desember</button>
-              <button>January</button>
-              <button>February</button>
-              <button>March</button>
-              <button>April</button>
-              <button>Mey</button>
-              <button>June</button>
-              <button>July</button>
-              <button>August</button> */}
             </div>
           </div>
+        </section>
 
-          <div className="home_upcoming-movie__main">
-            {upComingMovie.map((item) => (
-              <div className="home_card" key={item.id}>
-                <div className="home_header">
-                  <img src={Rectangle2} alt="" />
+        <main id="upcomingmovie">
+          <div className="container py-5">
+            <div className="row">
+              <div className="col">
+                <Link to="/home" className="h4">
+                  Upcoming Movie
+                </Link>
+              </div>
+              <div className="col text-end">
+                <Link to="/viewall" className="p">
+                  view all
+                </Link>
+              </div>
+            </div>
+
+            <section id="monthbutton">
+              <div className="container">
+                <div className="row home_month-wrap overflow-auto mt-5">
+                  <div className="col home_month">
+                    {monthList.map((item) => (
+                      <button
+                        key={item.id}
+                        type="button"
+                        className="btn btn-outline-primary btn-white"
+                        onClick={() => handleMonth(item.id)}
+                      >
+                        {item.month}
+                      </button>
+                    ))}
+                  </div>
                 </div>
-                <div className="home_content">
-                  <h3>{item.name}</h3>
-                  <p>{item.category}</p>
-                  <button onClick={() => handleDetailMovie(item.id)}>Detail</button>
+              </div>
+            </section>
+
+            <div className="d-flex flex-row py-5 justify-content-between upcomingmovie_overflow-movie">
+              {upComingMovie.map((item) => (
+                <div key={item.id} className="pe-3">
+                  <div className="card upcomingmovie-card" style={{ width: "13rem" }}>
+                    <img
+                      src={process.env.REACT_APP_CLOUDINARY_URL + item.image}
+                      className="card-img-top upcomingmovie-img"
+                      alt="image-movie"
+                    />
+                    <div className="card-body row text-center align-items-end upcomingmovie-detail py-1">
+                      <div className="align-self-end py-1">
+                        <h5
+                          className="card-title pt-0 fs-5 fw-bolder"
+                          style={{ color: "rgba(20, 20, 43, 1)" }}
+                        >
+                          {item.name}
+                        </h5>
+                      </div>
+                      <div className="align-self-start pb-2">
+                        <p className="card-text" style={{ color: "#a0a3bd", fontSize: "15px" }}>
+                          {item.category}
+                        </p>
+                      </div>
+                      <div className="align-items-end pb-2">
+                        <button
+                          onClick={() => handleDetailMovie(item.id)}
+                          className="btn btn-outline-primary"
+                          style={{
+                            width: "100%",
+                            border: "2px solid rgba(95, 46, 234, 1)",
+                            color: "rgba(95, 46, 234, 1)"
+                          }}
+                        >
+                          Detail
+                        </button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            ))}
-            {/* <div className="home_card">
-              <div className="home_header">
-                <img src={Rectangle4} alt="" />
-              </div>
-              <div className="home_content">
-                <h3>The Witches</h3>
-                <p>Adventure, Comedy, Family</p>
-                <button>Detail</button>
-              </div>
+              ))}
             </div>
-            <div className="home_card">
-              <div className="home_header">
-                <img src={Rectangle3} alt="" />
-              </div>
-              <div className="home_content">
-                <h3>Tenet</h3>
-                <p>Action, Sci-Fi</p>
-                <button>Detail</button>
-              </div>
-            </div>
-            <div className="home_card">
-              <div className="home_header">
-                <img src={Rectangle2} alt="" />
-              </div>
-              <div className="home_content">
-                <h3>Black Widow</h3>
-                <p>Action, Adventure, Sci-Fi</p>
-                <button>Detail</button>
-              </div>
-            </div>
-            <div className="home_card">
-              <div className="home_header">
-                <img src={Rectangle4} alt="" />
-              </div>
-              <div className="home_content">
-                <h3>The Witches</h3>
-                <p>Adventure, Comedy, Family</p>
-                <button>Detail</button>
-              </div>
-            </div> */}
           </div>
-        </div>
+        </main>
 
         {/* END OF MAIN */}
 
-        {/* JOIN A MEMBER */}
         <Member />
 
-        {/* END OF JOIN A MEMBER */}
-
-        {/* FOOTER */}
         <Footer />
       </div>
     </>

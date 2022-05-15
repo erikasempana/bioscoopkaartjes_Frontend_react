@@ -1,40 +1,38 @@
 import React from "react";
 import "./member.css";
-import Jumbotrontag from "../../assets/img/Jumbotrontag.png";
+import Membership from "../../assets/img1/membership.png";
 
 function Member() {
   return (
     <>
       {/* JOIN A MEMBER */}
-      <div className="tickitz_container-member">
-        <div className="tickitz_member__title">
-          <img src={Jumbotrontag} alt="" />
-        </div>
-        <div className="tickitz_member__email">
-          <form>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value="Type your email"
-              className="tickitz_member__email-input1"
-            />
-            <input
-              type="submit"
-              value="Join Now"
-              className="tickitz_member__email-input2"
-            />
-          </form>
-        </div>
-        <div className="tickitz_member__tagline">
-          <div className="tickitz_tagline1">
-            By joining you as a Tickitz member,
+      <section id="membership">
+        <div className="container membership_container text-center">
+          <div className="row membership_img ms-auto py-5">
+            <img src={Membership} alt="" />
           </div>
-          <div className="tickitz_tagline2">
-            we will always send you the latest updates via email .
+          <div className="row membership_email">
+            <form>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value="Type your email"
+                className="d-lg input"
+              />
+              <button type="button" value="Join Now" className="submit d-lg btn-outline-primary">
+                Join Now
+              </button>
+            </form>
           </div>
+          <footer className="row membership_footer py-5">
+            <p className="lh-base">
+              By joining you as a Tickitz member, <br />
+              we will always send you the latest updates via email .
+            </p>
+          </footer>
         </div>
-      </div>
+      </section>
 
       {/* END OF JOIN A MEMBER */}
     </>

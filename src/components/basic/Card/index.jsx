@@ -40,10 +40,7 @@ function Card(props) {
       <div className="card-body">
         <h5 className="card-title">{name}</h5>
         <p className="card-text">{category}</p>
-        <button
-          className="btn btn-primary"
-          onClick={() => props.handleDetail(id)}
-        >
+        <button className="btn btn-primary" onClick={() => props.handleDetail(id)}>
           Detail
         </button>
       </div>
@@ -52,7 +49,7 @@ function Card(props) {
 }
 
 Card.defaultProps = {
-  category: "Default Category",
+  category: "Default Category"
 };
 
 export default Card;

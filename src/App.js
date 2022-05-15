@@ -14,6 +14,7 @@ import Detail from "./pages/detail/detail";
 import Order from "./pages/order/order";
 import Payment from "./pages/payment/payment";
 import ManageMovie from "./pages/managemovie/managemovie";
+import ManageSchedule from "./pages/manageschedule/manageschedule";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
         <Route path="signup" element={<SignUp />} />
         <Route path="payment" element={<Payment />} />
         <Route path="managemovie" element={<ManageMovie />} />
+        <Route path="manageschedule" element={<ManageSchedule />} />
       </Routes>
     </BrowserRouter>
   );

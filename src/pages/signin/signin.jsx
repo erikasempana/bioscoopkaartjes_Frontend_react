@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import "./signin.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { login } from "../../stores/action/auth";
+import { login, isLogin } from "../../stores/action/auth";
+import { getUserById } from "../../stores/action/user";
 import TickitzBrandOne from "../../assets/img1/tickitz1.png";
 import TickitzBrandTwo from "../../assets/img1/Tickitz2.png";
 
@@ -29,19 +30,19 @@ function SignIn() {
       // console.log(resultLogin);
 
       const resultLogin = await dispatch(login(form)); //by redux
-      // console.log("resultLogin", resultLogin.action.payload.data.msg);
-      // dispatch(getUserById(resultLogin.data.data.id)); //by redux
       // Output = suatu keadaan yang dapat diinfokan ke user bahwa proses sudah selesai
       setIsError(false);
       setMessage(resultLogin.action.payload.data.msg);
 
-      // localStorage.setItem("token", resultLogin.data.data.token);
+      // console.log("res", resultLogin);
+      localStorage.setItem("token", resultLogin.action.payload.data.data.token);
+      dispatch(isLogin(false));
       // localStorage.setItem("refreshToken", resultLogin.data.data.refreshToken);
       // localStorage.setItem("role", resultLogin.data.data.role);
 
       // localStorage.setItem("dataUser", JSON.stringify(resultUser[0])); //ini LocalStorage
+      // await dispatch(getUserById(resultLogin.action.payload.data.data.id)); //by redux
       navigate("/home");
-      // console.log(resultLogin);
     } catch (error) {
       console.log(error.response);
       setIsError(true);

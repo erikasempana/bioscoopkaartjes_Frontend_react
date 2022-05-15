@@ -18,124 +18,104 @@ body {
 }
 
 /* OPENING */
-.home_opening {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  align-content: flex-end;
-  padding-top: 10%;
-}
-
-.home_opening-tagline {
-  flex: 1;
-  display: flex;
-}
-
-.home_opening-tagline img {
-  margin: auto;
-}
-
-.home_opening-picture {
-  flex: 1;
+#home1 {
+  padding-top: 200px;
 }
 /* END OF OPENING */
 
 /* MAIN */
-.home_now-showing {
-  display: flex;
-  flex-direction: column;
-  background-color: #f5f6f8;
-  box-sizing: border-box;
+#nowshowing {
+  background: rgba(245, 246, 248, 1);
+  margin-bottom: 100px;
 }
 
-.home_now-showing__link {
-  width: 80%;
-  margin: auto;
-  display: flex;
-  justify-content: space-between;
-  padding: 3%;
-  font-family: "Mulish", sans-serif;
-  font-size: 16px;
+#nowshowing .h4 {
+  font-weight: 700;
   color: rgba(95, 46, 234, 1);
-}
-
-.home_now-showing__link a {
-  color: rgba(95, 46, 234, 1);
-  text-decoration: none;
-  font-weight: 600;
-}
-
-.home_now-showing__left {
-  text-decoration: underline 4px;
   text-underline-offset: 10px;
-  font-family: "Mulish", sans-serif;
-  font-size: 24px;
-  font-weight: 700;
-  color: rgba(20, 20, 43, 1);
 }
 
-.home_now-showing__movie {
-  width: 80%;
-  margin: auto;
-  display: flex;
-  overflow-x: auto;
-  justify-content: space-evenly;
-}
-
-.home_upcoming-movie {
-  display: flex;
-  flex-direction: column;
-}
-
-.home_upcoming-movie__link {
-  width: 80%;
-  margin: auto;
-  display: flex;
-  justify-content: space-between;
-  padding: 3%;
-  font-family: "Mulish";
+#nowshowing .p {
   font-size: 16px;
-  text-decoration: none;
-}
-
-.home_upcoming-movie__link a {
-  text-decoration: none;
-  color: rgba(95, 46, 234, 1);
-  font-weight: 600;
-}
-
-.home_upcoming-movie__left {
-  text-decoration: none;
-  font-family: "Mulish", sans-serif;
   font-weight: 700;
-  font-size: 24px;
-  color: rgba(20, 20, 43, 1);
+  color: rgba(95, 46, 234, 1);
 }
 
-.home_container-month {
-  display: flex;
-  flex-direction: column;
+.nowshowing_overflow-movie {
+  margin: 4px, 4px;
+  padding: 4px;
   width: 100%;
-  margin: 40px;
-  overflow: hidden;
   overflow-x: auto;
-  cursor: pointer;
-  justify-content: flex-end;
-  padding-left: 3%;
-  padding-right: 3%;
-  box-sizing: border-box;
+  overflow-y: hidden;
 }
 
-.home_month {
-  width: 135%;
-  margin: auto;
-  display: flex;
-  justify-content: space-evenly;
+.nowshowing_movie-card {
+  max-width: 450px;
+  height: 290px;
+  margin: 30px 10px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+  transition: 0.3s ease-in-out;
+  border-radius: 10px;
+  position: relative;
+}
+
+.nowshowing_movie-card:hover {
+  height: 450px;
+}
+
+.nowshowing_movie-detail {
+  position: relative;
+  margin-top: -140px;
+  padding: 20px 15px;
+  text-align: center;
+  color: #111;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.nowshowing_movie-card:hover .nowshowing_movie-detail {
+  visibility: visible;
+  opacity: 1;
+  margin-top: 5px;
+  transition-delay: 0.3s;
+}
+/* end nowshowing */
+
+#upcomingmovie {
+  background-color: white;
+  position: relative;
+  top: 40px;
+}
+
+#upcomingmovie .container {
+  margin-top: 8%;
+  margin-bottom: 8%;
+}
+
+#upcomingmovie .h4 {
+  font-weight: 700;
+  color: rgba(95, 46, 234, 1);
+}
+
+#upcomingmovie .p {
+  font-size: 15px;
+  font-weight: 700;
+  color: rgba(95, 46, 234, 1);
+}
+/* Month */
+.home_month-wrap {
+  height: 100px;
+  white-space: nowrap;
+  position: relative;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
 }
 
 .home_month button {
   flex: 2;
-  width: 200px;
+  width: 120px;
   height: 42px;
   margin-right: 5px;
   border: 1px solid #5f2eea;
@@ -148,11 +128,44 @@ body {
   cursor: pointer;
 }
 
-.home_month button:hover {
-  background-color: #5f2eea;
-  color: #fff;
+/* button month */
+
+.home_month-wrap {
+  height: 100px;
+  white-space: nowrap;
+  position: relative;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
 }
 
+.home_month button {
+  flex: 2;
+  width: 120px;
+  height: 42px;
+  margin-right: 5px;
+  border: 1px solid #5f2eea;
+  font-family: "Mulish", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: rgba(95, 46, 234, 1);
+  border-radius: 4px;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:active,
+.btn-outline-primary:visited {
+  background-color: #5f2eea !important;
+  color: #fff !important;
+}
+
+.btn-outline-primary {
+  background-color: #fff !important;
+  color: #5f2eea !important;
+}
+/* akhir month butto */
 .home_upcoming-movie__main {
   background-color: #fff;
   margin: 10px;
@@ -215,22 +228,23 @@ body {
 /* END OF MAIN */
 
 @media only screen and (max-width: 768px) {
-  .home_opening {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-self: center;
-    align-items: center;
+  /* HOME 1 */
+
+  .home_hero {
+    text-align: center;
+    margin-bottom: 10px;
   }
 
-  .home_opening-tagline img {
-    height: 80px;
-    padding-top: 100px;
-    padding-bottom: 20px;
+  .home_hero-one img {
+    width: 250px;
+    padding-bottom: 50px;
   }
 
-  .home_opening-picture img {
-    width: 300px;
-    padding: 5px;
+  .home_hero-two img {
+    width: 345px;
+  }
+
+  #home1 {
+    padding-top: 150px;
   }
 }

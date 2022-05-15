@@ -13,3 +13,10 @@ export const register = (form) => {
     payload: axios.post("auth/register", form)
   };
 };
+
+export const isLogin = (body) => {
+  return {
+    type: "SET_IS_LOGIN",
+    payload: body
+  };
+};

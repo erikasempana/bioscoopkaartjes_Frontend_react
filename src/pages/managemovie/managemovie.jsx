@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Footer from "../../components/Footer/footer";
-import NavbarAdmin from "../../components/Navbar/navbarAdmin";
+// import NavbarAdmin from "../../components/Navbar/navbarAdmin";
 import "./managemovie.css";
 import DefaultImage from "../../assets/img1/default.png";
 import SpidermanImage from "../../assets/img1/spiderman.png";
@@ -48,7 +48,7 @@ function ManageMovie() {
 
   return (
     <>
-      <NavbarAdmin />
+      {/* <NavbarAdmin /> */}
 
       <section id="managemovie">
         <div className="container">

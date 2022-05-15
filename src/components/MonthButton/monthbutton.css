@@ -1,0 +1,43 @@
+@import url("https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;700;800;900&display=swap");
+
+body {
+  font-family: "Mulish", sans-serif;
+  background-color: #d6d8e7;
+}
+
+.home_month-wrap {
+  height: 100px;
+  white-space: nowrap;
+  position: relative;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.home_month button {
+  flex: 2;
+  width: 120px;
+  height: 42px;
+  margin-right: 5px;
+  border: 1px solid #5f2eea;
+  font-family: "Mulish", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: rgba(95, 46, 234, 1);
+  border-radius: 4px;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:active,
+.btn-outline-primary:visited {
+  background-color: #5f2eea !important;
+  color: #fff !important;
+}
+
+.btn-outline-primary {
+    background-color: #fff!important;
+    color:  #5f2eea !important;
+}
+/* Akhir Month */

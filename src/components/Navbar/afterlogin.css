@@ -4,22 +4,10 @@ body {
   font-family: "Mulish", sans-serif;
 }
 
-/* Navbar 1 */
-
-.navbar {
-  font-size: 16px;
-  font-weight: 600;
-  color: rgba(65, 65, 65, 1);
-}
-
-/* brand */
-.navbar-brand img {
-  width: 120px;
-}
-
 /* input search dropdown in navbar */
 .navbar_form-rounded {
   border-radius: 1rem;
+  width: 250px;
 }
 
 .navbar_input-icons i {
@@ -50,32 +38,12 @@ body {
   display: none;
 }
 
-/* Akhir Navbar 1 */
+.user_image {
+  width: 70px;
+}
 
 @media (max-width: 767.98px), (max-width: 991.98px) {
   /* Navbar 1 */
-
-  /* input search when burgermenu */
-  .navbar_in-dropmenu-wrap {
-    display: flex;
-    width: 30px;
-    padding-right: 10px;
-  }
-
-  .navbar_input-icon-show {
-    text-align: center;
-  }
-
-  .navbar_form-rounded-show {
-    border-radius: 5px;
-    padding: 25px;
-  }
-
-  .navbar_in-dropmenu {
-    display: contents;
-    margin: 10px 0;
-    width: 50%;
-  }
 
   /* input search dropdown in navbar */
 

@@ -8,10 +8,13 @@ import Rectangle2 from "../../assets/img/Rectangle2.png";
 import axios from "../../utils/axios";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllMovie } from "../../stores/action/movie";
+import MonthButton from "../../components/MonthButton/monthbutton";
 
 function ViewAll() {
   const dispatch = useDispatch();
   const allMovie = useSelector((state) => state.getAllMovie.data);
+  // const cloudinary = process.env.REACT_APP_CLOUDINARY_URL;
+  // console.log("cloudinary", REACT_APP_CLOUDINARY_URL);
 
   const limit = 6;
   const [page, setPage] = useState(1);
@@ -87,6 +90,7 @@ function ViewAll() {
         </div>
 
         {/* AKHIR MAIN */}
+        <MonthButton />
         <div className="container">
           <div className="row home_month-wrap overflow-auto mt-5">
             <div className="col home_month">
@@ -138,7 +142,11 @@ function ViewAll() {
             {allMovie.map((item) => (
               <div key={item.id} className="col d-md-1 m-2 px-4 py-5 viewall_border-card">
                 <div className="card viewall-card" style={{ width: "16rem" }}>
-                  <img src={item.image} className="card-img-top viewall-img" alt="..." />
+                  <img
+                    src={process.env.REACT_APP_CLOUDINARY_URL + item.image}
+                    className="card-img-top viewall-img"
+                    alt="..."
+                  />
                   <div className="card-body row text-center align-items-end viewall-detail py-1">
                     <div className="align-self-end py-1">
                       <h5
@@ -154,17 +162,13 @@ function ViewAll() {
                       </p>
                     </div>
                     <div className="align-items-end pb-2">
-                      <Link
-                        to="/detailmovie"
+                      <button
+                        to="/detail"
                         className="btn btn-outline-primary"
-                        style={{
-                          width: "100%",
-                          border: "2px solid rgba(95, 46, 234, 1)",
-                          color: "rgba(95, 46, 234, 1)"
-                        }}
+                        style={{ width: "100%" }}
                       >
                         Detail
-                      </Link>
+                      </button>
                     </div>
                   </div>
                 </div>

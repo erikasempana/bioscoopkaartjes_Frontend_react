@@ -20,7 +20,7 @@ const user = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        data: { ...action.payload.data.data[0], role: "admin" },
+        data: { ...action.payload.data.data },
         msg: action.payload.data.msg
       };
     }
