@@ -16,7 +16,7 @@ const user = (state = initialState, action) => {
       };
     }
     case "GET_USER_BY_ID_FULFILLED": {
-      console.log(action.payload);
+      // console.log(action.payload);
       return {
         ...state,
         isLoading: false,

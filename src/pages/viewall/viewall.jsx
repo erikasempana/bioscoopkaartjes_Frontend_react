@@ -13,13 +13,11 @@ import MonthButton from "../../components/MonthButton/monthbutton";
 function ViewAll() {
   const dispatch = useDispatch();
   const allMovie = useSelector((state) => state.getAllMovie.data);
-  // const cloudinary = process.env.REACT_APP_CLOUDINARY_URL;
-  // console.log("cloudinary", REACT_APP_CLOUDINARY_URL);
 
   const limit = 6;
   const [page, setPage] = useState(1);
   const [data, setData] = useState(allMovie);
-  // console.log("allMovie", data);
+  console.log("allMovie", data);
   // const [pageInfo, setPageInfo] = useState({});
   useEffect(() => {
     getdataMovie();

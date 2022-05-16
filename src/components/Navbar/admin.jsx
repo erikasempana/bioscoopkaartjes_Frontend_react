@@ -3,10 +3,6 @@ import "./basic.css";
 import { Link } from "react-router-dom";
 
 function Admin() {
-  // const myFunction = () => {};
-
-  const filterFunction = () => {};
-
   return (
     <>
       {/* menu navbar */}

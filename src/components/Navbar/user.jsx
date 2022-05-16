@@ -3,10 +3,6 @@ import "./basic.css";
 import { Link } from "react-router-dom";
 
 function User() {
-  // const myFunction = () => {};
-
-  const filterFunction = () => {};
-
   return (
     <>
       <ul className="navbar-nav me-auto mb-2 mb-lg-0">

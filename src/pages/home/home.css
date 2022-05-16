@@ -26,7 +26,8 @@ body {
 /* MAIN */
 #nowshowing {
   background: rgba(245, 246, 248, 1);
-  margin-bottom: 100px;
+  /* margin-bottom: 100px; */
+  min-height: 760px;
 }
 
 #nowshowing .h4 {
@@ -51,7 +52,7 @@ body {
 
 .nowshowing_movie-card {
   max-width: 450px;
-  height: 290px;
+  min-height: 360px;
   margin: 30px 10px;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
   transition: 0.3s ease-in-out;
@@ -60,7 +61,7 @@ body {
 }
 
 .nowshowing_movie-card:hover {
-  height: 450px;
+  height: 520px;
 }
 
 .nowshowing_movie-detail {
@@ -72,25 +73,39 @@ body {
   visibility: hidden;
   opacity: 0;
   pointer-events: none;
+  display: flex;
+  flex-direction: column;
 }
 
 .nowshowing_movie-card:hover .nowshowing_movie-detail {
   visibility: visible;
   opacity: 1;
-  margin-top: 5px;
+  margin-top: 15px;
   transition-delay: 0.3s;
 }
+
+.nowshowing_movie-img {
+  width: 220px;
+  height: 340px;
+  margin: auto;
+  padding-top: 15px;
+}
+
+.category {
+  padding-bottom: 20px;
+}
+
 /* end nowshowing */
 
 #upcomingmovie {
   background-color: white;
   position: relative;
-  top: 40px;
+  /* top: 40px; */
 }
 
 #upcomingmovie .container {
-  margin-top: 8%;
-  margin-bottom: 8%;
+  /* margin-top: 8%; */
+  /* margin-bottom: 8%; */
 }
 
 #upcomingmovie .h4 {
@@ -102,6 +117,49 @@ body {
   font-size: 15px;
   font-weight: 700;
   color: rgba(95, 46, 234, 1);
+}
+
+.upcomingmovie_overflow-movie {
+  margin: 4px, 4px;
+  padding: 15px;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.upcomingmovie-detail {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px 15px;
+  position: relative;
+  text-align: center;
+}
+
+.upcomingmovie-card {
+  border-radius: 8px;
+}
+
+.upcomingmovie-img {
+  width: 220px;
+  height: 340px;
+  margin: auto;
+  padding-top: 15px;
+}
+
+.upcoming_title {
+  min-height: 70px;
+  padding-top: 10px;
+}
+
+.upcoming_category {
+  min-height: 40px;
+  padding-bottom: 10px;
+}
+
+.upcoming_detail {
+  min-height: 50px;
+  padding-bottom: 10px;
 }
 /* Month */
 .home_month-wrap {
@@ -144,13 +202,13 @@ body {
   width: 120px;
   height: 42px;
   margin-right: 5px;
-  border: 1px solid #5f2eea;
+  /* borer: 1px solid #5f2eea; */
   font-family: "Mulish", sans-serif;
   font-size: 14px;
   font-weight: 700;
-  color: rgba(95, 46, 234, 1);
+  /* color: rgba(95, 46, 234, 1); */
   border-radius: 4px;
-  background-color: #fff;
+  /* background-color: #fff; */
   cursor: pointer;
 }
 

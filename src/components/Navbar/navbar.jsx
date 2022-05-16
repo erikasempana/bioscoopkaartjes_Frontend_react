@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./navbar.css";
 import { Link } from "react-router-dom";
 import TickitzBrandTwo from "../../assets/img1/Tickitz2.png";
-import ProfileImage from "../../assets/img1/profile.png";
+import Admin from "./admin";
+import User from "./user";
+import { useSelector } from "react-redux";
+// component navbar
+import AfterLogin from "./afterlogin,";
+import BeforeLogin from "./beforelogin";
 
 function Navbar() {
-  const myFunction = () => {};
-
-  const filterFunction = () => {};
+  const role = useSelector((state) => state.login.data.role);
+  const isLogin = useSelector((state) => state.setIsLogin.isLogin);
 
   return (
     <>
@@ -54,96 +58,12 @@ function Navbar() {
               </div>
             </form>
             {/* menu navbar */}
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-              <li>
-                <hr className="dropdown-divider" />
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link active" to="/home">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <hr className="dropdown-divider" />
-              </li>
 
-              <li className="nav-item">
-                <Link className="nav-link active" to="/viewall">
-                  List Movie
-                </Link>
-              </li>
-            </ul>
+            {/* {!isLogin === true ? <User /> :  */}
+            {role === "admin" ? <Admin /> : <User />}
 
-            {/* input search dropdown in navbar */}
-            <div className="dropdown navbar_dropdown-search">
-              <Link
-                onClick={myFunction()}
-                className="btn btn-white navbar_dropdown-search"
-                to="/"
-                role="button"
-                type="button"
-                id="dropdownMenuLink"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                <i className="fas fa-search navbar_fa-search"></i>
-              </Link>
-              <ul
-                className="dropdown-menu dropdown-menu-end navbar_dropdown-menu"
-                aria-labelledby="dropdownMenuLink"
-              >
-                <li>
-                  <Link className="dropdown-item navbar_dropdown-item text-end" to="/home">
-                    <form action="">
-                      <div style={{ display: "table" }}>
-                        <div style={{ display: "table-row", width: "100px" }}>
-                          <div className="navbar_input-icon" style={{ display: "table-cell" }}>
-                            <i style={{ letterSpacing: "-100px" }} className="fa fa-search"></i>
-                          </div>
-                          <div style={{ display: "table-cell", width: "100%" }}>
-                            <input
-                              onKeyUp={filterFunction()}
-                              className="form-control pe-5 ps-4 navbar_form-rounded"
-                              type="search"
-                              placeholder="Search"
-                              aria-label="Search"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </form>
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            {/* dropdown profile navbar */}
-            <div className="dropdown navbar-dropdown-profile">
-              <button
-                className="btn btn-white"
-                // role="button"
-                type="button"
-                id="dropdownMenuLink"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                <img src={ProfileImage} alt="dropdown" className="img-responsive" />
-              </button>
-              <ul
-                className="dropdown-menu dropdown-menu-end text-center"
-                aria-labelledby="dropdownMenuLink"
-              >
-                <li>
-                  <Link className="dropdown-item navbar-dropdown-profile-item" to="#">
-                    Profil
-                  </Link>
-                </li>
-                <li>
-                  <Link className="dropdown-item navbar-dropdown-profile-item" to="#">
-                    Logout
-                  </Link>
-                </li>
-              </ul>
-            </div>
+            {/* isLogin=false */}
+            {isLogin ? <BeforeLogin /> : <AfterLogin />}
             {/* menu profile when burgermenu  */}
 
             <hr className="dropdown-divider" />

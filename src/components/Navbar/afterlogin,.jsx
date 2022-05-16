@@ -17,7 +17,6 @@ function AfterLogin() {
   const getProfile = async () => {
     try {
       const result = await dispatch(getUserById(userData, token)); //by redux
-      console.log(result);
     } catch (error) {
       console.log(error.response);
       setIsError(true);

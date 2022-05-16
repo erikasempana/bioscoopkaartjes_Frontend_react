@@ -1,30 +1,162 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Mulish:wght@400;600;700&family=Open+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;700;800;900&display=swap");
 
-.payment_container-two {
-  padding: 10% 4% 10% 6%;
-  font-family: "Mulish";
-  background-color: #e5e5e5;
+body {
+  font-family: "Mulish", sans-serif;
+}
+
+/* MAIN */
+
+#main-payment {
+  margin: 120px 0;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:active,
+.btn-outline-primary:visited {
+  background: #5f2eea !important;
+  color: white !important;
+}
+
+.btn-outline-primary {
+  color: #5f2eea;
   font-size: 14px;
-  line-height: 24px;
+  font-weight: 700;
+  border: 1px solid #5f2eea;
+  background-color: rgba(239, 240, 246, 1);
 }
 
-.payment_personal-info {
-  background-color: white;
+.payment_card-movie,
+.payment_card-seat,
+.payment_card-info {
+  border-radius: 8px;
 }
 
-.payment-personal-info-danger {
-  background-color: rgba(244, 183, 64, 0.3);
+.payment_card-movie,
+.payment_card-seat,
+.payment_card-info p {
+  font-size: 18px;
+  font-weight: 400;
 }
 
-.payment_card-method {
+.payment_card-info label {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.payment_card-info input {
+  font-size: 18px;
+  font-weight: 400;
+}
+/* pay button */
+.payment_btn-pay {
+  overflow-x: auto;
+}
+
+.pay-btn button {
+  width: 125px;
+  height: 42px;
+  background-color: #fff;
+}
+
+.pay-btn img {
+  height: 20px;
+}
+
+.line-or p {
   display: flex;
   flex-direction: row;
-  background-color: white;
-  margin: auto;
+  color: #dedede;
+  font-size: 16px;
 }
 
-.payment_card-method button {
-  flex: 2;
-  height: 50px;
-  row-gap: 2px;
+.line-or p:before,
+.line-or p:after {
+  content: "";
+  flex: 1 1;
+  border-bottom: 1px solid #dedede;
+  margin: auto;
+}
+.line-or p:before {
+  margin-right: 10px;
+}
+.line-or p:after {
+  margin-left: 10px;
+}
+/*akhir  pay button */
+
+.lower-button-change,
+.lower-button-checkout {
+  width: 250px;
+  height: 46px;
+  border-radius: 5px;
+  background-color: #d6d8e7;
+}
+
+.pay-cash p {
+  font-size: 16px;
+  font-weight: 400;
+  color: #6e7191;
+}
+
+.pay-cash a {
+  font-size: 16px;
+  font-weight: 400;
+  color: #5f2eea;
+  text-decoration: none;
+}
+
+/* AKHIR MAIN */
+
+@media (max-width: 767.98px), (max-width: 991.98px) {
+  /* MAIN */
+  main {
+    margin: 80px 0;
+  }
+
+  .personal_info h4,
+  .payment_btn-wrap h4 {
+    text-align: center;
+  }
+
+  .wrap-button,
+  .wrap {
+    display: grid;
+    grid-auto-flow: row;
+    align-items: center;
+    justify-items: center;
+  }
+
+  .payment_movie-wrap {
+    display: none;
+  }
+
+  .payment_card-btn {
+    width: 350px;
+    text-align: center;
+  }
+
+  .personal_info {
+    padding-top: 30px;
+  }
+
+  /* pay button */
+  .pay-btn button {
+    width: 80px;
+    height: 40px;
+  }
+
+  .pay-btn img {
+    height: 15px;
+  }
+  /*akhir  pay button */
+
+  .lower-button-change {
+    display: none;
+  }
+
+  .lower-button-checkout {
+    width: 350px;
+    height: 56px;
+  }
+  /* AKHIR MAIN */
 }

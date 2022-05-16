@@ -20,6 +20,7 @@ body {
 /* input search dropdown in navbar */
 .navbar_form-rounded {
   border-radius: 1rem;
+  width: 250px;
 }
 
 .navbar_input-icons i {

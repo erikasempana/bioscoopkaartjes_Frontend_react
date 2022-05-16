@@ -7,6 +7,13 @@ export const getAllMovie = (page, limit) => {
   };
 };
 
+export const getMovieByIdMovie = (id) => {
+  return {
+    type: "GET_MOVIE_BY_ID_MOVIE",
+    payload: axios.get(`movie/${id}`)
+  };
+};
+
 export const postMovie = (form) => {
   return {
     type: "POST_MOVIE",

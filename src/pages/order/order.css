@@ -1,36 +1,129 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Mulish:wght@400;600;700&family=Open+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;700;800;900&display=swap");
 
-.order-container-dua {
-  padding: 15% 4% 25% 6%;
-  font-family: "Mulish";
-  background-color: #e5e5e5;
-  font-size: 14px;
-  line-height: 24px;
-}
-
-.order_key-available button {
+body {
+  font-family: "Mulish", sans-serif;
   background-color: #d6d8e7;
-  border: 2px #d6d8e7;
 }
 
-.order_key-selected button {
-  background-color: #5f2eea;
-  border: 2px #5f2eea;
+/* MAIN */
+
+main {
+  margin: 120px 0;
+  background-color: #e5e5e5;
 }
 
-.order_key-sold button {
-  background-color: #6e7191;
-  border: 2px #6e7191;
+.btn-outline-primary:hover,
+.btn-outline-primary:active,
+.btn-outline-primary:visited {
+  background: #5f2eea !important;
+  color: white !important;
 }
 
-.order_info-card {
-    background: none;
-    border: none;
-    font-weight: 700 bolder;
+.btn-outline-primary {
+  color: #5f2eea;
+  font-size: 14px;
+  font-weight: 700;
+  border: 1px solid #5f2eea;
+  background-color: rgba(239, 240, 246, 1);
 }
 
-.order_title-movie-selected p{
-    background: none;
-    border: none;
-    font-weight: 700 bolder;
+.order_card-movie,
+.order_card-seat,
+.order_card-info {
+  border-radius: 8px;
+}
+
+#order {
+  background-color: none;
+}
+
+/* sitting key */
+.order_seating-key {
+  padding-top: 30px;
+}
+
+.row-seating-key {
+  padding-top: 10px;
+}
+
+.square-available {
+  border: 1px solid #9ca3af;
+  background-color: rgba(214, 216, 231, 1);
+  border-radius: 5px;
+  color: rgba(214, 216, 231, 1);
+}
+
+.square-selected {
+  border: 1px solid #9ca3af;
+  background-color: rgba(95, 46, 234, 1);
+  border-radius: 5px;
+  color: rgba(95, 46, 234, 1);
+}
+
+.square-sold {
+  border: 1px solid #9ca3af;
+  background-color: rgba(110, 113, 145, 1);
+  border-radius: 5px;
+  color: rgba(110, 113, 145, 1);
+}
+/*akhir  sitting key */
+
+.lower-button-change,
+.lower-button-checkout {
+  width: 300px;
+  height: 56px;
+  border-radius: 8px;
+}
+
+/* AKHIR MAIN */
+
+@media (max-width: 767.98px), (max-width: 991.98px) {
+  /* MAIN */
+  main {
+    margin: 80px 0;
+  }
+
+  .order_info h4,
+  .order_seat-wrap h4 {
+    text-align: center;
+  }
+
+  .wrap-button,
+  .wrap {
+    display: grid;
+    grid-auto-flow: row;
+    align-items: center;
+    justify-items: center;
+  }
+
+  .order_movie-wrap {
+    display: none;
+  }
+
+  .order_card-seat {
+    width: 350px;
+    text-align: center;
+  }
+
+  .order_info {
+    padding-top: 30px;
+  }
+
+  /* sitting key */
+  .square-available,
+  .square-selected,
+  .square-sold {
+    font-size: 9px;
+  }
+  /*akhir  sitting key */
+
+  .lower-button-change {
+    display: none;
+  }
+
+  .lower-button-checkout {
+    width: 350px;
+    height: 56px;
+  }
+  /* AKHIR MAIN */
 }

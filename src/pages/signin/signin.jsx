@@ -56,7 +56,7 @@ function SignIn() {
 
   const handleReset = (event) => {
     // event.preventDefault();
-    console.log("Reset Form");
+    // console.log("Reset Form");
     setForm({
       email: "",
       password: ""

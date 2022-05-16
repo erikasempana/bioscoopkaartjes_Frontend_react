@@ -2,26 +2,42 @@ import React, { useEffect, useState } from "react";
 import "./detail.css";
 import Footer from "../../components/Footer/footer";
 import Navbar from "../../components/Navbar/navbar";
-import Spiderman from "../../assets/img/spiderman.png";
 import Ebuid from "../../assets/img/ebuid.png";
 import Cineone from "../../assets/img/cineone21.png";
 import Hiflix from "../../assets/img/hiflix.png";
 import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getMovieByIdMovie } from "../../stores/action/movie";
+import { getAllSchedule, dataOrder } from "../../stores/action/schedule";
+import CurrencyFormat from "react-currency-format";
 import axios from "../../utils/axios";
 import dayjs from "dayjs";
 
 export default function Detail() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { id } = useParams();
   const [detailMovie, setDetailMovie] = useState({});
   const [scheduleMovie, setScheduleMovie] = useState([]);
-  console.log(scheduleMovie);
+  const [dataDetailOrder, setDataDetailOrder] = useState({
+    movieId: id,
+    dateBooking: new Date().toISOString().split("T")[0]
+  });
+  console.log("dataOrder", dataDetailOrder);
+
+  // GET DATA MOVIE BY ID
+  // GET DATA SCHEDULE FILER BY MOVIE ID & DATE BOOKING
+
+  const changeDataBooking = (data) => {
+    setDataDetailOrder({ ...dataDetailOrder, ...data });
+  };
 
   const getDetailMovie = async () => {
     try {
-      const resultDetailMovie = await axios.get(`movie/${id}`);
-      console.log(resultDetailMovie.data.data[0]);
-      setDetailMovie(resultDetailMovie.data.data[0]);
+      const resultDetailMovie = await dispatch(getMovieByIdMovie(id));
+      // const resultDetailMovie = await axios.get(`movie/${id}`);
+      console.log(resultDetailMovie);
+      setDetailMovie(resultDetailMovie.action.payload.data.data[0]);
     } catch (error) {
       console.log(error.response);
     }
@@ -29,15 +45,25 @@ export default function Detail() {
 
   const getScheduleMovie = async () => {
     try {
-      const resultSchedulelMovie = await axios.get(`schedule?limit=6&page=1`);
-      console.log(resultSchedulelMovie);
-      setScheduleMovie(resultSchedulelMovie.data.data);
+      const limit = 6;
+      const page = 1;
+      // const resultSchedulelMovie = await axios.get(`schedule?limit=${limit}&page=${page}`);
+      const resultSchedulelMovie = await dispatch(getAllSchedule(limit, page));
+      setScheduleMovie(resultSchedulelMovie.action.payload.data.data);
     } catch (error) {
       console.log(error.response);
     }
   };
-  const handleBookNow = () => {
-    navigate(`/order`);
+
+  console.log("scheduleMovie", scheduleMovie);
+
+  const handleBookNow = (price) => {
+    const body = {
+      ...dataDetailOrder,
+      price
+    };
+    dispatch(dataOrder(body));
+    navigate("/order");
   };
 
   useEffect(() => {
@@ -50,227 +76,216 @@ export default function Detail() {
       {/* NAVBAR */}
       <Navbar />
 
-      {/* MAIN */}
-      {/* MAIN - MOVIE DETAIL */}
-      <main className="moviedetail_wrapping-main mx-auto">
-        <div className="row mx-auto mt-2 mt-5 moviedetail_content jumbotron bg-white">
-          <div className="col-md-3 mx-auto mt-5 mb-5">
-            <div className="card p-4 mx-auto" style={{ width: "fit-content" }}>
-              <img src={Spiderman} className="moviedetail_img-top" alt="..." />
-            </div>
-          </div>
-          <div className="col-md-9 mt-5 mb-5 mx-auto">
-            <h2 className="mb-3">
-              <b>{detailMovie.name}</b>
-            </h2>
-            <h5
-              className="mb-5"
-              style={{ color: "#4e4b66", fontWeight: "normal" }}
-            >
-              {detailMovie.category}
-            </h5>
-            <div className="row">
-              <div className="col-md-4">
-                <p>Release date</p>
-                <p>
-                  <b>{dayjs(detailMovie.releaseDate).format("DD-MM-YYYY")}</b>
-                </p>
-                <p>Duration</p>
-                <p>
-                  <b>June 28, 2017</b>
-                </p>
+      {/* NEW MAIN */}
+      <main>
+        <section id="moviedetail">
+          <div className="container">
+            <div className="row mx-auto mt-5 bg-white">
+              <div className="col-lg-3 mx-auto my-5 text-center">
+                <div className="card p-3 movie_detail-card">
+                  <img
+                    src={process.env.REACT_APP_CLOUDINARY_URL + detailMovie.image}
+                    className="img-top"
+                    alt="..."
+                  />
+                </div>
               </div>
-              <div className="col-md-8">
-                <p>Directed By</p>
-                <p>
-                  <b>{detailMovie.director}</b>
-                </p>
-                <p>Casts</p>
-                <p>
-                  <b>{detailMovie.casts}</b>
-                </p>
-              </div>
-            </div>
-            <div className="line-border"></div>
-            <h6>
-              <b>Synopsis</b>
-            </h6>
-            <p style={{ textAlign: "left" }}>{detailMovie.synopsis}</p>
-          </div>
-        </div>
-      </main>
-      {/* MAIN - MOVIE DETAIL */}
-
-      <h5 className="text-center mt-5 mb-5">
-        <b>Showtimes and Tickets</b>
-      </h5>
-
-      {/* DATE AND LOCATION */}
-      <form className="moviedetail_date-location">
-        <div className="moviedetail_form-group-date mb-2">
-          <input
-            data-provide="datepicker"
-            type="date"
-            className="form-control moviedetail_set-box"
-            placeholder="26/04/2022"
-            aria-label="Username"
-            aria-describedby="basic-addon1"
-          />
-        </div>
-        <div className="moviedetail_location">
-          <div className="moviedetail_iconmap">
-            <i className="bi bi-pin-map-fill"></i>
-          </div>
-          <div className="dropdown moviedetail_set-box">
-            <select name="location" className="moviedetail_dropdown-location">
-              <option value="">Select Location</option>
-              <option className="dropdown-item" value="jakarta">
-                Purwokerto
-              </option>
-              <option className="dropdown-item" value="jakarta">
-                Jakarta
-              </option>
-              <option className="dropdown-item" value="jakarta">
-                Bandung
-              </option>
-              <option className="dropdown-item" value="jakarta">
-                Surabaya
-              </option>
-            </select>
-          </div>
-        </div>
-      </form>
-      {/* END OF DATE AND LOCATION */}
-
-      {/* CARD */}
-      <div className="moviedetail_container-card mt-5 mx-auto">
-        <div className="row mx-auto">
-          {/* satu */}
-          {scheduleMovie.map((item) => (
-            <div
-              key={item.id}
-              className="col-md-4 mb-2 moviedetail_card-schedule"
-            >
-              <div className="card shadow mb-4">
-                <div className="card-body">
-                  <div className="row mb-1">
-                    <div className="col-md-6 d-flex flex-wrap align-items-center">
-                      <img
-                        src={Ebuid}
-                        className="img"
-                        height="auto"
-                        width="80%"
-                        alt="..."
-                      />
-                    </div>
-                    <div className="col-md-6">
-                      <h4 className="font-weight-bold">{item.premiere}</h4>
-                      <p style={{ fontSize: "12px", color: "#6e7191" }}>
-                        {item.location}
-                      </p>
-                    </div>
+              <div className="col-lg-9 mx-auto my-5 px-5 moviedetail_wrap">
+                <h2 className="mb-3">
+                  <b>{detailMovie.name}</b>
+                </h2>
+                <h5 className="mb-5" style={{ color: "#4e4b66", fontWeight: "normal" }}>
+                  {detailMovie.category}
+                </h5>
+                <div className="d-flex flex-row text-start">
+                  <div className="col-lg-6 pe-5 pb-3">
+                    <p className="my-1">Release date</p>
+                    <p>
+                      <b>{dayjs(detailMovie.releaseDate).format("DD-MM-YYYY")}</b>
+                    </p>
                   </div>
+                  <div className="col-lg-6 pb-3">
+                    <p className="my-1">Directed By</p>
+                    <p>
+                      <b>{detailMovie.director}</b>
+                    </p>
+                  </div>
+                </div>
+                <div className="d-flex flex-row text-start">
+                  <div className="col-lg-6 pe-5 pb-3">
+                    <p className="my-1">Duration</p>
+                    <p>
+                      <b>{detailMovie.duration}</b>
+                    </p>
+                  </div>
+                  <div className="col-lg-6 pb-3">
+                    <p className="my-1">Casts</p>
+                    <p className="">
+                      <b className="d-inline">{detailMovie.casts}</b>
+                    </p>
+                  </div>
+                </div>
+                <div className="row moviedetail_synopsis">
                   <hr />
-                  <div className="row mt-4 mb-2">
-                    <div
-                      className="col-md-3 mb-3"
-                      style={{
-                        fontSize: "12px",
-                        fontWeight: 600,
-                        color: "#4e4b66",
-                      }}
-                    >
-                      {item.time}
-                    </div>
-                    <div
-                      className="col-md-3 mb-3"
-                      style={{
-                        fontSize: "12px",
-                        fontWeight: 600,
-                        color: "#6e7191",
-                      }}
-                    >
-                      10:30am
-                    </div>
-                    <div
-                      className="col-md-3 mb-3"
-                      style={{
-                        fontSize: "12px",
-                        fontWeight: 600,
-                        color: "#a0a3bd",
-                      }}
-                    >
-                      12:00pm
-                    </div>
-                    <div
-                      className="col-md-3 mb-3"
-                      style={{
-                        fontSize: "12px",
-                        fontWeight: 600,
-                        color: "#6e7191",
-                      }}
-                    >
-                      02:00pm
-                    </div>
-                    <div
-                      className="col-md-3 mb-3"
-                      style={{
-                        fontSize: "12px",
-                        fontWeight: 600,
-                        color: "#6e7191",
-                      }}
-                    >
-                      04.30pm
-                    </div>
-                    <div
-                      className="col-md-3 mb-3"
-                      style={{
-                        fontSize: "12px",
-                        fontWeight: 600,
-                        color: "#4e4b66",
-                      }}
-                    >
-                      07:00pm
-                    </div>
-                    <div
-                      className="col-md-3 mb-3"
-                      style={{
-                        fontSize: "12px",
-                        fontWeight: 600,
-                        color: "#a0a3bd",
-                      }}
-                    >
-                      08:30pm
-                    </div>
-                  </div>
-                  <div className="d-flex justify-content-between">
-                    <h6
-                      className="card-text"
-                      style={{ fontSize: "16px", color: "#6b6b6b" }}
-                    >
-                      Price
-                    </h6>
-                    <h6 className="card-text" style={{ fontSize: "16px" }}>
-                      <b>Rp {item.price}/Seat</b>
-                    </h6>
-                  </div>
-
-                  <div className="row-lg-0 d-flex justify-content-between">
-                    <button
-                      onClick={handleBookNow}
-                      className="btn btn-primary mx-auto moviedetail_btn-1"
-                    >
-                      Book now
-                    </button>
-                  </div>
+                  <h5>
+                    <b>Synopsis</b>
+                  </h5>
+                  <span className="text-start">{detailMovie.synopsis}</span>
                 </div>
               </div>
             </div>
-          ))}
-        </div>
-      </div>
-      {/* END OF CARD */}
-      {/* END OF MAIN */}
+          </div>
+        </section>
+
+        <section id="showtimes">
+          <div className="container showtimes">
+            <div className="row text-center showtimes_title">
+              <h4>
+                <b>Showtimes and Tickets</b>
+              </h4>
+            </div>
+            <div className="row pt-3 showtimes-wrap">
+              <div className="col-lg-6 showtimes_date">
+                <form>
+                  <input
+                    data-provide="datepicker"
+                    type="date"
+                    className="form-control moviedetail_set-box"
+                    placeholder="20/05/2022"
+                    aria-label="Username"
+                    aria-describedby="basic-addon1"
+                  />
+                </form>
+              </div>
+              <div className="col-lg-6 showtimes_location">
+                <div className="d-flex flex-row showtimes_location-flex">
+                  <img src="./assets/img/map.png" alt="" />
+                  <form>
+                    <div className="col dropdown moviedetail_set-box">
+                      <select name="location" className="moviedetail_dropdown-location">
+                        <option value="">Select Location</option>
+                        <option className="dropdown-item" value="jakarta">
+                          Purwokerto
+                        </option>
+                        <option className="dropdown-item" value="jakarta">
+                          Jakarta
+                        </option>
+                        <option className="dropdown-item" value="jakarta">
+                          Bandung
+                        </option>
+                        <option className="dropdown-item" value="jakarta">
+                          Surabaya
+                        </option>
+                      </select>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="schedule">
+          <div className="container pb-5">
+            <div className="row d-flex justify-content-center pb-5">
+              {/* satu */}
+              {scheduleMovie.map((item) => (
+                <div
+                  key={item.id}
+                  className="col-lg-4 mb-2 d-flex justify-content-center schedule_column"
+                >
+                  <div className="card shadow d-flex mb-4 justify-content-center schedule_card">
+                    <div className="card-body shcedule_card-body">
+                      <div className="row mb-1">
+                        <div className="col-lg-6 d-flex flex-wrap align-items-center premiere_brand">
+                          {item.premiere === "Hiflix Cinema" ? (
+                            <img src={Hiflix} className="img" height="auto" width="90%" alt="..." />
+                          ) : null}
+                          {item.premiere === "cineone21" ? (
+                            <img
+                              src={Cineone}
+                              className="img"
+                              height="auto"
+                              width="90%"
+                              alt="..."
+                            />
+                          ) : null}
+                          {item.premiere === "cineone21" ? (
+                            <img src={Ebuid} className="img" height="auto" width="90%" alt="..." />
+                          ) : null}
+                        </div>
+                        <div className="col-lg-6 premiere_name">
+                          <h4 className="font-weight-bold">{item.premiere}</h4>
+                          <p
+                            className="text-truncate"
+                            style={{ fonSize: "13px", color: "#6e7191" }}
+                          >
+                            {item.location}
+                          </p>
+                        </div>
+                      </div>
+                      <hr />
+                      <div className="row mt-4 m-auto pt-2">
+                        {item.time.split(",").map((itemTime) => (
+                          <button
+                            key={itemTime}
+                            onClick={() =>
+                              changeDataBooking({ timeBooking: itemTime, scheduleId: item.id })
+                            }
+                            className="col-3 mb-3 btn btn-white m-2"
+                            style={{
+                              width: "fit-content",
+                              fontSize: "12px",
+                              fontWeight: 600,
+                              color: "#4e4b66"
+                            }}
+                          >
+                            {itemTime}
+                          </button>
+                        ))}
+                      </div>
+                      <div className="d-flex pt-3">
+                        <div className="col-6 price text-start">
+                          <h6 className="card-text" style={{ fontSize: "16px", color: "#6b6b6b" }}>
+                            Price
+                          </h6>
+                        </div>
+                        <div className="col-6 money text-end">
+                          <h6 className="card-text" style={{ fontSize: "16px" }}>
+                            <span>
+                              <b>
+                                <CurrencyFormat
+                                  value={item.price}
+                                  displayType={"text"}
+                                  thousandSeparator={"."}
+                                  decimalSeparator={","}
+                                  prefix={"Rp "}
+                                  suffix={"/seat"}
+                                />
+                              </b>
+                            </span>
+                          </h6>
+                        </div>
+                      </div>
+
+                      <div className="d-flex justify-content-center pt-3">
+                        <button
+                          disabled={item.id === dataDetailOrder.scheduleId ? false : true}
+                          onClick={() => handleBookNow(item.price)}
+                          className="btn btn-primary mx-auto moviedetail_btn-1"
+                        >
+                          Book now
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      </main>
+      {/* END NEW MAIN */}
 
       {/* FOOTER */}
       <Footer />

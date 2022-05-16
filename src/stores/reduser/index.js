@@ -6,8 +6,11 @@ import { combineReducers } from "redux";
 import user from "./user";
 import login from "./login";
 import getAllMovie from "./getAllMovie";
-import postMovie from "./postMovie";
+// import postMovie from "./postMovie";
 import setIsLogin from "./isLogin";
+import getMovieByIdMovie from "./getMovieByIdMovie";
+import getAllSchedule from "./getAllSchedule";
+import dataOrder from "./dataOrder";
 // import pathnya yg di reducer
 //import (nama fungsi) from "./letak folder(namafile)"
 
@@ -17,6 +20,8 @@ export default combineReducers({
   user,
   login,
   getAllMovie,
-  postMovie,
-  setIsLogin
+  setIsLogin,
+  getMovieByIdMovie,
+  getAllSchedule,
+  dataOrder
 });

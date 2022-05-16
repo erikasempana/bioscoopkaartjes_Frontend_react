@@ -1,18 +1,26 @@
 import React, { useState } from "react";
-import { useLocation /*useNavigate*/, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./order.css";
-import Navbar from "../../components/Navbar/navbar";
 import Footer from "../../components/Footer/footer";
+import Navbar from "../../components/Navbar/navbar";
 import Cineone21 from "../../assets/img/cineone21.png";
 import Seat from "../../components/Seat/index";
+import { useSelector, useDispatch } from "react-redux";
+import { dataOrder } from "../../stores/action/schedule";
+import dayjs from "dayjs";
+import CurrencyFormat from "react-currency-format";
 
 function Order() {
   const navigate = useNavigate();
   const { state } = useLocation();
+  const dispatch = useDispatch();
   const listSeat = ["A", "B", "C", "D", "E", "F", "G"];
   const [selectedSeat, setSelectedSeat] = useState([]);
-  const [reservedSeat /*setReservedSeat*/] = useState(["A1", "C2", "B11"]);
-
+  const [reservedSeat, setReservedSeat] = useState(["A1", "C2", "B11"]);
+  const detailOrder = useSelector((state) => state.dataOrder.dataOrder);
+  const movieById = useSelector((state) => state.getMovieByIdMovie.data);
+  const userId = useSelector((state) => state.user.data.id);
+  console.log("detailOrder", detailOrder);
   //   PROSES GET SEAT
 
   const handleSelectSeat = (seat) => {
@@ -27,144 +35,234 @@ function Order() {
     }
   };
 
-  const handleBooking = (event) => {
+  const handleCheckout = () => {
     try {
-      console.log(state);
-      console.log(selectedSeat);
-
-      event.preventDefault();
-      // const resultBooking = await axios.post("auth/register", form);
-      // navigate("/login");
+      // console.log(state);
+      console.log("selectedSeat", selectedSeat);
+      const body = {
+        ...detailOrder,
+        selectedSeat,
+        totalPayment: selectedSeat.length * detailOrder.price,
+        userId
+      };
+      console.log(body);
+      dispatch(dataOrder(body));
 
       navigate("/payment");
     } catch (error) {
       console.log(error.response);
     }
   };
+
+  const handleChangeMovie = () => {
+    navigate("/home");
+  };
+
   return (
     <>
       <div className="order_container-satu">
         {/* NAVBAR */}
         <Navbar />
 
-        {/* MAIN */}
-        <div className="text-center order-container-dua pt-auto py-auto ">
-          <main className="row">
-            <section className="col-md-9">
-              <div className="card">
-                <div className="order_title-movie-selected">
-                  <p className="text-start h6">Movie Selected</p>
-                </div>
-                <div className="order_movie-title px-4 py-2 ">
-                  <div className="row gx-5">
-                    <div className="col">
-                      <p className="text-start mx-auto h6">
-                        Spider-Man: Homecoming
-                      </p>
-                    </div>
-                    <div className="text-end mx-auto col">
-                      <button className="btn btn-light btn-outline-primary">
-                        Change movie
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="card">
-                <div className="card-body border-2 border-top">
-                  <p className="h6">Screen</p>
-                  <hr className="border border-5 border-dark ms-4 me-4" />
-                </div>
-                <div className="container-float seat_card-body ms-2 me-2 gap-1">
-                  {listSeat.map((item) => (
-                    <div key={item}>
-                      <Seat
-                        rowSeat={item}
-                        selectedSeat={handleSelectSeat}
-                        reserved={reservedSeat}
-                        selected={selectedSeat}
-                      />
-                    </div>
-                  ))}
-                </div>
-                <div className="order_seating-key text-start ms-4">
-                  <p className="h6">Seating Key</p>
+        {/* NEW MAIN */}
+        <main id="order">
+          <section id="order">
+            <div className="container">
+              <div className="row m-auto order-wrapper">
+                <div className="col-lg-8">
+                  <div className="wrap-card order_movie-wrap">
+                    <h4>
+                      <b>Movie Selected</b>
+                    </h4>
 
-                  <div className="row-seating-key md-8  mb-5">
-                    <span className="order_key-available me-3">
-                      <button className="btn rounded border-5 w-5 p-2 mx-2"></button>
-                      <span>available</span>
-                    </span>
-                    <span className="order_key-selected me-3">
-                      <button className="btn rounded border-5 w-5 p-2 mx-2"></button>
-                      <span>selected</span>
-                    </span>
-                    <span className="order_key-sold me-3">
-                      <button className="btn rounded border-5 w-5 p-2 mx-2"></button>
-                      <span>sold</span>
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <div className="order_button-nextstep row mx-auto gap-5 pt-3 pb-3">
-                <button className="btn btn-light btn-outline-primary text-center col">
-                  Change Your Movie
-                </button>
-                <button
-                  type="submit"
-                  className="btn  btn-light btn-outline-primary text-center col"
-                  onClick={handleBooking}
-                >
-                  Checkout Now
-                </button>
-              </div>
-            </section>
-
-            <section className="col-md-3">
-              <div className="card order_info-card pt-2 py-2">
-                <p className="text-start bg-transparent h6">Order Info</p>
-              </div>
-              <div className="order_detail card pt-2">
-                <div className="order_img-premier md-4">
-                  <img
-                    src={Cineone21}
-                    className="img-fluid img-thumbnail border-0"
-                    width="70%"
-                    alt=""
-                  />
-                </div>
-                <p className="h5">CineOne21 Cinema</p>
-                <div className="order_more-detail">
-                  <div className="row">
-                    <div className="text-start ms-2 col">
-                      <p>Movie selected</p>
-                      <p>Tuesday, 07 July 2020</p>
-                      <p>One ticket price</p>
-                      <p>Seat choosed</p>
-                    </div>
-                    <div className="text-end me-2 col">
-                      <p>Spider-Man: Homecoming</p>
-                      <p>02:00</p>
-                      <p>$10</p>
-                      <p>C4, C5, C6</p>
-                    </div>
-                    <div className="order_total-payment">
-                      <hr />
-                      <div className="row">
-                        <div className="col">
-                          <p className="order_total text-start fw-bolder ms-2">
-                            Total Payment
-                          </p>
+                    <div className="card order_card-movie">
+                      <div className="card-body">
+                        <div className="row align-items-center">
+                          <div className="col-8">
+                            <h5 className="card-title m-0">
+                              <b>{movieById.name}</b>
+                            </h5>
+                          </div>
+                          <div className="col-4 text-end">
+                            <button className="btn btn-outline-primary" onClick={handleChangeMovie}>
+                              Change movie
+                            </button>
+                          </div>
                         </div>
-                        <div className="col text-end fw-bolder me-2">$30</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="wrap-card pt-5 order_seat-wrap">
+                    <h4>
+                      <b>Choose Your Seat</b>
+                    </h4>
+                    <div className="wrap">
+                      <div className="card text-center order_card-seat">
+                        <div className="card-body">
+                          <p>Screen</p>
+
+                          <svg
+                            width="232"
+                            height="6"
+                            viewBox="0 0 532 8"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <rect width="532" height="8" rx="4" fill="#D6D8E7" />
+                          </svg>
+                          <br />
+                          <div className="row text-center">
+                            {listSeat.map((item) => (
+                              <div key={item}>
+                                <Seat
+                                  rowSeat={item}
+                                  selectedSeat={handleSelectSeat}
+                                  reserved={reservedSeat}
+                                  selected={selectedSeat}
+                                />
+                              </div>
+                            ))}
+                          </div>
+                          <div className="row text-start">
+                            <div className="col ms-5">
+                              <div className="order_seating-key">
+                                <h6>
+                                  <b>Seating Key</b>
+                                </h6>
+                                <div className="row-seating-key m-auto md-8 m-5">
+                                  <span className="order_key-available">
+                                    <span className="square-available d-lg-h6">nn</span>
+                                    <span style={{ fontSize: "14px" }}> available </span>
+                                  </span>
+                                  <span className="order_key-selected">
+                                    <span className="square-selected  ">nn</span>
+                                    <span style={{ fontSize: "14px" }}> selected </span>
+                                  </span>
+                                  <span className="order_key-sold">
+                                    <span className="square-sold">nn</span>
+                                    <span style={{ fontSize: "14px" }}> sold </span>
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-lg-4 order_info">
+                  <h4>
+                    <b>Order Info</b>
+                  </h4>
+                  <div className="wrap">
+                    <div className="card order_card-info" style={{ width: "22rem" }}>
+                      <div className="card-body">
+                        <img className="mx-auto d-block" src="./assets/img/cineone.png" alt="" />
+                        <h4 className="card-title text-center fw-bolder">CineOne21 Cinema</h4>
+                        <div className="row">
+                          <div className="col-6">
+                            <p className="fs-6">Movie Selected</p>
+                          </div>
+                          <div className="col-6 text-end">
+                            <p className="fs-6">
+                              <b>Spider-Man: Homecoming</b>
+                            </p>
+                          </div>
+                        </div>
+                        <div className="row">
+                          <div className="col-6">
+                            <p className="fs-6">
+                              {dayjs(detailOrder.dateBooking).format("dddd, DD MMMM YYYY")}
+                            </p>
+                          </div>
+                          <div className="col-6 text-end">
+                            <p className="fs-6">
+                              <b>{detailOrder.timeBooking}</b>
+                            </p>
+                          </div>
+                        </div>
+                        <div className="row">
+                          <div className="col-6">
+                            <p className="fs-6">One ticket Price</p>
+                          </div>
+                          <div className="col-6 text-end">
+                            <p className="fs-6">
+                              <b>
+                                <CurrencyFormat
+                                  value={detailOrder.price}
+                                  displayType={"text"}
+                                  thousandSeparator={"."}
+                                  decimalSeparator={","}
+                                  prefix={"Rp "}
+                                />
+                              </b>
+                            </p>
+                          </div>
+                        </div>
+                        <div className="row">
+                          <div className="col-6">
+                            <p className="fs-6">Seat Choosed</p>
+                          </div>
+                          <div className="col-6 text-end">
+                            <p className="fs-6">
+                              <b>{selectedSeat.toString()}</b>
+                            </p>
+                          </div>
+                        </div>
+                        <hr />
+                        <div className="row">
+                          <div className="col-6">
+                            <h5>
+                              <b>Total Payment</b>
+                            </h5>
+                          </div>
+                          <div className="col-6 text-end">
+                            <h4>
+                              <b>
+                                <CurrencyFormat
+                                  value={selectedSeat.length * detailOrder.price}
+                                  displayType={"text"}
+                                  thousandSeparator={"."}
+                                  decimalSeparator={","}
+                                  prefix={"Rp "}
+                                />
+                              </b>
+                            </h4>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </section>
-          </main>
-        </div>
+              <div className="row">
+                <div className="col-lg-8">
+                  <div className="wrap-button d-lg-flex pt-3">
+                    <div className="col text-start ms-3">
+                      <button
+                        className="btn btn-outline-primary lower-button-change"
+                        onClick={handleChangeMovie}
+                      >
+                        Change your movie
+                      </button>
+                    </div>
+                    <div className="col text-end order_checkout-btn">
+                      <button
+                        className="btn btn-outline-primary lower-button-checkout"
+                        onClick={handleCheckout}
+                      >
+                        Checkout now
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </main>
+        {/* END OF NEW MAIN */}
 
         {/* FOOTER */}
         <Footer />

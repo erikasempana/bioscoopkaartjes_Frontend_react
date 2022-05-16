@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./home.css";
-import Navbar from "../../components/Navbar/navbarAfterLogin";
+import Navbar from "../../components/Navbar/navbar";
 import Footer from "../../components/Footer/footer";
 import Nearest from "../../assets/img1/nearest.png";
 import JumbotroneImage from "../../assets/img1/group.png";
-import Movie1 from "../../assets/img/Movie1.png";
-import Rectangle2 from "../../assets/img/Rectangle2.png";
 import Member from "../../components/Member/member";
+import DefaultImage from "../../assets/img1/default.png";
 import axios from "../../utils/axios";
 import { Link, useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
@@ -35,8 +34,9 @@ export default function Home() {
     try {
       const month = dayjs().month();
       const resultNowShowing = await axios.get(`movie/?searchRelease=${month}`);
-      console.log("result", resultNowShowing.data.data);
+      // console.log("result", resultNowShowing.data.data);
       setNowShowing(resultNowShowing.data.data);
+      // console.log("first", resultNowShowing.data.data);
     } catch (error) {
       console.log(error.response);
     }
@@ -56,7 +56,7 @@ export default function Home() {
   const handleMonth = async (id) => {
     try {
       const resultUpComingMovie = await axios.get(`movie/?searchRelease=${id}`);
-      console.log("upcomingmovie", resultUpComingMovie.data.data);
+      // console.log("upcomingmovie", resultUpComingMovie.data.data);
       setUpComingMovie(resultUpComingMovie.data.data);
     } catch (error) {
       console.log(error.response);
@@ -64,6 +64,7 @@ export default function Home() {
   };
 
   const handleDetailMovie = (id) => {
+    console.log("HANDLE DETAIL CLICK");
     navigate(`/detail/${id}`);
   };
 
@@ -111,33 +112,38 @@ export default function Home() {
             <div className="d-flex flex-row py-5 justify-content-between nowshowing_overflow-movie">
               {nowShowing.map((item) => (
                 <div key={item.id} className="wrapper">
-                  <div className="card nowshowing_movie-card" style={{ width: "13rem" }}>
+                  <div className="card nowshowing_movie-card" style={{ width: "16rem" }}>
                     <img
                       src={process.env.REACT_APP_CLOUDINARY_URL + item.image}
                       className="card-img-top nowshowing_movie-img"
                       alt="..."
                     />
+
                     <div className="card-body text-center nowshowing_movie-detail pt-1">
-                      <h5
-                        className="card-title pt-0 fs-5 fw-bolder"
-                        style={{ color: "rgba(20, 20, 43, 1)" }}
-                      >
-                        {item.name}
-                      </h5>
-                      <p className="card-text" style={{ color: "#a0a3bd", fontSize: "15px" }}>
-                        {item.category}
-                      </p>
-                      <a
-                        className="btn btn-outline-primary"
-                        style={{
-                          width: "100%",
-                          border: "2px solid rgba(95, 46, 234, 1)",
-                          color: "rgba(95, 46, 234, 1)"
-                        }}
-                        onClick={() => handleDetailMovie(item.id)}
-                      >
-                        Detail
-                      </a>
+                      <div className="title m-auto">
+                        <h5
+                          className="card-title pt-0 fs-5 fw-bolder"
+                          style={{ color: "rgba(20, 20, 43, 1)" }}
+                        >
+                          {item.name}
+                        </h5>
+                      </div>
+                      <div className="category">
+                        <p className="card-text" style={{ color: "#a0a3bd", fontSize: "15px" }}>
+                          {item.category}
+                        </p>
+                      </div>
+                      <div className="detail d-flex flex-row">
+                        <button
+                          onClick={handleDetailMovie}
+                          className="btn btn-outline-primary"
+                          style={{
+                            width: "100%"
+                          }}
+                        >
+                          Detail
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -169,7 +175,7 @@ export default function Home() {
                       <button
                         key={item.id}
                         type="button"
-                        className="btn btn-outline-primary btn-white"
+                        className="btn btn-outline-primary"
                         onClick={() => handleMonth(item.id)}
                       >
                         {item.month}
@@ -182,15 +188,15 @@ export default function Home() {
 
             <div className="d-flex flex-row py-5 justify-content-between upcomingmovie_overflow-movie">
               {upComingMovie.map((item) => (
-                <div key={item.id} className="pe-3">
-                  <div className="card upcomingmovie-card" style={{ width: "13rem" }}>
+                <div key={item.id} className="pe-3 ">
+                  <div className="card upcomingmovie-card" style={{ width: "16rem" }}>
                     <img
                       src={process.env.REACT_APP_CLOUDINARY_URL + item.image}
                       className="card-img-top upcomingmovie-img"
                       alt="image-movie"
                     />
-                    <div className="card-body row text-center align-items-end upcomingmovie-detail py-1">
-                      <div className="align-self-end py-1">
+                    <div className="card-body text-center upcomingmovie-detail py-1">
+                      <div className="upcoming_title">
                         <h5
                           className="card-title pt-0 fs-5 fw-bolder"
                           style={{ color: "rgba(20, 20, 43, 1)" }}
@@ -198,12 +204,12 @@ export default function Home() {
                           {item.name}
                         </h5>
                       </div>
-                      <div className="align-self-start pb-2">
+                      <div className="upcoming_category">
                         <p className="card-text" style={{ color: "#a0a3bd", fontSize: "15px" }}>
                           {item.category}
                         </p>
                       </div>
-                      <div className="align-items-end pb-2">
+                      <div className="upcoming_detail">
                         <button
                           onClick={() => handleDetailMovie(item.id)}
                           className="btn btn-outline-primary"

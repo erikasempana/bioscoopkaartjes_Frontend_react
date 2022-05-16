@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Footer from "../../components/Footer/footer";
-// import NavbarAdmin from "../../components/Navbar/navbarAdmin";
+import Navbar from "../../components/Navbar/navbar";
 import "./managemovie.css";
 import DefaultImage from "../../assets/img1/default.png";
 import SpidermanImage from "../../assets/img1/spiderman.png";
@@ -19,6 +19,7 @@ function ManageMovie() {
     releaseDate: "",
     duration_hours: "",
     duration_minutes: "",
+    synopsis: "",
     image: ""
   });
   const [image, setImage] = useState(null);
@@ -35,20 +36,29 @@ function ManageMovie() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    // console.log("form yukss", form);
+    console.log("form yukss", form);
+    const body = {
+      name: form.name,
+      category: form.category,
+      director: form.director,
+      casts: form.casts,
+      releaseDate: form.releaseDate,
+      duration: form.duration_hours + "h" + form.duration_minutes + "m",
+      synopsis: form.synopsis,
+      image: form.image
+    };
     const formData = new FormData();
-    for (const data in form) {
-      formData.append(data, form[data]);
+    for (const data in body) {
+      formData.append(data, body[data]);
     }
-
-    console.log(postMovie(formData));
-    // dispatch(postMovie(formData));
+    // console.log(postMovie(formData));
+    dispatch(postMovie(formData));
     // setImage(null);
   };
 
   return (
     <>
-      {/* <NavbarAdmin /> */}
+      <Navbar />
 
       <section id="managemovie">
         <div className="container">

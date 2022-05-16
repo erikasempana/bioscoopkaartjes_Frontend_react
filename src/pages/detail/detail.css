@@ -1,86 +1,126 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Mulish:wght@400;600;700&family=Open+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;700;800;900&display=swap");
 
-/* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
-
-.moviedetail_container {
-  width: 100%;
-  background-color: rgb(211, 210, 210);
-  display: flex;
-  flex-direction: column;
+body {
+  font-family: "Mulish", sans-serif;
 }
 
 /* MAIN */
-/* MAIN-MOVIE DETAIL */
-.moviedetail_content {
+
+main {
   background-color: rgba(245, 246, 248, 1);
-  font-family: "Mulish";
 }
 
-.moviedetail_wrapping-main {
-  padding-top: 5%;
+.movie_detail-card {
+  width: 20rem;
+  border-radius: 10px;
+  align-items: center;
 }
 
-.moviedetail_img-top {
-  width: 100%;
+.img-top {
+  width: 250px;
+  /* height: 280px; */
+  padding: 15px 0;
 }
 
-/* END OFMAIN-MOVIE DETAIL */
+#moviedetail {
+  padding-top: 30px;
+  background-color: #fff;
+}
+
+.moviedetail_wrap {
+  padding: 0 100px;
+  text-align: start;
+}
+
+.moviedetail_synopsis,
+.detail_synopsis span {
+  align-items: start;
+}
+
+.moviedetail_wrap p {
+  line-height: normal;
+  padding-bottom: 0px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 100px;
+  white-space: nowrap;
+}
+
+.moviedetail_wrap span {
+  text-align: start;
+}
+
+#showtimes {
+  background-color: rgba(245, 246, 248, 1);
+  margin: 30px 0;
+  padding: 100px 0;
+}
 
 /* DATE AND LOCATION */
-.moviedetail_date-location {
-  display: flex;
-  margin: auto;
+/* date */
+.showtimes_title {
+  padding-bottom: 20px;
 }
 
-.moviedetail_form-group-date {
-  margin-right: 60px;
+.showtimes_date {
+  text-align: end;
 }
 
-.moviedetail_line-border {
-  margin-top: 20px;
-  margin-bottom: 20px;
-  margin-left: auto;
-  margin-right: auto;
-  border-bottom: 1px solid #dedede;
-  width: 100%;
-}
-
-.moviedetail_date-location {
-  display: flexbox;
-  margin: auto;
-  padding: 10px;
-}
-
-.moviedetail_location {
-  height: 100%;
-  display: flex;
-  background: #eff0f6;
-  border-color: #eff0f6;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 16px;
-  letter-spacing: 0.25px;
-  color: #4e4b66;
-  padding: 7px 12px;
-  border-radius: 5px;
-}
-
-.moviedetail_dropdown-location {
+.showtimes_date form input {
+  width: 280px;
+  height: 50px;
+  padding-left: 10px;
+  border: 1px solid #dedede;
   background-color: #eff0f6;
-  font-family: "Mulish";
   font-size: 16px;
-  line-height: 28px;
-  color: #4e4b66;
+  font-weight: 600;
+  color: rgba(78, 75, 102, 1);
+  border-radius: 5px;
+  margin: auto;
 }
+
+/* akhir date */
+
+/* location */
+.showtimes_location {
+  text-align: start;
+}
+
+.showtimes_location form select {
+  width: 280px;
+  height: 50px;
+  padding-left: 30px;
+  border: 1px solid #dedede;
+  background-color: #eff0f6;
+  font-size: 16px;
+  font-weight: 600;
+  color: rgba(78, 75, 102, 1);
+  border-radius: 5px;
+  margin: auto;
+}
+
+.showtimes_location img {
+  width: 15px;
+  height: 15px;
+  bottom: -17px;
+  right: -25px;
+  position: relative;
+}
+
+.moviedetail_location img {
+  position: absolute;
+}
+/* akhir location */
 /* END OF DATE AND LOCATION */
 
-/* CARD */
+/* schedule */
+.schedule_card {
+  width: 410px;
+  height: 330px;
+}
 
-.moviedetail_card-schedule {
-  margin-bottom: 0;
+.shcedule_card-body {
+  width: 410px;
 }
 
 .moviedetail_btn-1 {
@@ -98,54 +138,132 @@
   box-shadow: 0px 8px 24px rgba(95, 46, 234, 0.24);
 }
 
-.moviedetail_set-box {
-  background: #eff0f6;
-  border-color: #eff0f6;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 28px;
-  letter-spacing: 0.25px;
-  color: #4e4b66;
-}
+/* akhir schedule  */
+/* AKHIR MAIN */
 
-.moviedetail_set-box:hover {
-  background: #eff0f6;
-  border-color: #eff0f6;
-  color: #4e4b66;
-}
-
-.moviedetail_set-box:active {
-  background: #eff0f6;
-  border-color: #eff0f6;
-  color: #4e4b66;
-}
-/* END OF DATE AND LOCATION */
-
-/* END OF MAIN */
-
-/* MEDIA QUERY */
-@media only screen and (max-width: 768px) {
-  .moviedetail_menu {
-    /* line-height: 30px; */
-    width: 100%;
-    padding: 2px;
+@media (max-width: 767.98px), (max-width: 995.98px) {
+  /* MAIN */
+  .movie_detail-card {
+    margin: auto;
   }
 
-  .moviedetail_li a {
+  .moviedetail_synopsis p {
+    text-overflow: ellipsis;
+  }
+
+  .img-top {
+    width: 200px;
+    /* height: 280px; */
+    padding: 15px 0;
+  }
+
+  /* DATE AND LOCATION */
+  /* date */
+  .showtimes_date {
+    text-align: center;
+    align-items: center;
+  }
+
+  .showtimes_date form input {
+    text-align: center;
+  }
+
+  .moviedetail_wrap {
+    text-align: start;
+  }
+
+  .moviedetail_synopsis,
+  .detail_synopsis span {
+    align-items: start;
+  }
+
+  /* akhir date */
+
+  /* location */
+
+  .showtimes_location {
+    align-self: center;
+  }
+
+  .showtimes_location-flex {
+    justify-content: center;
+    text-align: center;
+    padding-top: 15px;
+    margin: 0px 10px;
+    left: 10px;
+  }
+
+  .moviedetail_dropdown-location {
+    padding-top: 10px;
+  }
+
+  /* Schedule */
+
+  .schedule_column {
+    padding: 10px;
+  }
+
+  .schedule_card {
+    align-items: center;
+    width: 330px;
+    height: 330px;
+  }
+
+  .shcedule_card-body {
+    width: 330px;
+  }
+
+  .premiere_brand {
+    justify-content: center;
+  }
+
+  .premiere_brand img {
+    width: 100px;
+  }
+
+  .premiere_name h4 {
     display: none;
   }
 
-  .moviedetail_nav-search {
-    display: none;
+  .premiere_name p {
+    margin-top: 20px;
+    line-height: 5px;
+    color: rgba(170, 170, 170, 1);
+    font-size: 13px;
+    font-weight: 300;
+    text-align: center;
+    text-overflow: ellipsis;
   }
 
-  .moviedetail_date-location {
-    display: flex;
-    flex-direction: column;
+  .premiere_name {
+    text-align: center;
+  }
+  /* akhir schedule */
+
+  /* AKHIR MAIN */
+}
+
+@media (max-width: 1060px), (max-width: 1200px) {
+  .movie_detail-card {
+    width: 16rem;
   }
 
-  .moviedetail_form-group-date {
-    margin-right: 0;
+  .img-top {
+    width: 200px;
+    /* height: 280px; */
+    padding: 15px 0;
+  }
+
+  /* Schedule */
+  .schedule_column {
+    padding: 5px;
+  }
+
+  .schedule_card {
+    width: 330px;
+  }
+
+  .shcedule_card-body {
+    width: 303px;
   }
 }
