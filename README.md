@@ -36,5 +36,5 @@ If you aren't satisfied with the build tool and configuration choices, you can `
 
 ## Deployment
 
-- you can see result deployment without integration [Here] (https://bioscoopkaartjes.netlify.app/home1.html)
-- integrate deployment [Here] (https://www.google.com)
+- you can see result deployment without integration [Here](https://bioscoopkaartjes.netlify.app/home1.html)
+- integrate deployment [Here](https://www.google.com)
