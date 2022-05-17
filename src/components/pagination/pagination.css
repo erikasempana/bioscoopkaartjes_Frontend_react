@@ -1,0 +1,42 @@
+@import url("https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;700;800;900&display=swap");
+
+body {
+  font-family: "Mulish", sans-serif;
+  background-color: #d6d8e7;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:active,
+.btn-outline-primary:visited {
+  background-color: #5f2eea !important;
+  color: #fff;
+}
+
+.btn-outline-primary {
+  background-color: #fff !important;
+  color: #5f2eea !important;
+}
+
+/* Pagination */
+#pagination {
+  padding: 80px;
+  min-height: 200px;
+}
+
+#pagination button {
+  background-color: #fff;
+  border: 1px solid #fff;
+}
+
+#pagination button a {
+  font-size: 18px;
+  text-decoration: none;
+  color: black;
+}
+
+#pagination button:hover a {
+  font-size: 18px;
+  text-decoration: none;
+  color: #fff;
+}
+/* Akhir Pagination */

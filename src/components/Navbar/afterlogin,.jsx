@@ -31,6 +31,7 @@ function AfterLogin() {
   const handleLogout = () => {
     localStorage.clear();
     dispatch(isLogin(true));
+    navigate("/home");
   };
 
   useEffect(() => {

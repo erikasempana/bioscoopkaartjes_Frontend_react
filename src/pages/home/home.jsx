@@ -64,7 +64,6 @@ export default function Home() {
   };
 
   const handleDetailMovie = (id) => {
-    console.log("HANDLE DETAIL CLICK");
     navigate(`/detail/${id}`);
   };
 

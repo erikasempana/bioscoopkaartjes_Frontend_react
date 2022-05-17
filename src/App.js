@@ -15,29 +15,45 @@ import Order from "./pages/order/order";
 import Payment from "./pages/payment/payment";
 import ManageMovie from "./pages/managemovie/managemovie";
 import ManageSchedule from "./pages/manageschedule/manageschedule";
+import Dasboard from "./pages/dasboard/dasboard";
+import Unauthorized from "./pages/unauthorized/unauthorized";
+
+import PrivateRoute from "./helpers/route/privateRoute";
+import PublicRoute from "./helpers/route/publicRoute";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="basic/counter" element={<BasicCounter />} />
-        <Route path="basic/react" element={<BasicReact />} />
-        <Route path="basic/login" element={<BasicLogin />} />
-        <Route path="basic/home" element={<BasicHome />} />
-        {/* [1 & 2] */}
-        {/* <Route path="basic/detail" element={<BasicDetail />} /> */}
-        {/* [3] */}
-        <Route path="basic/detail/:id" element={<BasicDetail />} />
-        <Route path="basic/order" element={<BasicOrder />} />
-        <Route path="login" element={<SignIn />} />
+        <Route element={<PublicRoute restricted={true} />}>
+          <Route path="basic/counter" element={<BasicCounter />} />
+          <Route path="basic/react" element={<BasicReact />} />
+          <Route path="basic/login" element={<BasicLogin />} />
+          <Route path="basic/home" element={<BasicHome />} />
+          {/* [1 & 2] */}
+          {/* <Route path="basic/detail" element={<BasicDetail />} /> */}
+          {/* [3] */}
+          <Route path="basic/detail/:id" element={<BasicDetail />} />
+          <Route path="basic/order" element={<BasicOrder />} />
+          <Route path="login" element={<SignIn />} />
+        </Route>
+
+        <Route path="unauthorized" element={<Unauthorized />} />
         <Route path="home" element={<Home />} />
-        <Route path="viewall" element={<ViewAll />} />
-        <Route path="detail/:id" element={<Detail />} />
-        <Route path="order" element={<Order />} />
-        <Route path="signup" element={<SignUp />} />
-        <Route path="payment" element={<Payment />} />
-        <Route path="managemovie" element={<ManageMovie />} />
-        <Route path="manageschedule" element={<ManageSchedule />} />
+
+        <Route element={<PrivateRoute isAdmin={false} />}>
+          <Route path="viewall" element={<ViewAll />} />
+          <Route path="detail/:id" element={<Detail />} />
+          <Route path="order" element={<Order />} />
+          <Route path="signup" element={<SignUp />} />
+          <Route path="payment" element={<Payment />} />
+        </Route>
+
+        <Route element={<PrivateRoute isAdmin={true} />}>
+          <Route path="managemovie" element={<ManageMovie />} />
+          <Route path="manageschedule" element={<ManageSchedule />} />
+          <Route path="dasboard" element={<Dasboard />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

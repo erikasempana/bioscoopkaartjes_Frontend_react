@@ -15,7 +15,7 @@ function Footer() {
     <>
       {/*  Footer */}
       <section id="footer">
-        <footer className="bg-white text-secondary text-center text-md-start">
+        <footer className="bg-white text-secondary text-center text-md-start pt-5">
           <div className="container ">
             <div className="row">
               <div className="col-lg-3 col-md-12 mb-4 mb-md-0 footer_brand">

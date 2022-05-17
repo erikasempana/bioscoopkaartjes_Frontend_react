@@ -5,12 +5,13 @@ import "./managemovie.css";
 import DefaultImage from "../../assets/img1/default.png";
 import SpidermanImage from "../../assets/img1/spiderman.png";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { postMovie } from "../../stores/action/movie";
+import { useDispatch, useSelector } from "react-redux";
+import { postMovie, updateMovie, getAllMovie } from "../../stores/action/movie";
 
 function ManageMovie() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const [form, setForm] = useState({
     name: "",
     category: "",
@@ -22,7 +23,9 @@ function ManageMovie() {
     synopsis: "",
     image: ""
   });
+  const [idMovie, setIdMovie] = useState("");
   const [image, setImage] = useState(null);
+  const [isUpdate, setIsUpdate] = useState(false);
 
   const handleChangeForm = (event) => {
     const { name, value, files } = event.target;
@@ -56,6 +59,44 @@ function ManageMovie() {
     // setImage(null);
   };
 
+  // NEW UPDATE
+  const allMovie = useSelector((state) => state.getAllMovie.data);
+  console.log("movie", allMovie);
+
+  const setUpdate = (data) => {
+    const { id, name, category, synopsis, image } = data;
+    setForm({
+      ...form,
+      name,
+      category,
+      synopsis,
+      image
+    });
+
+    setIdMovie(id);
+    setIsUpdate(true); //update data lama
+  };
+
+  const handleUpdate = (e) => {
+    e.preventDefault();
+    console.log(form);
+    console.log(idMovie);
+    const formData = new FormData();
+    for (const data in form) {
+      formData.append(data.form[data]);
+    }
+    // formData.append("name", form.name)
+    // axios.post("...", formData);
+
+    dispatch(updateMovie(idMovie, formData));
+    getAllMovie(); //supaya datanya lgsg terupdate di getdatamovie (home)
+
+    setIsUpdate(false);
+    setImage(null);
+  };
+
+  // END OF NEW UPDATE
+
   return (
     <>
       <Navbar />
@@ -69,7 +110,7 @@ function ManageMovie() {
             <div className="col">
               <div className="card p-4">
                 <div className="card-body">
-                  <form onSubmit={handleSubmit}>
+                  <form onSubmit={isUpdate ? handleUpdate : handleSubmit}>
                     <div className="row">
                       <div className="col-lg-4 manage_image-card m-auto">
                         <div className="card" style={{ width: "fit-content" }}>
@@ -279,390 +320,57 @@ function ManageMovie() {
         <div className="container">
           <div className="card bg-white manage_viewall-wrap">
             <div className="row manage_viewall_overflow-movie">
-              <div className="col d-lg-3 d-sm-6 d-md-3 manage_viewall_border-card ">
-                <div className="card manage_viewall-card">
-                  <img
-                    src={SpidermanImage}
-                    className="card-img-top manage_viewall-img m-auto"
-                    alt="..."
-                  />
-                  <div className="card-body row text-center align-items-end manage_viewall-detail py-1">
-                    <div className="align-self-end py-1">
-                      <h5
-                        className="card-title pt-0 fs-5 fw-bolder"
-                        style={{ color: "rgba(20, 20, 43, 1)" }}
-                      >
-                        Lion King
-                      </h5>
-                    </div>
-                    <div className="align-self-start pb-2">
-                      <p className="card-text" style={{ color: "#a0a3bd", fontSize: "15px" }}>
-                        Acion, Adventure, Sci-FI
-                      </p>
-                    </div>
-                    <div className="align-items-end pb-2">
-                      <button
-                        className="btn btn-outline-primary"
-                        style={{
-                          width: "100%",
-                          border: "2px solid rgba(95, 46, 234, 1)",
-                          color: "rgba(95, 46, 234, 1)"
-                        }}
-                      >
-                        Update
-                      </button>
-                      <div className="align-items-end pt-2 pb-2">
+              {allMovie.map((item) => (
+                <div key={item.id} className="col d-lg-3 d-sm-6 d-md-3 manage_viewall_border-card ">
+                  <div className="card manage_viewall-card">
+                    <img
+                      src={process.env.REACT_APP_CLOUDINARY_URL + item.image}
+                      className="card-img-top manage_viewall-img m-auto"
+                      alt="..."
+                    />
+                    <div className="card-body row text-center align-items-end manage_viewall-detail py-1">
+                      <div className="align-self-end py-1">
+                        <h5
+                          className="card-title pt-0 fs-5 fw-bolder"
+                          style={{ color: "rgba(20, 20, 43, 1)" }}
+                        >
+                          {item.name}
+                        </h5>
+                      </div>
+                      <div className="align-self-start pb-2">
+                        <p className="card-text" style={{ color: "#a0a3bd", fontSize: "15px" }}>
+                          {item.category}
+                        </p>
+                      </div>
+                      <div className="align-items-end pb-2">
                         <button
-                          className="btn btn-outline-danger"
+                          className="btn btn-outline-primary"
                           style={{
                             width: "100%",
-                            border: "2px solid red",
-                            color: "red"
+                            border: "2px solid rgba(95, 46, 234, 1)",
+                            color: "rgba(95, 46, 234, 1)"
                           }}
+                          onClick={setUpdate}
                         >
-                          Reset
+                          Update
                         </button>
+                        <div className="align-items-end pt-2 pb-2">
+                          <button
+                            className="btn btn-outline-danger"
+                            style={{
+                              width: "100%",
+                              border: "2px solid red",
+                              color: "red"
+                            }}
+                          >
+                            Reset
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div className="col d-lg-3 d-sm-6 d-md-3 manage_viewall_border-card">
-                <div className="card manage_viewall-card">
-                  <img
-                    src={SpidermanImage}
-                    className="card-img-top manage_viewall-img m-auto"
-                    alt="..."
-                  />
-                  <div className="card-body row text-center align-items-end manage_viewall-detail py-1">
-                    <div className="align-self-end py-1">
-                      <h5
-                        className="card-title pt-0 fs-5 fw-bolder"
-                        style={{ color: "rgba(20, 20, 43, 1)" }}
-                      >
-                        Lion King
-                      </h5>
-                    </div>
-                    <div className="align-self-start pb-2">
-                      <p className="card-text" style={{ color: "#a0a3bd", fontSize: "15px" }}>
-                        Acion, Adventure, Sci-FI
-                      </p>
-                    </div>
-                    <div className="align-items-end pb-2">
-                      <button
-                        className="btn btn-outline-primary"
-                        style={{
-                          width: "100%",
-                          border: "2px solid rgba(95, 46, 234, 1)",
-                          color: "rgba(95, 46, 234, 1)"
-                        }}
-                      >
-                        Update
-                      </button>
-                      <div className="align-items-end pt-2 pb-2">
-                        <button
-                          className="btn btn-outline-danger"
-                          style={{
-                            width: "100%",
-                            border: "2px solid red",
-                            color: "red"
-                          }}
-                        >
-                          Reset
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col d-lg-3 d-sm-6 d-md-3 manage_viewall_border-card">
-                <div className="card manage_viewall-card">
-                  <img
-                    src={SpidermanImage}
-                    className="card-img-top manage_viewall-img pt-4 m-auto"
-                    alt="..."
-                  />
-                  <div className="card-body row text-center align-items-end manage_viewall-detail py-1">
-                    <div className="align-self-end py-1">
-                      <h5
-                        className="card-title pt-0 fs-5 fw-bolder"
-                        style={{ color: "rgba(20, 20, 43, 1)" }}
-                      >
-                        Lion King
-                      </h5>
-                    </div>
-                    <div className="align-self-start pb-2">
-                      <p className="card-text" style={{ color: "#a0a3bd", fontSize: "15px" }}>
-                        Acion, Adventure, Sci-FI
-                      </p>
-                    </div>
-                    <div className="align-items-end pb-2">
-                      <button
-                        className="btn btn-outline-primary"
-                        style={{
-                          width: "100%",
-                          border: "2px solid rgba(95, 46, 234, 1)",
-                          color: "rgba(95, 46, 234, 1)"
-                        }}
-                      >
-                        Update
-                      </button>
-                      <div className="align-items-end pt-2 pb-2">
-                        <button
-                          className="btn btn-outline-danger"
-                          style={{
-                            width: "100%",
-                            border: "2px solid red",
-                            color: "red"
-                          }}
-                        >
-                          Reset
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col d-lg-3 d-sm-6 d-md-3 manage_viewall_border-card">
-                <div className="card manage_viewall-card">
-                  <img
-                    src={SpidermanImage}
-                    className="card-img-top manage_viewall-img pt-4 m-auto"
-                    alt="..."
-                  />
-                  <div className="card-body row text-center align-items-end manage_viewall-detail py-1">
-                    <div className="align-self-end py-1">
-                      <h5
-                        className="card-title pt-0 fs-5 fw-bolder"
-                        style={{ color: "rgba(20, 20, 43, 1)" }}
-                      >
-                        Lion King
-                      </h5>
-                    </div>
-                    <div className="align-self-start pb-2">
-                      <p className="card-text" style={{ color: "#a0a3bd", fontSize: "15px" }}>
-                        Acion, Adventure, Sci-FI
-                      </p>
-                    </div>
-                    <div className="align-items-end pb-2">
-                      <button
-                        className="btn btn-outline-primary"
-                        style={{
-                          width: "100%",
-                          border: "2px solid rgba(95, 46, 234, 1)",
-                          color: "rgba(95, 46, 234, 1)"
-                        }}
-                      >
-                        Update
-                      </button>
-                      <div className="align-items-end pt-2 pb-2">
-                        <button
-                          className="btn btn-outline-danger"
-                          style={{
-                            width: "100%",
-                            border: "2px solid red",
-                            color: "red"
-                          }}
-                        >
-                          Reset
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col d-lg-3 d-sm-6 d-md-3 manage_viewall_border-card">
-                <div className="card manage_viewall-card">
-                  <img
-                    src={SpidermanImage}
-                    className="card-img-top manage_viewall-img pt-4 m-auto"
-                    alt="..."
-                  />
-                  <div className="card-body row text-center align-items-end manage_viewall-detail py-1">
-                    <div className="align-self-end py-1">
-                      <h5
-                        className="card-title pt-0 fs-5 fw-bolder"
-                        style={{ color: "rgba(20, 20, 43, 1)" }}
-                      >
-                        Lion King
-                      </h5>
-                    </div>
-                    <div className="align-self-start pb-2">
-                      <p className="card-text" style={{ color: "#a0a3bd", fontSize: "15px" }}>
-                        Acion, Adventure, Sci-FI
-                      </p>
-                    </div>
-                    <div className="align-items-end pb-2">
-                      <button
-                        className="btn btn-outline-primary"
-                        style={{
-                          width: "100%",
-                          border: "2px solid rgba(95, 46, 234, 1)",
-                          color: "rgba(95, 46, 234, 1)"
-                        }}
-                      >
-                        Update
-                      </button>
-                      <div className="align-items-end pt-2 pb-2">
-                        <button
-                          className="btn btn-outline-danger"
-                          style={{
-                            width: "100%",
-                            border: "2px solid red",
-                            color: "red"
-                          }}
-                        >
-                          Reset
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col d-lg-3 d-sm-6 d-md-3 manage_viewall_border-card">
-                <div className="card manage_viewall-card">
-                  <img
-                    src={SpidermanImage}
-                    className="card-img-top manage_viewall-img pt-4 m-auto"
-                    alt="..."
-                  />
-                  <div className="card-body row text-center align-items-end manage_viewall-detail py-1">
-                    <div className="align-self-end py-1">
-                      <h5
-                        className="card-title pt-0 fs-5 fw-bolder"
-                        style={{ color: "rgba(20, 20, 43, 1)" }}
-                      >
-                        Lion King
-                      </h5>
-                    </div>
-                    <div className="align-self-start pb-2">
-                      <p className="card-text" style={{ color: "#a0a3bd", fontSize: "15px" }}>
-                        Acion, Adventure, Sci-FI
-                      </p>
-                    </div>
-                    <div className="align-items-end pb-2">
-                      <button
-                        className="btn btn-outline-primary"
-                        style={{
-                          width: "100%",
-                          border: "2px solid rgba(95, 46, 234, 1)",
-                          color: "rgba(95, 46, 234, 1)"
-                        }}
-                      >
-                        Update
-                      </button>
-                      <div className="align-items-end pt-2 pb-2">
-                        <button
-                          className="btn btn-outline-danger"
-                          style={{
-                            width: "100%",
-                            border: "2px solid red",
-                            color: "red"
-                          }}
-                        >
-                          Reset
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col d-lg-3 d-sm-6 d-md-3 manage_viewall_border-card">
-                <div className="card manage_viewall-card">
-                  <img
-                    src={SpidermanImage}
-                    className="card-img-top manage_viewall-img pt-4 m-auto"
-                    alt="..."
-                  />
-                  <div className="card-body row text-center align-items-end manage_viewall-detail py-1">
-                    <div className="align-self-end py-1">
-                      <h5
-                        className="card-title pt-0 fs-5 fw-bolder"
-                        style={{ color: "rgba(20, 20, 43, 1)" }}
-                      >
-                        Lion King
-                      </h5>
-                    </div>
-                    <div className="align-self-start pb-2">
-                      <p className="card-text" style={{ color: "#a0a3bd", fontSize: "15px" }}>
-                        Acion, Adventure, Sci-FI
-                      </p>
-                    </div>
-                    <div className="align-items-end pb-2">
-                      <button
-                        className="btn btn-outline-primary"
-                        style={{
-                          width: "100%",
-                          border: "2px solid rgba(95, 46, 234, 1)",
-                          color: "rgba(95, 46, 234, 1)"
-                        }}
-                      >
-                        Update
-                      </button>
-                      <div className="align-items-end pt-2 pb-2">
-                        <button
-                          className="btn btn-outline-danger"
-                          style={{
-                            width: "100%",
-                            border: "2px solid red",
-                            color: "red"
-                          }}
-                        >
-                          Reset
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col d-lg-3 d-sm-6 d-md-3 manage_viewall_border-card">
-                <div className="card manage_viewall-card">
-                  <img
-                    src={SpidermanImage}
-                    className="card-img-top manage_viewall-img pt-4 m-auto"
-                    alt="..."
-                  />
-                  <div className="card-body row text-center align-items-end manage_viewall-detail py-1">
-                    <div className="align-self-end py-1">
-                      <h5
-                        className="card-title pt-0 fs-5 fw-bolder"
-                        style={{ color: "rgba(20, 20, 43, 1)" }}
-                      >
-                        Lion King
-                      </h5>
-                    </div>
-                    <div className="align-self-start pb-2">
-                      <p className="card-text" style={{ color: "#a0a3bd", fontSize: "15px" }}>
-                        Acion, Adventure, Sci-FI
-                      </p>
-                    </div>
-                    <div className="align-items-end pb-2">
-                      <button
-                        className="btn btn-outline-primary"
-                        style={{
-                          width: "100%",
-                          border: "2px solid rgba(95, 46, 234, 1)",
-                          color: "rgba(95, 46, 234, 1)"
-                        }}
-                      >
-                        Update
-                      </button>
-                      <div className="align-items-end pt-2 pb-2">
-                        <button
-                          className="btn btn-outline-danger"
-                          style={{
-                            width: "100%",
-                            border: "2px solid red",
-                            color: "red"
-                          }}
-                        >
-                          Reset
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>

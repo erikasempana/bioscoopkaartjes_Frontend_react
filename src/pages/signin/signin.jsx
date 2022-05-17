@@ -134,7 +134,7 @@ function SignIn() {
                 </div>
                 <div className="d-grid mt-3 pt-3">
                   <button type="submit" className="btn btn btn-primary">
-                    Sign Up
+                    Sign In
                   </button>
                 </div>
               </form>

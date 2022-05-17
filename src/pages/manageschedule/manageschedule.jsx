@@ -1,24 +1,35 @@
 import React from "react";
+import "./manageschedule.css";
 import SpidermanImage from "../../assets/img1/spiderman.png";
+import Ebuid from "../../assets/img1/ebuid.png";
+import Hiflix from "../../assets/img1/hiflix.png";
+import Cineone from "../../assets/img1/cineone.png";
+import Pagination from "../../components/pagination/pagination";
+import Navbar from "../../components/Navbar/navbar";
+import Footer from "../../components/Footer/footer";
 
 function ManageSchedule() {
   return (
     <>
+      <Navbar />
+
       <section id="manageschedule">
         <div className="container">
           <div className="row">
             <h4>
-              <b>Form Schedule</b>
+              <b>
+                <b>Form Schedule</b>
+              </b>
             </h4>
             <div className="col">
-              <div className="card p-4">
+              <div className="card manageschedule_border">
                 <div className="card-body">
                   <form>
                     <div className="row">
-                      <div className="col-lg-4 manageschedule_image-card m-auto">
-                        <div className="card" style={{ width: "fit-content" }}>
+                      <div className="col-lg-3 manageschedule_image-card m-auto">
+                        <div className="card" style={{ width: "240px" }}>
                           <div className="card-body m-auto manageschedule_image">
-                            <input />
+                            <input type="file" name="image" style={{ width: "fit-content" }} />
                             <img
                               className="manageschedule_image-movie"
                               src={SpidermanImage}
@@ -32,12 +43,12 @@ function ManageSchedule() {
                           <label htmlFor="movie-name" className="form-label">
                             Movie Name
                           </label>
-                          <input
-                            type="text"
-                            className="form-control"
-                            id="movie-name"
-                            placeholder="Movie name..."
-                          />
+                          <select className="form-select" aria-label="Default select example">
+                            <option selected>Select Movie</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                          </select>
                         </div>
                         <div className="mb-3">
                           <label htmlFor="director" className="form-label">
@@ -46,20 +57,33 @@ function ManageSchedule() {
                           <input
                             type="text"
                             className="form-control"
-                            id="director"
-                            placeholder="Director..."
+                            id="price"
+                            placeholder="Price..."
                           />
                         </div>
+
+                        {}
                         <div className="mb-3">
                           <label htmlFor="releasedate" className="form-label">
                             Premiere
                           </label>
-                          <input
-                            type="date"
-                            className="form-control"
-                            id="releasedate"
-                            placeholder="dd/mm/yyyy..."
-                          />
+                          <div className="premiere_wrap">
+                            <div className="">
+                              <button className="btn btn-outline-primary premiere_button">
+                                <img src={Ebuid} alt="premiere" className="premiere_img" />
+                              </button>
+                            </div>
+                            <div className="">
+                              <button className="btn btn-outline-primary premiere_button">
+                                <img src={Hiflix} alt="premiere" className="premiere_img" />
+                              </button>
+                            </div>
+                            <div className="">
+                              <button className="btn btn-outline-primary premiere_button">
+                                <img src={Cineone} alt="premiere" className="premiere_img" />
+                              </button>
+                            </div>
+                          </div>
                         </div>
                       </div>
                       <div className="col-lg-4 manageschedule_data-movie-two m-auto">
@@ -67,83 +91,70 @@ function ManageSchedule() {
                           <label htmlFor="category" className="form-label">
                             Location
                           </label>
-                          <input
-                            type="text"
-                            className="form-control"
-                            id="category"
-                            placeholder="Category..."
-                          />
-                        </div>
-                        <div className="mb-3">
-                          <label htmlFor="casts" className="form-label">
-                            Casts
-                          </label>
-                          <input
-                            type="text"
-                            className="form-control"
-                            id="casts"
-                            placeholder="Casts..."
-                          />
+                          <select className="form-select" aria-label="Default select example">
+                            <option selected>Select Location</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                          </select>
                         </div>
                         <div className="mb-3">
                           <div className="row">
                             <div className="col-6">
                               <label htmlFor="duration-hour" className="form-label">
-                                Duration Hour
+                                Date Start
                               </label>
-                              <input
-                                type="text"
-                                className="form-control"
-                                id="duration_hours"
-                                placeholder="hour..."
-                              />
+                              <input type="date" className="form-control" />
                             </div>
                             <div className="col-6">
                               <label htmlFor="duration-minute" className="form-label">
-                                Duration Minute
+                                Date End
                               </label>
-                              <input
-                                type="text"
-                                className="form-control"
-                                id="duration_minutes"
-                                placeholder="minute..."
-                              />
+                              <input type="date" className="form-control" />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="mb-3">
+                          <div className="row">
+                            <div className="col">
+                              <label htmlFor="duration-hour" className="form-label">
+                                Time
+                              </label>
+                            </div>
+                            <div className="row manage_time">
+                              <div className="col-3">
+                                <button className="time-plus btn btn-outline-primary">+</button>
+                              </div>
+                              <div className="col-3">08:30 am</div>
+                              <div className="col-3">08:30 am</div>
+                              <div className="col-3">08:30 am</div>
+                              <div className="col-3">08:30 am</div>
+                              <div className="col-3">08:30 am</div>
+                              <div className="col-3">08:30 am</div>
+                              <div className="col-3">08:30 am</div>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div className="row text-start">
-                      <div className="mb-3 pt-3 m-auto manageschedule_data-movie-three m-auto">
-                        <label htmlFor="synopsis" className="form-label">
-                          Synopsis
-                        </label>
-                        <textarea
-                          className="form-control"
-                          id="synopsis"
-                          rows="3"
-                          placeholder="Synopsis..."
-                        ></textarea>
-                      </div>
-                    </div>
-                    <div className="row text-end">
+                    <div className="row text-end button-manageschedule-wrap">
                       <div className="col-lg button-manageschedule">
-                        <span className="reset-manageschedule">
+                        <div className=" col-lg-6 reset-manageschedule">
                           <button
                             type="submit"
                             className="btn btn-outline-primary reset-manageschedule-button"
                           >
-                            Update
+                            Reset
                           </button>
-                        </span>
-                        <span className="submit-manageschedule">
+                        </div>
+                        <div className="submit-manageschedule">
                           <button
                             type="submit"
-                            className="btn btn-outline-primary submit-manageschedule-button"
+                            className="col-lg-6 btn btn-outline-primary submit-manageschedule-button"
                           >
                             Submit
                           </button>
-                        </span>
+                        </div>
                       </div>
                     </div>
                   </form>
@@ -153,6 +164,363 @@ function ManageSchedule() {
           </div>
         </div>
       </section>
+
+      <section id="dataschedule_filter">
+        <div className="container">
+          <div className="row">
+            <div className="col-6 m-auto">
+              <h4>
+                <b>Data Schedule</b>
+              </h4>
+            </div>
+            <div className="col-2">
+              <select className="form-select" aria-label="Default select example">
+                <option selected>Sort</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+            </div>
+            <div className="col-2">
+              <select className="form-select" aria-label="Default select example">
+                <option selected>Location</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+            </div>
+            <div className="col-2">
+              <select className="form-select" aria-label="Default select example">
+                <option selected>Movie</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="manageschedule-movie">
+        <div className="container manageschedule_wrap-card p-4">
+          <div className="row">
+            <div className="col-lg-4 p-2">
+              <div className="card p-2 manageschedule_card ">
+                <div className="card-body">
+                  <div className="row">
+                    <div className="col-6 m-auto text-center">
+                      <img src={Hiflix} alt="premiere" />
+                    </div>
+                    <div className="col-6">
+                      <div className="row">
+                        <h4>
+                          <b>hiflix Cinema</b>
+                        </h4>
+                      </div>
+                      <div className="row">
+                        <p>Colonel Street No. 2. East Purwokerto</p>
+                      </div>
+                    </div>
+                  </div>
+                  <hr />
+                  <div className="row py-3">
+                    <div className="col-3 py-2">08:30am</div>
+                    <div className="col-3 py-2">08:30am</div>
+                    <div className="col-3 py-2">08:30am</div>
+                    <div className="col-3 py-2">08:30am</div>
+                    <div className="col-3 py-2">08:30am</div>
+                    <div className="col-3 py-2">08:30am</div>
+                  </div>
+                  <div className="row pt-2 pb-4">
+                    <div className="col-6 text-start">
+                      <h5>Price</h5>
+                    </div>
+                    <div className="col-6 text-end">
+                      <h5>
+                        <b>$10.00/seat</b>
+                      </h5>
+                    </div>
+                  </div>
+                  <div className="row p-auto">
+                    <div className="col-6 text-start">
+                      <button className="btn btn-outline-primary managedataschedule_update-button">
+                        Update
+                      </button>
+                    </div>
+                    <div className="col-6 text-end">
+                      <button className="btn btn-outline-danger managedataschedule_delete-button">
+                        Delete
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="col-lg-4 p-2">
+              <div className="card p-2 manageschedule_card ">
+                <div className="card-body">
+                  <div className="row">
+                    <div className="col-6 m-auto text-center">
+                      <img src={Hiflix} alt="premiere" />
+                    </div>
+                    <div className="col-6">
+                      <div className="row">
+                        <h4>
+                          <b>hiflix Cinema</b>
+                        </h4>
+                      </div>
+                      <div className="row">
+                        <p>Colonel Street No. 2. East Purwokerto</p>
+                      </div>
+                    </div>
+                  </div>
+                  <hr />
+                  <div className="row py-3">
+                    <div className="col-3 py-2">08:30am</div>
+                    <div className="col-3 py-2">08:30am</div>
+                    <div className="col-3 py-2">08:30am</div>
+                    <div className="col-3 py-2">08:30am</div>
+                    <div className="col-3 py-2">08:30am</div>
+                    <div className="col-3 py-2">08:30am</div>
+                  </div>
+                  <div className="row pt-2 pb-4">
+                    <div className="col-6 text-start">
+                      <h5>Price</h5>
+                    </div>
+                    <div className="col-6 text-end">
+                      <h5>
+                        <b>$10.00/seat</b>
+                      </h5>
+                    </div>
+                  </div>
+                  <div className="row p-auto">
+                    <div className="col-6 text-start">
+                      <button className="btn btn-outline-primary managedataschedule_update-button">
+                        Update
+                      </button>
+                    </div>
+                    <div className="col-6 text-end">
+                      <button className="btn btn-outline-danger managedataschedule_delete-button">
+                        Delete
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="col-lg-4 p-2">
+              <div className="card p-2 manageschedule_card ">
+                <div className="card-body">
+                  <div className="row">
+                    <div className="col-6 m-auto text-center">
+                      <img src={Hiflix} alt="premiere" />
+                    </div>
+                    <div className="col-6">
+                      <div className="row">
+                        <h4>
+                          <b>hiflix Cinema</b>
+                        </h4>
+                      </div>
+                      <div className="row">
+                        <p>Colonel Street No. 2. East Purwokerto</p>
+                      </div>
+                    </div>
+                  </div>
+                  <hr />
+                  <div className="row py-3">
+                    <div className="col-3 py-2">08:30am</div>
+                    <div className="col-3 py-2">08:30am</div>
+                    <div className="col-3 py-2">08:30am</div>
+                    <div className="col-3 py-2">08:30am</div>
+                    <div className="col-3 py-2">08:30am</div>
+                    <div className="col-3 py-2">08:30am</div>
+                  </div>
+                  <div className="row pt-2 pb-4">
+                    <div className="col-6 text-start">
+                      <h5>Price</h5>
+                    </div>
+                    <div className="col-6 text-end">
+                      <h5>
+                        <b>$10.00/seat</b>
+                      </h5>
+                    </div>
+                  </div>
+                  <div className="row p-auto">
+                    <div className="col-6 text-start">
+                      <button className="btn btn-outline-primary managedataschedule_update-button">
+                        Update
+                      </button>
+                    </div>
+                    <div className="col-6 text-end">
+                      <button className="btn btn-outline-danger managedataschedule_delete-button">
+                        Delete
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="col-lg-4 p-2">
+              <div className="card p-2 manageschedule_card ">
+                <div className="card-body">
+                  <div className="row">
+                    <div className="col-6 m-auto text-center">
+                      <img src={Hiflix} alt="premiere" />
+                    </div>
+                    <div className="col-6">
+                      <div className="row">
+                        <h4>
+                          <b>hiflix Cinema</b>
+                        </h4>
+                      </div>
+                      <div className="row">
+                        <p>Colonel Street No. 2. East Purwokerto</p>
+                      </div>
+                    </div>
+                  </div>
+                  <hr />
+                  <div className="row py-3">
+                    <div className="col-3 py-2">08:30am</div>
+                    <div className="col-3 py-2">08:30am</div>
+                    <div className="col-3 py-2">08:30am</div>
+                    <div className="col-3 py-2">08:30am</div>
+                    <div className="col-3 py-2">08:30am</div>
+                    <div className="col-3 py-2">08:30am</div>
+                  </div>
+                  <div className="row pt-2 pb-4">
+                    <div className="col-6 text-start">
+                      <h5>Price</h5>
+                    </div>
+                    <div className="col-6 text-end">
+                      <h5>
+                        <b>$10.00/seat</b>
+                      </h5>
+                    </div>
+                  </div>
+                  <div className="row p-auto">
+                    <div className="col-6 text-start">
+                      <button className="btn btn-outline-primary managedataschedule_update-button">
+                        Update
+                      </button>
+                    </div>
+                    <div className="col-6 text-end">
+                      <button className="btn btn-outline-danger managedataschedule_delete-button">
+                        Delete
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="col-lg-4 p-2">
+              <div className="card p-2 manageschedule_card ">
+                <div className="card-body">
+                  <div className="row">
+                    <div className="col-6 m-auto text-center">
+                      <img src={Hiflix} alt="premiere" />
+                    </div>
+                    <div className="col-6">
+                      <div className="row">
+                        <h4>
+                          <b>hiflix Cinema</b>
+                        </h4>
+                      </div>
+                      <div className="row">
+                        <p>Colonel Street No. 2. East Purwokerto</p>
+                      </div>
+                    </div>
+                  </div>
+                  <hr />
+                  <div className="row py-3">
+                    <div className="col-3 py-2">08:30am</div>
+                    <div className="col-3 py-2">08:30am</div>
+                    <div className="col-3 py-2">08:30am</div>
+                    <div className="col-3 py-2">08:30am</div>
+                    <div className="col-3 py-2">08:30am</div>
+                    <div className="col-3 py-2">08:30am</div>
+                  </div>
+                  <div className="row pt-2 pb-4">
+                    <div className="col-6 text-start">
+                      <h5>Price</h5>
+                    </div>
+                    <div className="col-6 text-end">
+                      <h5>
+                        <b>$10.00/seat</b>
+                      </h5>
+                    </div>
+                  </div>
+                  <div className="row p-auto">
+                    <div className="col-6 text-start">
+                      <button className="btn btn-outline-primary managedataschedule_update-button">
+                        Update
+                      </button>
+                    </div>
+                    <div className="col-6 text-end">
+                      <button className="btn btn-outline-danger managedataschedule_delete-button">
+                        Delete
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="col-lg-4 p-2">
+              <div className="card p-2 manageschedule_card ">
+                <div className="card-body">
+                  <div className="row">
+                    <div className="col-6 m-auto text-center">
+                      <img src={Hiflix} alt="premiere" />
+                    </div>
+                    <div className="col-6">
+                      <div className="row">
+                        <h4>
+                          <b>hiflix Cinema</b>
+                        </h4>
+                      </div>
+                      <div className="row">
+                        <p>Colonel Street No. 2. East Purwokerto</p>
+                      </div>
+                    </div>
+                  </div>
+                  <hr />
+                  <div className="row py-3">
+                    <div className="col-3 py-2">08:30am</div>
+                    <div className="col-3 py-2">08:30am</div>
+                    <div className="col-3 py-2">08:30am</div>
+                    <div className="col-3 py-2">08:30am</div>
+                    <div className="col-3 py-2">08:30am</div>
+                    <div className="col-3 py-2">08:30am</div>
+                  </div>
+                  <div className="row pt-2 pb-4">
+                    <div className="col-6 text-start">
+                      <h5>Price</h5>
+                    </div>
+                    <div className="col-6 text-end">
+                      <h5>
+                        <b>$10.00/seat</b>
+                      </h5>
+                    </div>
+                  </div>
+                  <div className="row p-auto">
+                    <div className="col-6 text-start">
+                      <button className="btn btn-outline-primary managedataschedule_update-button">
+                        Update
+                      </button>
+                    </div>
+                    <div className="col-6 text-end">
+                      <button className="btn btn-outline-danger managedataschedule_delete-button">
+                        Delete
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <Pagination />
+      <Footer />
     </>
   );
 }

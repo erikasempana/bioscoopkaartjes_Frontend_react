@@ -5,10 +5,16 @@ body {
   background-color: #e5e5e5;
 }
 
-/* section #manage movie */
+/* section #manage schedule */
 
 #manageschedule {
-  padding-top: 100px;
+  padding-top: 150px;
+}
+
+.manageschedule_border {
+  padding: 20px 0;
+  border: 2px solid #e5e5e5;
+  border-radius: 30px;
 }
 
 .btn-outline-danger:hover,
@@ -31,8 +37,8 @@ body {
 }
 
 .btn-outline-primary {
-  border: 2px solid #5f2eea;
-  color: #5f2eea;
+  border: 2px solid #5f2eea !important;
+  color: #5f2eea !important;
 }
 
 .manageschedule_image-card {
@@ -52,7 +58,28 @@ body {
   color: #4e4b66;
 }
 
+.premiere_wrap {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.premiere_button {
+  width: 125px;
+  height: 60px;
+  border-radius: 10px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+}
+
+.premiere_img {
+  max-width: 100px;
+}
+
+.manageschedule_data-movie-one .form-select,
 .manageschedule_data-movie-one input,
+.manageschedule_data-movie-two .form-select,
 .manageschedule_data-movie-two input,
 .manageschedule_data-movie-three input {
   padding: 15px 10px;
@@ -62,34 +89,51 @@ body {
   font-weight: 400;
 }
 
+.manage_time {
+  text-align: center;
+  place-content: center;
+}
+
+.manage_time button {
+  width: 70px;
+  height: 40px;
+  text-align: center;
+  border-radius: 10px;
+}
+
 .reset-manageschedule {
   padding-right: 10px;
 }
 
 .reset-manageschedule-button,
 .submit-manageschedule-button {
-  width: 100px;
-  height: 40px;
+  width: 150px;
+  height: 50px;
+  border-radius: 7px;
+  border: 3px solid #5f2eea !important;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
 }
 
 /* end of section #manage movie*/
 
 /* section #manage_viewall-filter */
-#manage_viewall-filter {
+#dataschedule_filter {
   padding-top: 60px;
-  padding-bottom: 50px;
+  padding-bottom: 20px;
 }
 
-#manage_viewall-filter h4 {
+#dataschedule_filter h4 {
   margin: 5px;
   color: black;
   font-weight: 700;
   color: rgba(0, 0, 0, 1);
 }
 
-#manage_viewall-filter form select {
-  width: 100px;
-  height: 40px;
+#dataschedule_filter .form-select {
+  width: 200px;
+  height: 60px;
   margin: 5px;
   border-radius: 10px;
   font-size: 16px;
@@ -98,95 +142,78 @@ body {
   box-sizing: border-box;
   margin-right: 10px;
 }
-
-#manage_viewall-filter-wrap form input {
-  width: 300px;
-  height: 40px;
-  margin: 5px;
-  border-radius: 10px;
-  color: rgba(78, 75, 102, 1);
-  border: 2px solid white;
-  box-sizing: border-box;
-  padding: 6px 12px;
-}
-.manage_viewall_input {
-  width: 310px;
-  height: 40px;
-  margin: 5px;
-  border-radius: 10px;
-  color: rgba(78, 75, 102, 1);
-  border: 2px solid white;
-  box-sizing: border-box;
-  padding: 6px 12px;
-}
 /* end of section  #manage_viewall-filter */
 
-/* manage_viewall */
-#manage_viewall {
-  margin: auto;
-  border-radius: 8px;
-  text-align: space-between;
-  border-radius: 4px;
-}
-
-.manage_viewall_overflow-movie {
-  margin: 20px 10px;
-}
-
-.manage_viewall-img {
-  padding-top: 20px;
-  width: 200px;
-}
-
-.manage_viewall-card {
-  width: 16rem;
-}
-
-.manage_viewall_border-card {
-  margin: auto;
-  padding: 10px;
-  display: grid;
-  place-content: center;
-}
-.manage_viewall_border-card .card {
+.manageschedule_wrap-card {
+  background-color: white;
   border-radius: 10px;
-  place-content: center;
 }
 
-/* end of manage_viewall */
+.manageschedule_card {
+  margin: auto;
+  border-radius: 15px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.manageschedule_card:hover {
+  border: 3px solid #5f2eea !important;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.managedataschedule_update-button,
+.managedataschedule_delete-button {
+  width: 150px;
+  height: 45px;
+}
 
 @media (max-width: 767.98px) {
   /* section #manage movie*/
-  .manage_image-card {
+  .manageschedule_image-card {
     display: grid;
     place-items: center;
   }
 
-  .manage_image-movie {
+  .manageschedule_image-movie {
     width: 200px;
   }
 
-  .manage_data-movie-one {
+  .manageschedule_data-movie-one {
     padding-top: 30px;
   }
 
-  .manage_data-movie-one label,
-  .manage_data-movie-two label,
-  .manage_data-movie-three label {
+  .manageschedule_data-movie-one label,
+  .manageschedule_data-movie-two label,
+  .manageschedule_data-movie-three label {
     font-size: 13px;
     font-weight: 400;
     color: #4e4b66;
   }
 
-  .manage_data-movie-one input,
-  .manage_data-movie-two input,
-  .manage_data-movie-three input {
+  .manageschedule_data-movie-one .form-select,
+  .manageschedule_data-movie-one input,
+  .manageschedule_data-movie-two .form-select,
+  .manageschedule_data-movie-two input,
+  .manageschedule_data-movie-three input {
     padding: 15px 10px;
     height: 56px;
     border-radius: 10px;
     font-size: 13px;
     font-weight: 400;
     color: #4e4b66;
+  }
+
+  .manage_time {
+    font-size: 10px;
+    justify-content: space-around;
+    align-content: space-between;
+  }
+
+  .manage_time button {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    border-radius: 10px;
   }
 
   .button-manage {
@@ -197,7 +224,7 @@ body {
     align-items: center;
   }
 
-  .reset-manage {
+  .reset-manageschedule {
     padding: 10px 0;
   }
 

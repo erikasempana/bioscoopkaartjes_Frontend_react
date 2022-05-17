@@ -13,6 +13,10 @@ body {
 }
 
 /* membership */
+main {
+  padding-bottom: 30px;
+}
+
 #membership {
   width: 80%;
   min-height: 350px;

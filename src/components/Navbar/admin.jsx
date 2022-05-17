@@ -11,7 +11,7 @@ function Admin() {
           <hr className="dropdown-divider" />
         </li>
         <li className="nav-item">
-          <Link className="nav-link active" to="/home">
+          <Link className="nav-link active" to="/dasboard">
             Dashboard
           </Link>
         </li>
@@ -24,7 +24,7 @@ function Admin() {
           </Link>
         </li>
         <li className="nav-item">
-          <Link className="nav-link active" to="/viewall">
+          <Link className="nav-link active" to="/manageSchedule">
             Manage Schedule
           </Link>
         </li>

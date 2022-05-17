@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./viewall.css";
 import Navbar from "../../components/Navbar/navbar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Pagination from "react-paginate";
 import Footer from "../../components/Footer/footer";
 import Rectangle2 from "../../assets/img/Rectangle2.png";
@@ -12,6 +12,7 @@ import MonthButton from "../../components/MonthButton/monthbutton";
 
 function ViewAll() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const allMovie = useSelector((state) => state.getAllMovie.data);
 
   const limit = 6;
@@ -38,6 +39,7 @@ function ViewAll() {
       // output
       setData(resultMovie); //resultMovie ini bisa di cek dengan me-log resultMovie terlebih dahulu
       // setPageInfo(resultMovie.data.pagination);
+      // navigate(`/detail/${id}`);
     } catch (error) {
       console.log(error.response);
       // gunakan alert atau toas untuk nampilin messegenya
@@ -89,48 +91,7 @@ function ViewAll() {
 
         {/* AKHIR MAIN */}
         <MonthButton />
-        <div className="container">
-          <div className="row home_month-wrap overflow-auto mt-5">
-            <div className="col home_month">
-              <button type="button" className="btn btn-outline-primary btn-white">
-                september
-              </button>
-              <button type="button" className="btn btn-outline-primary btn-white">
-                Oktober
-              </button>
-              <button type="button" className="btn btn-outline-primary btn-white">
-                November
-              </button>
-              <button type="button" className="btn btn-outline-primary btn-white">
-                Desember
-              </button>
-              <button type="button" className="btn btn-outline-primary btn-white">
-                January
-              </button>
-              <button type="button" className="btn btn-outline-primary btn-white">
-                February
-              </button>
-              <button type="button" className="btn btn-outline-primary btn-white">
-                March
-              </button>
-              <button type="button" className="btn btn-outline-primary btn-white">
-                April
-              </button>
-              <button type="button" className="btn btn-outline-primary btn-white">
-                Mey
-              </button>
-              <button type="button" className="btn btn-outline-primary btn-white">
-                June
-              </button>
-              <button type="button" className="btn btn-outline-primary btn-white">
-                July
-              </button>
-              <button type="button" className="btn btn-outline-primary btn-white">
-                August
-              </button>
-            </div>
-          </div>
-        </div>
+
         {/* Akhir Month */}
       </section>
 
@@ -139,10 +100,10 @@ function ViewAll() {
           <div className="row viewall_overflow-movie">
             {allMovie.map((item) => (
               <div key={item.id} className="col d-md-1 m-2 px-4 py-5 viewall_border-card">
-                <div className="card viewall-card" style={{ width: "16rem" }}>
+                <div className="card viewall-card m-auto" style={{ width: "16rem" }}>
                   <img
                     src={process.env.REACT_APP_CLOUDINARY_URL + item.image}
-                    className="card-img-top viewall-img"
+                    className="card-img-top m-auto viewall-img"
                     alt="..."
                   />
                   <div className="card-body row text-center align-items-end viewall-detail py-1">
