@@ -32,11 +32,9 @@ export default function Home() {
 
   const getNowShowing = async () => {
     try {
-      const month = dayjs().month();
+      const month = new Date().getMonth();
       const resultNowShowing = await axios.get(`movie/?searchRelease=${month}`);
-      // console.log("result", resultNowShowing.data.data);
       setNowShowing(resultNowShowing.data.data);
-      // console.log("first", resultNowShowing.data.data);
     } catch (error) {
       console.log(error.response);
     }
@@ -44,9 +42,8 @@ export default function Home() {
 
   const getUpComingMovie = async () => {
     try {
-      const params = 5;
+      const params = new Date().getMonth() + 1;
       const resultUpComingMovie = await axios.get(`movie/?searchRelease=${params}`);
-      // console.log("upcomingmovie", resultUpComingMovie.data.data);
       setUpComingMovie(resultUpComingMovie.data.data);
     } catch (error) {
       console.log(error.response);
@@ -56,7 +53,6 @@ export default function Home() {
   const handleMonth = async (id) => {
     try {
       const resultUpComingMovie = await axios.get(`movie/?searchRelease=${id}`);
-      // console.log("upcomingmovie", resultUpComingMovie.data.data);
       setUpComingMovie(resultUpComingMovie.data.data);
     } catch (error) {
       console.log(error.response);
@@ -64,6 +60,7 @@ export default function Home() {
   };
 
   const handleDetailMovie = (id) => {
+    console.log("ika", id);
     navigate(`/detail/${id}`);
   };
 
@@ -109,11 +106,11 @@ export default function Home() {
               </div>
             </div>
             <div className="d-flex flex-row py-5 justify-content-between nowshowing_overflow-movie">
-              {nowShowing.map((item) => (
-                <div key={item.id} className="wrapper">
+              {nowShowing.map((el) => (
+                <div key={el.id} className="wrapper">
                   <div className="card nowshowing_movie-card" style={{ width: "16rem" }}>
                     <img
-                      src={process.env.REACT_APP_CLOUDINARY_URL + item.image}
+                      src={process.env.REACT_APP_CLOUDINARY_URL + el.image}
                       className="card-img-top nowshowing_movie-img"
                       alt="..."
                     />
@@ -124,21 +121,19 @@ export default function Home() {
                           className="card-title pt-0 fs-5 fw-bolder"
                           style={{ color: "rgba(20, 20, 43, 1)" }}
                         >
-                          {item.name}
+                          {el.name}
                         </h5>
                       </div>
                       <div className="category">
                         <p className="card-text" style={{ color: "#a0a3bd", fontSize: "15px" }}>
-                          {item.category}
+                          {el.category}
                         </p>
                       </div>
-                      <div className="detail d-flex flex-row">
+
+                      <div className="detail">
                         <button
-                          onClick={handleDetailMovie}
-                          className="btn btn-outline-primary"
-                          style={{
-                            width: "100%"
-                          }}
+                          onClick={() => handleDetailMovie(el.id)}
+                          className="btn btn-outline-primary btn-detail"
                         >
                           Detail
                         </button>

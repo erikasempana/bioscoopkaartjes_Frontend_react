@@ -8,10 +8,12 @@ import Hiflix from "../../assets/img/hiflix.png";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getMovieByIdMovie } from "../../stores/action/movie";
-import { getAllSchedule, dataOrder } from "../../stores/action/schedule";
+import { getAllSchedule, dataOrder, getScheduleByMovieId } from "../../stores/action/schedule";
 import CurrencyFormat from "react-currency-format";
 import axios from "../../utils/axios";
 import dayjs from "dayjs";
+import customParseFormat from "dayjs/plugin/customParseFormat";
+dayjs.extend(customParseFormat);
 
 export default function Detail() {
   const navigate = useNavigate();
@@ -19,9 +21,10 @@ export default function Detail() {
   const { id } = useParams();
   const [detailMovie, setDetailMovie] = useState({});
   const [scheduleMovie, setScheduleMovie] = useState([]);
+  const [dateBooking, setDateBooking] = useState("");
   const [dataDetailOrder, setDataDetailOrder] = useState({
-    movieId: id,
-    dateBooking: new Date().toISOString().split("T")[0]
+    movieId: id
+    // dateBooking: new Date().toISOString().split("T")[0]
   });
   console.log("dataOrder", dataDetailOrder);
 
@@ -29,8 +32,17 @@ export default function Detail() {
   // GET DATA SCHEDULE FILER BY MOVIE ID & DATE BOOKING
 
   const changeDataBooking = (data) => {
-    setDataDetailOrder({ ...dataDetailOrder, ...data });
+    setDataDetailOrder({ ...dataDetailOrder, ...data, dateBooking });
   };
+
+  const handleDateBooking = (e) => {
+    setDateBooking(e.target.value);
+  };
+
+  // handleDateChange = ({ target: { name, value } }) => {
+  //   this.setState({
+  //     [name]: value
+  //   });
 
   const getDetailMovie = async () => {
     try {
@@ -45,17 +57,12 @@ export default function Detail() {
 
   const getScheduleMovie = async () => {
     try {
-      const limit = 6;
-      const page = 1;
-      // const resultSchedulelMovie = await axios.get(`schedule?limit=${limit}&page=${page}`);
-      const resultSchedulelMovie = await dispatch(getAllSchedule(limit, page));
+      const resultSchedulelMovie = await dispatch(getScheduleByMovieId(id));
       setScheduleMovie(resultSchedulelMovie.action.payload.data.data);
     } catch (error) {
       console.log(error.response);
     }
   };
-
-  console.log("scheduleMovie", scheduleMovie);
 
   const handleBookNow = (price) => {
     const body = {
@@ -77,7 +84,7 @@ export default function Detail() {
       <Navbar />
 
       {/* NEW MAIN */}
-      <main>
+      <main className="m-0 p-0">
         <section id="moviedetail">
           <div className="container">
             <div className="row mx-auto mt-5 bg-white">
@@ -154,6 +161,7 @@ export default function Detail() {
                     placeholder="20/05/2022"
                     aria-label="Username"
                     aria-describedby="basic-addon1"
+                    onChange={handleDateBooking}
                   />
                 </form>
               </div>
@@ -164,18 +172,11 @@ export default function Detail() {
                     <div className="col dropdown moviedetail_set-box">
                       <select name="location" className="moviedetail_dropdown-location">
                         <option value="">Select Location</option>
-                        <option className="dropdown-item" value="jakarta">
-                          Purwokerto
-                        </option>
-                        <option className="dropdown-item" value="jakarta">
-                          Jakarta
-                        </option>
-                        <option className="dropdown-item" value="jakarta">
-                          Bandung
-                        </option>
-                        <option className="dropdown-item" value="jakarta">
-                          Surabaya
-                        </option>
+                        {scheduleMovie.map((el) => (
+                          <option key={el.id} className="dropdown-item" value={el.location}>
+                            {el.location}
+                          </option>
+                        ))}
                       </select>
                     </div>
                   </form>
@@ -187,21 +188,18 @@ export default function Detail() {
 
         <section id="schedule">
           <div className="container pb-5">
-            <div className="row d-flex justify-content-center pb-5">
+            <div className="row d-flex justify-content-center pb-5 shedule-card-wrapper">
               {/* satu */}
               {scheduleMovie.map((item) => (
-                <div
-                  key={item.id}
-                  className="col-lg-4 mb-2 d-flex justify-content-center schedule_column"
-                >
+                <div key={item.id} className="col-lg-4 mb-2 d-flex schedule_column">
                   <div className="card shadow d-flex mb-4 justify-content-center schedule_card">
                     <div className="card-body shcedule_card-body">
                       <div className="row mb-1">
                         <div className="col-lg-6 d-flex flex-wrap align-items-center premiere_brand">
-                          {item.premiere === "Hiflix Cinema" ? (
+                          {item.premiere === "Hiflix" ? (
                             <img src={Hiflix} className="img" height="auto" width="90%" alt="..." />
                           ) : null}
-                          {item.premiere === "cineone21" ? (
+                          {item.premiere === "cineOne21" ? (
                             <img
                               src={Cineone}
                               className="img"
@@ -210,12 +208,12 @@ export default function Detail() {
                               alt="..."
                             />
                           ) : null}
-                          {item.premiere === "cineone21" ? (
+                          {item.premiere === "Ebu.id" ? (
                             <img src={Ebuid} className="img" height="auto" width="90%" alt="..." />
                           ) : null}
                         </div>
                         <div className="col-lg-6 premiere_name">
-                          <h4 className="font-weight-bold">{item.premiere}</h4>
+                          <h4 className="font-weight-bold">{item.premiere} </h4>
                           <p
                             className="text-truncate"
                             style={{ fonSize: "13px", color: "#6e7191" }}
@@ -225,22 +223,16 @@ export default function Detail() {
                         </div>
                       </div>
                       <hr />
-                      <div className="row mt-4 m-auto pt-2">
+                      <div className="row mt-4  pt-2 schedule-time">
                         {item.time.split(",").map((itemTime) => (
                           <button
                             key={itemTime}
                             onClick={() =>
                               changeDataBooking({ timeBooking: itemTime, scheduleId: item.id })
                             }
-                            className="col-3 mb-3 btn btn-white m-2"
-                            style={{
-                              width: "fit-content",
-                              fontSize: "12px",
-                              fontWeight: 600,
-                              color: "#4e4b66"
-                            }}
+                            className="col-3 mb-3 btn btn-white  time"
                           >
-                            {itemTime}
+                            {dayjs(itemTime, "HH:mm").format("hh:mm a")}
                           </button>
                         ))}
                       </div>

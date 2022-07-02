@@ -52,27 +52,28 @@ body {
 
 .nowshowing_movie-card {
   max-width: 450px;
-  min-height: 360px;
-  margin: 30px 10px;
+  height: 340px;
+  margin-top: 30px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 70px;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
   transition: 0.3s ease-in-out;
   border-radius: 10px;
-  position: relative;
+  /* position: relative; */
 }
 
 .nowshowing_movie-card:hover {
-  height: 520px;
+  height: 500px;
 }
 
 .nowshowing_movie-detail {
   position: relative;
-  margin-top: -140px;
+  margin-top: 20px;
   padding: 20px 15px;
   text-align: center;
   color: #111;
-  visibility: hidden;
   opacity: 0;
-  pointer-events: none;
   display: flex;
   flex-direction: column;
 }
@@ -86,7 +87,7 @@ body {
 
 .nowshowing_movie-img {
   width: 220px;
-  height: 340px;
+  height: 320px;
   margin: auto;
   padding-top: 15px;
 }
@@ -94,7 +95,14 @@ body {
 .category {
   padding-bottom: 20px;
 }
-
+.detail {
+  margin-top: 20px;
+  height: 60px;
+}
+.btn-detail {
+  top: -20px;
+  width: 100%;
+}
 /* end nowshowing */
 
 #upcomingmovie {

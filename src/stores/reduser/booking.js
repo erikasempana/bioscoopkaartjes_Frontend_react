@@ -3,25 +3,25 @@ const initialState = {
   isError: false,
   data: {}
 };
-const getAllSchedule = (state = initialState, action) => {
+
+const booking = (state = initialState, action) => {
   switch (action.type) {
-    case "GET_ALL_SCHEDULE_PENDING": {
-      console.log(action.payload);
+    case "POST_BOOKING_PENDING": {
       return {
         ...state,
         isLoading: true,
         isError: false
       };
     }
-    case "GET_ALL_SCHEDULE_FULFILLED": {
+    case "POST_BOOKING_FULFILLED": {
       console.log(action.payload);
       return {
         ...state,
         isLoading: false,
-        data: { ...action.payload.data.data[0] }
+        data: { ...action.payload.data.data }
       };
     }
-    case "GET_ALL_SCHEDULE_REJECTED": {
+    case "POST_BOOKING_REJECTED": {
       return {
         ...state,
         isLoading: false,
@@ -35,4 +35,4 @@ const getAllSchedule = (state = initialState, action) => {
   }
 };
 
-export default getAllSchedule;
+export default booking;

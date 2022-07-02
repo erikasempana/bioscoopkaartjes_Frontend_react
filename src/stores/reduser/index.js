@@ -8,9 +8,10 @@ import getAllMovie from "./getAllMovie";
 // import postMovie from "./postMovie";
 import setIsLogin from "./isLogin";
 import getMovieByIdMovie from "./getMovieByIdMovie";
-import getAllSchedule from "./getAllSchedule";
+import schedule from "./schedule";
 import dataOrder from "./dataOrder";
-import updateMovie from "./updateMovie";
+import postMovie from "./postMovie";
+import booking from "./booking";
 // import pathnya yg di reducer
 //import (nama fungsi) from "./letak folder(namafile)"
 
@@ -22,7 +23,8 @@ export default combineReducers({
   getAllMovie,
   setIsLogin,
   getMovieByIdMovie,
-  getAllSchedule,
+  schedule,
   dataOrder,
-  updateMovie
+  postMovie,
+  booking
 });

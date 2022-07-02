@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./order.css";
 import Footer from "../../components/Footer/footer";
 import Navbar from "../../components/Navbar/navbar";
-import Cineone21 from "../../assets/img/cineone21.png";
+import Ebuid from "../../assets/img/ebuid.png";
+import Cineone from "../../assets/img/cineone21.png";
+import Hiflix from "../../assets/img/hiflix.png";
 import Seat from "../../components/Seat/index";
 import { useSelector, useDispatch } from "react-redux";
-import { dataOrder } from "../../stores/action/schedule";
+import { dataOrder, getScheduleById } from "../../stores/action/schedule";
 import dayjs from "dayjs";
 import CurrencyFormat from "react-currency-format";
 
@@ -20,9 +22,19 @@ function Order() {
   const detailOrder = useSelector((state) => state.dataOrder.dataOrder);
   const movieById = useSelector((state) => state.getMovieByIdMovie.data);
   const userId = useSelector((state) => state.user.data.id);
+  const premiereName = useSelector((state) => state.schedule.data[0].premiere);
   console.log("detailOrder", detailOrder);
-  //   PROSES GET SEAT
 
+  const handlePremiereName = async () => {
+    try {
+      const id = detailOrder.scheduleId;
+      await dispatch(getScheduleById(id));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  //   PROSES GET SEAT
   const handleSelectSeat = (seat) => {
     console.log(seat);
     if (selectedSeat.includes(seat)) {
@@ -32,6 +44,7 @@ function Order() {
       setSelectedSeat(deleteSeat);
     } else {
       setSelectedSeat([...selectedSeat, seat]);
+      setReservedSeat([...reservedSeat, selectedSeat]);
     }
   };
 
@@ -57,6 +70,10 @@ function Order() {
   const handleChangeMovie = () => {
     navigate("/home");
   };
+
+  useEffect(() => {
+    handlePremiereName();
+  }, []);
 
   return (
     <>
@@ -101,16 +118,8 @@ function Order() {
                       <div className="card text-center order_card-seat">
                         <div className="card-body">
                           <p>Screen</p>
+                          <div className="screen-line"></div>
 
-                          <svg
-                            width="232"
-                            height="6"
-                            viewBox="0 0 532 8"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <rect width="532" height="8" rx="4" fill="#D6D8E7" />
-                          </svg>
                           <br />
                           <div className="row text-center">
                             {listSeat.map((item) => (
@@ -124,18 +133,19 @@ function Order() {
                               </div>
                             ))}
                           </div>
+
                           <div className="row text-start">
-                            <div className="col ms-5">
+                            <div className="col">
                               <div className="order_seating-key">
                                 <h6>
                                   <b>Seating Key</b>
                                 </h6>
                                 <div className="row-seating-key m-auto md-8 m-5">
-                                  <span className="order_key-available">
+                                  <span className="order_key-available me-3">
                                     <span className="square-available d-lg-h6">nn</span>
                                     <span style={{ fontSize: "14px" }}> available </span>
                                   </span>
-                                  <span className="order_key-selected">
+                                  <span className="order_key-selected me-3">
                                     <span className="square-selected  ">nn</span>
                                     <span style={{ fontSize: "14px" }}> selected </span>
                                   </span>
@@ -158,16 +168,30 @@ function Order() {
                   </h4>
                   <div className="wrap">
                     <div className="card order_card-info" style={{ width: "22rem" }}>
-                      <div className="card-body">
-                        <img className="mx-auto d-block" src="./assets/img/cineone.png" alt="" />
-                        <h4 className="card-title text-center fw-bolder">CineOne21 Cinema</h4>
+                      <div className="card-body order_card-info-body">
+                        <img
+                          className="mx-auto d-block premiere-img "
+                          src={
+                            premiereName === "Hiflix"
+                              ? Hiflix
+                              : premiere === "cineOne21"
+                              ? Cineone
+                              : premiereName === "Ebu.id"
+                              ? Ebuid
+                              : ""
+                          }
+                          alt=""
+                        />
+                        <h4 className="card-title text-center fw-bolder premiere-name">
+                          {premiereName} Cinema
+                        </h4>
                         <div className="row">
                           <div className="col-6">
                             <p className="fs-6">Movie Selected</p>
                           </div>
                           <div className="col-6 text-end">
                             <p className="fs-6">
-                              <b>Spider-Man: Homecoming</b>
+                              <b>{movieById.name}</b>
                             </p>
                           </div>
                         </div>
@@ -179,7 +203,7 @@ function Order() {
                           </div>
                           <div className="col-6 text-end">
                             <p className="fs-6">
-                              <b>{detailOrder.timeBooking}</b>
+                              <b>{dayjs(detailOrder.timeBooking, "HH:mm").format("hh:mm a")}</b>
                             </p>
                           </div>
                         </div>

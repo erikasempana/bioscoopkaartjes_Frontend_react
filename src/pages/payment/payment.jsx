@@ -20,13 +20,11 @@ function Payment() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const detailOrder = useSelector((state) => state.dataOrder.dataOrder);
-  const dataSchedule = useSelector((state) => state.getAllSchedule.data);
+  const dataSchedule = useSelector((state) => state.schedule.data[0]);
   const personalInfo = useSelector((state) => state.user.data);
-  const [userInfo, setUserInfo] = useState(personalInfo);
+  const movieOrder = useSelector((state) => state.getMovieByIdMovie.data);
   const [paymentMethod, setPaymentMethod] = useState("");
-  console.log("personalInfo", personalInfo);
 
-  console.log("paymentMethod", paymentMethod);
   const handleGooglepay = () => {
     setPaymentMethod("googlepay");
   };
@@ -70,9 +68,9 @@ function Payment() {
         totalPayment: detailOrder.totalPayment,
         seat: detailOrder.selectedSeat
       };
-      console.log("body", body);
+      // console.log("body", body);
       const resultBooking = await dispatch(postBooking(body));
-      window.open(resultBooking.action.payload.data.pagination.redirectUrl);
+      window.open(resultBooking.action.payload.data.data.redirectUrl);
     } catch (error) {
       console.log(error.response);
     }
@@ -101,8 +99,8 @@ function Payment() {
                         <div className="col-8 text-end">
                           <p>
                             <b>
-                              {dayjs(detailOrder.dateBooking).format("dddd, DD MMMM YYYY")} at
-                              {detailOrder.timeBooking}
+                              {dayjs(detailOrder.dateBooking).format("dddd, DD MMMM YYYY")} at{" "}
+                              {dayjs(detailOrder.timeBooking, "HH:mm").format("hh:mm a")}
                             </b>
                           </p>
                         </div>
@@ -114,7 +112,7 @@ function Payment() {
                         </div>
                         <div className="col-8 text-end">
                           <p>
-                            <b>{dataSchedule.name}</b>
+                            <b>{movieOrder.name}</b>
                           </p>
                         </div>
                       </div>
@@ -125,7 +123,7 @@ function Payment() {
                         </div>
                         <div className="col-8 text-end">
                           <p>
-                            <b>{dataSchedule.premiere}</b>
+                            <b>{dataSchedule.premiere} Cinema</b>
                           </p>
                         </div>
                       </div>
@@ -295,10 +293,10 @@ function Payment() {
                               </div>
                             </div>
                           </form>
-                          <div className="alert alert-warning" role="alert">
+                          {/* <div className="alert alert-warning" role="alert">
                             <i className="fas fa-exclamation-triangle"></i>
                             Fill your data correctly.
-                          </div>
+                          </div> */}
                         </div>
                       </div>
                     </div>

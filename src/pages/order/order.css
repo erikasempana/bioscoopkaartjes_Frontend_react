@@ -2,17 +2,12 @@
 
 body {
   font-family: "Mulish", sans-serif;
-  background-color: #d6d8e7;
+  background-color: #f5f6f8;
 }
 
 /* MAIN */
 
-main {
-  margin: 120px 0;
-  background-color: #e5e5e5;
-}
-
-.btn-outline-primary:hover,
+.btn-outline-primary .btn-outline-primary:hover,
 .btn-outline-primary:active,
 .btn-outline-primary:visited {
   background: #5f2eea !important;
@@ -27,17 +22,48 @@ main {
   background-color: rgba(239, 240, 246, 1);
 }
 
-.order_card-movie,
-.order_card-seat,
+.order_card-movie {
+  border-radius: 8px;
+}
+.order_card-seat {
+  border-radius: 8px;
+  padding: 50px;
+}
 .order_card-info {
   border-radius: 8px;
+  padding-top: 20px;
+}
+
+.order_card-info-body {
+  padding: 30px;
+}
+
+.premiere-img {
+  padding-bottom: 15px;
+}
+
+.premiere-name {
+  padding-bottom: 25px;
 }
 
 #order {
-  background-color: none;
+  padding-top: 80px;
+  padding-bottom: 80px;
+  background-color: #f5f6f8;
 }
 
+.order {
+  background-color: #f5f6f8;
+}
 /* sitting key */
+.screen-line {
+  width: 550px;
+  margin: auto;
+  height: 4px;
+  background-color: #9ca3af;
+  border-color: 1px solid #9ca3af;
+}
+
 .order_seating-key {
   padding-top: 30px;
 }

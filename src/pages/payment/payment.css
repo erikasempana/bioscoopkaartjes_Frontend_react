@@ -7,7 +7,8 @@ body {
 /* MAIN */
 
 #main-payment {
-  margin: 120px 0;
+  padding: 150px 0;
+  background-color: #f5f6f8;
 }
 
 .btn-outline-primary:hover,

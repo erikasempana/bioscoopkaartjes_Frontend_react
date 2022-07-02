@@ -11,15 +11,15 @@ main {
 }
 
 .movie_detail-card {
-  width: 20rem;
+  width: 18rem;
   border-radius: 10px;
   align-items: center;
+  justify-content: center;
 }
 
 .img-top {
-  width: 250px;
-  /* height: 280px; */
-  padding: 15px 0;
+  width: 200px;
+  padding: 20px 0;
 }
 
 #moviedetail {
@@ -51,19 +51,26 @@ main {
 }
 
 #showtimes {
-  background-color: rgba(245, 246, 248, 1);
-  margin: 30px 0;
+  background-color: #f5f6f8;
   padding: 100px 0;
 }
 
+.showtimes-wrap {
+  display: flex;
+  flex-direction: row;
+}
 /* DATE AND LOCATION */
 /* date */
+
 .showtimes_title {
   padding-bottom: 20px;
 }
 
 .showtimes_date {
-  text-align: end;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
 }
 
 .showtimes_date form input {
@@ -76,7 +83,6 @@ main {
   font-weight: 600;
   color: rgba(78, 75, 102, 1);
   border-radius: 5px;
-  margin: auto;
 }
 
 /* akhir date */
@@ -114,13 +120,36 @@ main {
 /* END OF DATE AND LOCATION */
 
 /* schedule */
+#schedule {
+  background-color: #f5f6f8;
+}
+
+.schedule_column {
+  margin: auto;
+}
+
 .schedule_card {
-  width: 410px;
-  height: 330px;
+  min-width: 400px;
 }
 
 .shcedule_card-body {
-  width: 410px;
+  /* width: 350px; */
+  padding: 30px;
+}
+
+.schedule-time {
+  height: 120px;
+}
+
+.time {
+  font-size: 12px;
+  font-weight: 600;
+  color: #4e4b66;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  /* padding-left: 5px; */
 }
 
 .moviedetail_btn-1 {
@@ -206,15 +235,19 @@ main {
   .schedule_card {
     align-items: center;
     width: 330px;
-    height: 330px;
   }
 
   .shcedule_card-body {
-    width: 330px;
+    width: 280px;
+    padding: 25px;
   }
 
   .premiere_brand {
     justify-content: center;
+  }
+
+  .schedule-time {
+    height: 160px;
   }
 
   .premiere_brand img {
@@ -227,7 +260,6 @@ main {
 
   .premiere_name p {
     margin-top: 20px;
-    line-height: 5px;
     color: rgba(170, 170, 170, 1);
     font-size: 13px;
     font-weight: 300;
@@ -241,29 +273,4 @@ main {
   /* akhir schedule */
 
   /* AKHIR MAIN */
-}
-
-@media (max-width: 1060px), (max-width: 1200px) {
-  .movie_detail-card {
-    width: 16rem;
-  }
-
-  .img-top {
-    width: 200px;
-    /* height: 280px; */
-    padding: 15px 0;
-  }
-
-  /* Schedule */
-  .schedule_column {
-    padding: 5px;
-  }
-
-  .schedule_card {
-    width: 330px;
-  }
-
-  .shcedule_card-body {
-    width: 303px;
-  }
 }

@@ -8,7 +8,7 @@ class App extends Component {
       name: "Bagus",
       count: 0, // 1
       increaseClick: 0,
-      showName: true,
+      showName: true
     };
     console.log("CONSTRUCTOR IS RUNNING");
   }
@@ -37,19 +37,16 @@ class App extends Component {
 
     // [2]
     this.setState({
-      name:
-        this.state.increaseClick < 3
-          ? this.state.name + " Tri"
-          : this.state.name,
+      name: this.state.increaseClick < 3 ? this.state.name + " Tri" : this.state.name,
       increaseClick: this.state.increaseClick + 1,
-      count: this.state.count + 1,
+      count: this.state.count + 1
     });
   };
 
   decreaseCounter = () => {
     console.log("Decrease Counter");
     this.setState({
-      count: this.state.count - 1,
+      count: this.state.count - 1
     });
   };
 
@@ -57,7 +54,7 @@ class App extends Component {
     console.log("Reset Counter");
     this.setState({
       count: 0,
-      showName: false,
+      showName: false
     });
   };
 

@@ -24,17 +24,12 @@ function SignIn() {
 
   const handleSubmit = async (event) => {
     try {
-      // console.log("login is running");
       event.preventDefault();
       // const resultLogin = await axios.post("auth/login", form);
-      // console.log(resultLogin);
-
       const resultLogin = await dispatch(login(form)); //by redux
       // Output = suatu keadaan yang dapat diinfokan ke user bahwa proses sudah selesai
       setIsError(false);
       setMessage(resultLogin.action.payload.data.msg);
-
-      // console.log("res", resultLogin);
       localStorage.setItem("token", resultLogin.action.payload.data.data.token);
       dispatch(isLogin(false));
       // localStorage.setItem("refreshToken", resultLogin.data.data.refreshToken);
