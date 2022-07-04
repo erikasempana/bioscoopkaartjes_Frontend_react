@@ -3,8 +3,6 @@ import "./signin.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login, isLogin } from "../../stores/action/auth";
-import { getUserById } from "../../stores/action/user";
-import TickitzBrandOne from "../../assets/img1/tickitz1.png";
 import TickitzBrandTwo from "../../assets/img1/Tickitz2.png";
 
 function SignIn() {
@@ -16,7 +14,6 @@ function SignIn() {
   });
   const [message, setMessage] = useState("");
   const [isError, setIsError] = useState(false);
-  // console.log(form);
 
   const handleChangeForm = (event) => {
     setForm({ ...form, [event.target.name]: event.target.value });
@@ -25,33 +22,30 @@ function SignIn() {
   const handleSubmit = async (event) => {
     try {
       event.preventDefault();
-      // const resultLogin = await axios.post("auth/login", form);
+
       const resultLogin = await dispatch(login(form)); //by redux
       // Output = suatu keadaan yang dapat diinfokan ke user bahwa proses sudah selesai
       setIsError(false);
       setMessage(resultLogin.action.payload.data.msg);
       localStorage.setItem("token", resultLogin.action.payload.data.data.token);
+      localStorage.setItem("refreshToken", resultLogin.data.data.refreshToken);
+      localStorage.setItem("id", resultLogin.data.data.id);
+      localStorage.setItem("role", resultLogin.data.data.role);
       dispatch(isLogin(false));
-      // localStorage.setItem("refreshToken", resultLogin.data.data.refreshToken);
-      // localStorage.setItem("role", resultLogin.data.data.role);
-
       // localStorage.setItem("dataUser", JSON.stringify(resultUser[0])); //ini LocalStorage
-      // await dispatch(getUserById(resultLogin.action.payload.data.data.id)); //by redux
       navigate("/home");
     } catch (error) {
       console.log(error.response);
       setIsError(true);
       setMessage(error.response.data.msg);
-      // setForm({
-      //   email: "",
-      //   password: ""
-      // });
+      setForm({
+        email: "",
+        password: ""
+      });
     }
   };
 
-  const handleReset = (event) => {
-    // event.preventDefault();
-    // console.log("Reset Form");
+  const handleReset = () => {
     setForm({
       email: "",
       password: ""

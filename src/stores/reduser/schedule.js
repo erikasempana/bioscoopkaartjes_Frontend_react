@@ -1,7 +1,7 @@
 const initialState = {
   isLoading: false,
   isError: false,
-  data: {}
+  data: []
 };
 const schedule = (state = initialState, action) => {
   switch (action.type) {
@@ -18,7 +18,7 @@ const schedule = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        data: { ...action.payload.data.data[0] }
+        data: action.payload.data.data
       };
     }
     case "GET_ALL_SCHEDULE_REJECTED": {
@@ -42,7 +42,7 @@ const schedule = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        data: { ...action.payload.data.data }
+        data: [...action.payload.data.data]
       };
     }
     case "GET_SCHEDULE_BY_MOVIE_ID_REJECTED": {
@@ -50,7 +50,7 @@ const schedule = (state = initialState, action) => {
         ...state,
         isLoading: false,
         isError: true,
-        data: {}
+        data: []
       };
     }
     case "GET_SCHEDULE_BY_ID_PENDING": {

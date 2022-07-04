@@ -67,7 +67,7 @@ function Navbar() {
             {/* menu profile when burgermenu  */}
 
             <hr className="dropdown-divider" />
-            <Link className="dropdown-item mb-3 mt-3 d-lg-none navbar_item-show" to="/home">
+            <Link className="dropdown-item mb-3 mt-3 d-lg-none navbar_item-show" to="/profile">
               Profil
             </Link>
             <hr className="dropdown-divider" />

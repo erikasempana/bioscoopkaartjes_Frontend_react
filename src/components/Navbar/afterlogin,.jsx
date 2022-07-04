@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./afterlogin.css";
-import ProfileImage from "../../assets/img1/profile.png";
+import Default from "../../assets/img1/default.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserById } from "../../stores/action/user";
@@ -16,11 +16,11 @@ function AfterLogin() {
 
   const getProfile = async () => {
     try {
-      const result = await dispatch(getUserById(userData, token)); //by redux
+      await dispatch(getUserById(userData, token)); //by redux
+      // alert(result.action.payload.data.data.msg);
     } catch (error) {
       console.log(error.response);
-      setIsError(true);
-      setMessage(error.response.data.msg);
+      // alert(error.response);
     }
   };
 
@@ -36,6 +36,7 @@ function AfterLogin() {
 
   useEffect(() => {
     getProfile();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -50,7 +51,7 @@ function AfterLogin() {
       ) : null}
 
       <div className="dropdown navbar_dropdown-search">
-        <button onClick={() => handleSearch()} className="btn btn-white navbar_dropdown-search">
+        <button onClick={handleSearch} className="btn btn-white navbar_dropdown-search">
           <i className="fas fa-search navbar_fa-search"></i>
         </button>
       </div>
@@ -65,7 +66,7 @@ function AfterLogin() {
           aria-expanded="false"
         >
           <img
-            src={process.env.REACT_APP_CLOUDINARY_URL + userImage}
+            src={userImage ? process.env.REACT_APP_CLOUDINARY_URL + userImage : Default}
             alt="dropdown"
             className="img-responsive user_image"
           />
@@ -75,15 +76,12 @@ function AfterLogin() {
           aria-labelledby="dropdownMenuLink"
         >
           <li>
-            <Link className="dropdown-item navbar-dropdown-profile-item" to="/home">
+            <Link className="dropdown-item navbar-dropdown-profile-item" to="/profile">
               Profil
             </Link>
           </li>
           <li>
-            <button
-              className="dropdown-item navbar-dropdown-profile-item"
-              onClick={() => handleLogout()}
-            >
+            <button className="dropdown-item navbar-dropdown-profile-item" onClick={handleLogout()}>
               Logout
             </button>
           </li>

@@ -90,7 +90,7 @@ function ManageMovie() {
 
     dispatch(updateMovie(idMovie, formData));
     getAllMovie(); //supaya datanya lgsg terupdate di getdatamovie (home)
-
+    setIdMovie();
     setIsUpdate(false);
     setImage(null);
   };

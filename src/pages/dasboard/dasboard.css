@@ -1,0 +1,93 @@
+@import url("https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;700;800;900&display=swap");
+
+body {
+  font-family: "Mulish", sans-serif;
+  background-color: #f5f6f8;
+}
+.dashboard_container {
+  padding-top: 140px;
+  padding-bottom: 70px;
+}
+
+.dashboard_card {
+  margin-top: 25px;
+  height: 438px;
+  border-radius: 4px;
+  background-color: #fff;
+  border-color: #fff;
+}
+.dashboard_card-body {
+  padding: 30px 40px;
+}
+.filtered_card {
+  margin-top: 25px;
+  height: 438px;
+  border-radius: 4px;
+  background-color: #fff;
+  border-color: #fff;
+}
+.filtered_card-body {
+  padding: 45px 25px 25px;
+}
+.filter_select-movie {
+  width: 215px;
+  height: 50px;
+  border: 1px solid #dedede;
+  background-color: #fcfdfe;
+  border-radius: 4px;
+  align-self: center;
+  padding: 5px;
+  margin-bottom: 25px;
+}
+.filter_select-premiere {
+  width: 215px;
+  height: 50px;
+  border: 1px solid #dedede;
+  background-color: #fcfdfe;
+  border-radius: 4px;
+  align-self: center;
+  padding: 5px;
+  margin-bottom: 25px;
+}
+.filter_select-location {
+  width: 215px;
+  height: 50px;
+  border: 1px solid #dedede;
+  background-color: #fcfdfe;
+  border-radius: 4px;
+  align-self: center;
+  padding: 5px;
+  margin-bottom: 25px;
+}
+
+.filter_input-select {
+  width: 195px;
+  padding: 8px;
+  font-family: "Mulish", sans-serif;
+  border: 1px solid #fcfdfe;
+  background-color: #fcfdfe;
+  font-size: 16px;
+  font-weight: 400;
+  color: #4e4b66;
+  border: 0px;
+  outline: 0px;
+}
+.filter_button {
+  margin-bottom: 25px;
+}
+.filter_button-style {
+  width: 215px;
+  height: 50px;
+  border: 2px solid #5f2eea;
+  background-color: white;
+  color: #5f2eea;
+  border-radius: 4px;
+  font-family: "Mulish", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+}
+.filter_button-style:hover {
+  color: #fff;
+  background-color: #5f2eea;
+}

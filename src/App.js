@@ -13,6 +13,7 @@ import ViewAll from "./pages/viewall/viewall";
 import Detail from "./pages/detail/detail";
 import Order from "./pages/order/order";
 import Payment from "./pages/payment/payment";
+import Profile from "./pages/Profile/profile";
 import ManageMovie from "./pages/managemovie/managemovie";
 import ManageSchedule from "./pages/manageschedule/manageschedule";
 import Dasboard from "./pages/dasboard/dasboard";
@@ -30,16 +31,13 @@ function App() {
           <Route path="basic/react" element={<BasicReact />} />
           <Route path="basic/login" element={<BasicLogin />} />
           <Route path="basic/home" element={<BasicHome />} />
-          {/* [1 & 2] */}
-          {/* <Route path="basic/detail" element={<BasicDetail />} /> */}
-          {/* [3] */}
           <Route path="basic/detail/:id" element={<BasicDetail />} />
           <Route path="basic/order" element={<BasicOrder />} />
           <Route path="login" element={<SignIn />} />
+          {/* <Route path="/" element={<Home />} /> */}
+          <Route path="home" element={<Home />} />
+          <Route path="unauthorized" element={<Unauthorized />} />
         </Route>
-
-        <Route path="unauthorized" element={<Unauthorized />} />
-        <Route path="home" element={<Home />} />
 
         <Route element={<PrivateRoute isAdmin={false} />}>
           <Route path="viewall" element={<ViewAll />} />
@@ -47,6 +45,7 @@ function App() {
           <Route path="order" element={<Order />} />
           <Route path="signup" element={<SignUp />} />
           <Route path="payment" element={<Payment />} />
+          <Route path="profile" element={<Profile />} />
         </Route>
 
         <Route element={<PrivateRoute isAdmin={true} />}>
