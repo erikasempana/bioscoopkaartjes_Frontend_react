@@ -1,53 +1,83 @@
 import React, { useState, useEffect } from "react";
-import "./viewall.css";
-import Navbar from "../../components/Navbar/navbar";
-import { Link, useNavigate } from "react-router-dom";
-import Pagination from "react-paginate";
-import Footer from "../../components/Footer/footer";
-import Rectangle2 from "../../assets/img/Rectangle2.png";
-import axios from "../../utils/axios";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllMovie } from "../../stores/action/movie";
-import MonthButton from "../../components/MonthButton/monthbutton";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "../../utils/axios";
+import "./viewall.css";
 
-function ViewAll() {
+import Rectangle2 from "../../assets/img/Rectangle2.png";
+
+import { getAllMovie } from "../../stores/action/movie";
+import Footer from "../../components/Footer/footer";
+import MonthButton from "../../components/MonthButton/monthbutton";
+import Navbar from "../../components/Navbar/navbar";
+import Pagination from "react-paginate";
+
+function ViewAll(props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const allMovie = useSelector((state) => state.getAllMovie.data);
 
-  const limit = 6;
+  const [items, setItems] = useState([
+    { label: "ASC", value: "ASC" },
+    { label: "DESC", value: "DESC" }
+  ]);
+  const [limit, setLimit] = useState(6);
+  const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
-  const [data, setData] = useState(allMovie);
-  console.log("allMovie", data);
-  // const [pageInfo, setPageInfo] = useState({});
-  useEffect(() => {
-    getdataMovie();
-  }, []);
+  const [sort, setSort] = useState("ASC");
+  const [sortBy, setSortBy] = useState("");
+  const [releaseDate, setReleaseDate] = useState("");
+  const [searchName, setSearchName] = useState("");
+  const [selectMovie, setSelectMovie] = useState("");
+  const [pageInfo, setPageInfo] = useState({});
 
-  const getdataMovie = async () => {
-    console.log("GET DATA MOVIE");
+  const getDataMovie = async () => {
     try {
-      // input
-      // console.log(limit);
-      // console.log(page);
-      // kalau log nya sudah selesai dan data sudah dapat di lihat, hapus lognya
-
-      // proses
-      // const resultMovie = await axios.get(`movie?page=${page}&limit=${limit}`);
-      const resultMovie = await dispatch(getAllMovie(page, limit));
-      // console.log(resultMovie);
-      // output
-      setData(resultMovie); //resultMovie ini bisa di cek dengan me-log resultMovie terlebih dahulu
-      // setPageInfo(resultMovie.data.pagination);
-      // navigate(`/detail/${id}`);
+      const resultMovie = await axios.get(
+        `movie/?limit=${limit}&page=${page}&sort=${sort}&sortBy=${sortBy}&searchRelease=${releaseDate}&searchName=${searchName}`
+      );
+      setData(resultMovie.data.data);
+      setPageInfo(resultMovie.data.pagination);
     } catch (error) {
       console.log(error.response);
-      // gunakan alert atau toas untuk nampilin messegenya
     }
   };
-  // log ini ambil diluar fungsi tempat datanya di set agar datanya bisa diambil
-  // console.log(data); //ini dari setData(resultMovie)
-  // console.log(pageInfo); //ini dari setPageInfo
+
+  const handlePagination = (data) => {
+    console.log(data.selected + 1);
+    setPage(data.selected + 1);
+  };
+
+  const handleClickDetail = (id) => {
+    console.log(id);
+    navigate(`/detail/${id}`);
+  };
+
+  const handleMonth = async (sortMonth) => {
+    try {
+      setReleaseDate(sortMonth);
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+
+  const handleSearch = (searchValue) => {
+    const searchInput = searchValue.toLowerCase();
+    setSearchName(searchInput);
+  };
+
+  const handleSort = (event) => {
+    setSortBy("name");
+    setSort(event.target.value);
+  };
+
+  useEffect(() => {
+    getDataMovie();
+  }, []);
+
+  useEffect(() => {
+    getDataMovie();
+  }, [page, releaseDate, searchName, sort]);
 
   return (
     <div className="viewall_container">
@@ -66,10 +96,13 @@ function ViewAll() {
               <div className="d-flex flex-row">
                 <div className="col-md text-end">
                   <form action="/action_page.php">
-                    <select name="sort" id="sort" value="Sort">
-                      <option value="">Sort</option>
-                      <option value="ASC">Ascending</option>
-                      <option value="DESC">Descending</option>
+                    <select onChange={handleSort} name="sort" id="sort" value={sort}>
+                      <option>Sort</option>
+                      {items.map((el) => (
+                        <option key={el} value={el.value}>
+                          {el.label}
+                        </option>
+                      ))}
                     </select>
                   </form>
                 </div>
@@ -81,6 +114,8 @@ function ViewAll() {
                       className="form-control viewall_input2"
                       placeholder="Search Movie Name ..."
                       aria-label="Search"
+                      name="search"
+                      onChange={(event) => handleSearch(event.target.value)}
                     />
                   </div>
                 </div>
@@ -90,7 +125,7 @@ function ViewAll() {
         </div>
 
         {/* AKHIR MAIN */}
-        <MonthButton />
+        <MonthButton sortMonth={handleMonth} />
 
         {/* Akhir Month */}
       </section>
@@ -98,61 +133,65 @@ function ViewAll() {
       <section id="viewall">
         <div className="container">
           <div className="row viewall_overflow-movie">
-            {allMovie.map((item) => (
-              <div key={item.id} className="col d-md-1 m-2 px-4 py-5 viewall_border-card">
-                <div className="card viewall-card m-auto" style={{ width: "16rem" }}>
-                  <img
-                    src={process.env.REACT_APP_CLOUDINARY_URL + item.image}
-                    className="card-img-top m-auto viewall-img"
-                    alt="..."
-                  />
-                  <div className="card-body row text-center align-items-end viewall-detail py-1">
-                    <div className="align-self-end py-1">
-                      <h5
-                        className="card-title pt-0 fs-5 fw-bolder"
-                        style={{ color: "rgba(20, 20, 43, 1)" }}
-                      >
-                        {item.name}
-                      </h5>
-                    </div>
-                    <div className="align-self-start pb-2">
-                      <p className="card-text" style={{ color: "#a0a3bd", fontSize: "15px" }}>
-                        {item.category}
-                      </p>
-                    </div>
-                    <div className="align-items-end pb-2">
-                      <button
-                        to="/detail"
-                        className="btn btn-outline-primary"
-                        style={{ width: "100%" }}
-                      >
-                        Detail
-                      </button>
+            {data[0] ? (
+              data.map((item) => (
+                <div key={item.id} className="col d-md-1 m-2 px-4 py-5 viewall_border-card">
+                  <div className="card viewall-card m-auto" style={{ width: "16rem" }}>
+                    <img
+                      src={process.env.REACT_APP_CLOUDINARY_URL + item.image}
+                      className="card-img-top m-auto viewall-img"
+                      alt="..."
+                    />
+                    <div className="card-body row text-center align-items-end viewall-detail py-1">
+                      <div className="align-self-end py-1">
+                        <h5
+                          className="card-title pt-0 fs-5 fw-bolder"
+                          style={{ color: "rgba(20, 20, 43, 1)" }}
+                        >
+                          {item.name}
+                        </h5>
+                      </div>
+                      <div className="align-self-start pb-2">
+                        <p className="card-text" style={{ color: "#a0a3bd", fontSize: "15px" }}>
+                          {item.category}
+                        </p>
+                      </div>
+                      <div className="align-items-end pb-2">
+                        <button
+                          to="/detail"
+                          onClick={() => handleClickDetail(item.id)}
+                          className="btn btn-outline-primary"
+                          style={{ width: "100%" }}
+                        >
+                          Detail
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))
+            ) : (
+              <h4 className="no_data">
+                <b>THERE IS NO MOVIE</b>
+              </h4>
+            )}
           </div>
         </div>
       </section>
 
-      <section id="pagination">
-        <div className="container text-center">
-          <button className="btn btn-outline-primary p-auto mx-2">
-            <Link to="#page1">1</Link>
-          </button>
-          <button className="btn btn-outline-primary p-auto mx-2">
-            <Link to="#page2">2</Link>
-          </button>
-          <button className="btn btn-outline-primary p-auto mx-2">
-            <Link to="#page3">3</Link>
-          </button>
-          <button className="btn btn-outline-primary p-auto mx-2">
-            <Link to="#page4">4</Link>
-          </button>
-        </div>
-      </section>
+      <Pagination
+        previousLabel={"<<"}
+        nextLabel={">>"}
+        breakLabel={"..."}
+        pageCount={pageInfo.totalPage}
+        onPageChange={handlePagination}
+        // marginPagesDisplayed={3}
+        // pageRangeDisplayed={4}
+        containerClassName={"pagination"}
+        subContainerClassName={"pages pagination"}
+        activeClassName={"active"}
+      />
+
       {/* AKHIR MAIN */}
 
       {/* FOOTER */}

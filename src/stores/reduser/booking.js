@@ -29,6 +29,29 @@ const booking = (state = initialState, action) => {
         data: {}
       };
     }
+    case "UPDATE_STATUS_BOOKING_PENDING": {
+      return {
+        ...state,
+        isLoading: true,
+        isError: false
+      };
+    }
+    case "UPDATE_STATUS_BOOKING_FULFILLED": {
+      console.log(action.payload);
+      return {
+        ...state,
+        isLoading: false,
+        data: { ...action.payload.data.data }
+      };
+    }
+    case "UPDATE_STATUS_BOOKING_REJECTED": {
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        data: {}
+      };
+    }
     default: {
       return state;
     }

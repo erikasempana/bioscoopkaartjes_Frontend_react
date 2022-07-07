@@ -17,10 +17,10 @@ function Member() {
                 type="email"
                 id="email"
                 name="email"
-                value="Type your email"
+                placeholder="Type your email"
                 className="d-lg input"
               />
-              <button type="button" value="Join Now" className="submit d-lg btn-outline-primary">
+              <button type="button" className="submit d-lg btn-outline-primary">
                 Join Now
               </button>
             </form>

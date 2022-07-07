@@ -4,3 +4,74 @@ body {
   font-family: "Mulish", sans-serif;
   background-color: #f5f6f8;
 }
+.history_wrapper {
+  margin-top: 30px;
+}
+.history_card {
+  width: 830px;
+  height: 250px;
+  border-radius: 8px;
+  background-color: #fff;
+  border: none;
+  margin-top: 35px;
+}
+.history_card-body {
+  padding: 40px 40px;
+}
+.history_detail-wrapper {
+  margin-bottom: 40px;
+}
+.history_date {
+  font-family: "Mulish", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #aaa;
+  margin: 0;
+}
+.history_movie-title {
+  font-family: "Mulish", sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: #000;
+  margin: 15px 0 0;
+}
+.history_premiere {
+  display: flex;
+  margin: 25px 0px 25px 120px;
+  object-fit: contain;
+  /* width: 182px; */
+  width: 132px;
+}
+.history_button {
+  align-self: center;
+}
+.button_tickets-status-active {
+  width: 196px;
+  height: 40px;
+  background-color: #00ba88;
+  border-radius: 4px;
+  font-family: "Mulish", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+}
+.button_tickets-status-used {
+  width: 196px;
+  height: 40px;
+  background-color: #6e7191;
+  border-radius: 4px;
+  font-family: "Mulish", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+}
+.info-detail {
+  font-family: "Mulish", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  color: #aaa;
+  text-align: end;
+  margin-top: 15px;
+}

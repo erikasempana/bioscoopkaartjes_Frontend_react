@@ -9,7 +9,6 @@ import Pagination from "react-paginate";
 import Navbar from "../../components/Navbar/navbar";
 import Footer from "../../components/Footer/footer";
 import axios from "../../utils/axios";
-import CurrencyFormat from "react-currency-format";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 dayjs.extend(customParseFormat);
@@ -84,6 +83,13 @@ function ManageSchedule() {
     console.log(data.selected + 1);
     setPage(data.selected + 1);
   };
+
+  function formatRupiah(money) {
+    return new Intl.NumberFormat(
+      "id-ID",
+      { style: "currency", currency: "IDR", minimumFractionDigits: 0 } // diletakkan dalam object
+    ).format(money);
+  }
 
   useEffect(() => {
     dataSchedule();
@@ -187,8 +193,6 @@ function ManageSchedule() {
                                 {item.location}
                               </option>
                             ))}
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
                           </select>
                         </div>
                         <div className="mb-3">
@@ -294,8 +298,6 @@ function ManageSchedule() {
                       </option>
                     ))
                   : movieId}
-                <option value="2">Two</option>
-                <option value="3">Three</option>
               </select>
             </div>
           </div>
@@ -346,16 +348,7 @@ function ManageSchedule() {
                       </div>
                       <div className="col-9 text-end">
                         <h5>
-                          <b>
-                            <CurrencyFormat
-                              value={item.price}
-                              displayType={"text"}
-                              thousandSeparator={"."}
-                              decimalSeparator={","}
-                              prefix={"Rp "}
-                              suffix={" /seat"}
-                            />
-                          </b>
+                          <b>{formatRupiah(item.price)} /seat</b>
                         </h5>
                       </div>
                     </div>

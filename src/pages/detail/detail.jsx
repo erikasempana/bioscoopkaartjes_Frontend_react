@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./detail.css";
 import Footer from "../../components/Footer/footer";
 import Navbar from "../../components/Navbar/navbar";
+import Default from "../../assets/img1/default.png";
 import Ebuid from "../../assets/img/ebuid.png";
 import Cineone from "../../assets/img/cineone21.png";
 import Hiflix from "../../assets/img/hiflix.png";
@@ -9,8 +10,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getMovieByIdMovie } from "../../stores/action/movie";
 import { getAllSchedule, dataOrder, getScheduleByMovieId } from "../../stores/action/schedule";
-import CurrencyFormat from "react-currency-format";
-import axios from "../../utils/axios";
+
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 dayjs.extend(customParseFormat);
@@ -24,7 +24,6 @@ export default function Detail() {
   const [dateBooking, setDateBooking] = useState("");
   const [dataDetailOrder, setDataDetailOrder] = useState({
     movieId: id
-    // dateBooking: new Date().toISOString().split("T")[0]
   });
   console.log("dataOrder", dataDetailOrder);
 
@@ -73,6 +72,13 @@ export default function Detail() {
     navigate("/order");
   };
 
+  function formatRupiah(money) {
+    return new Intl.NumberFormat(
+      "id-ID",
+      { style: "currency", currency: "IDR", minimumFractionDigits: 0 } // diletakkan dalam object
+    ).format(money);
+  }
+
   useEffect(() => {
     getDetailMovie();
     getScheduleMovie();
@@ -91,7 +97,11 @@ export default function Detail() {
               <div className="col-lg-3 mx-auto my-5 text-center">
                 <div className="card p-3 movie_detail-card">
                   <img
-                    src={process.env.REACT_APP_CLOUDINARY_URL + detailMovie.image}
+                    src={
+                      detailMovie.image
+                        ? process.env.REACT_APP_CLOUDINARY_URL + detailMovie.image
+                        : Default
+                    }
                     className="img-top"
                     alt="..."
                   />
@@ -171,7 +181,7 @@ export default function Detail() {
                   <form>
                     <div className="col dropdown moviedetail_set-box">
                       <select name="location" className="moviedetail_dropdown-location">
-                        <option value="">Select Location</option>
+                        <option>Select Location</option>
                         {scheduleMovie.map((el) => (
                           <option key={el.id} className="dropdown-item" value={el.location}>
                             {el.location}
@@ -245,16 +255,7 @@ export default function Detail() {
                         <div className="col-6 money text-end">
                           <h6 className="card-text" style={{ fontSize: "16px" }}>
                             <span>
-                              <b>
-                                <CurrencyFormat
-                                  value={item.price}
-                                  displayType={"text"}
-                                  thousandSeparator={"."}
-                                  decimalSeparator={","}
-                                  prefix={"Rp "}
-                                  suffix={"/seat"}
-                                />
-                              </b>
+                              <b>{formatRupiah(item.price)} /seat</b>
                             </span>
                           </h6>
                         </div>

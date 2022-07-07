@@ -6,6 +6,7 @@ body {
 }
 .profile_container {
   padding-top: 130px;
+  min-height: 1300px;
 }
 .info_card {
   background-color: #fff;
@@ -25,15 +26,13 @@ body {
   border-radius: 24px;
   border-color: #fff;
 }
-.navigation_card-body {
-  padding: 20px 35px;
-}
 .profile_img {
   width: 120px;
   height: 120px;
   border-radius: 120px;
   margin: auto;
   margin-top: 30px;
+  object-fit: cover;
 }
 .profile_name {
   text-align: center;
@@ -53,69 +52,17 @@ body {
   margin: 10px 0;
 }
 .navigation_button {
-  width: 150px;
   background: #fff;
-  padding: 0 0 20px;
   text-align: top;
-  margin-right: 30px;
   font-family: "Mulish", sans-serif;
   font-size: 18px;
   font-weight: 400;
   color: #aaa;
+  border: none;
 }
-.navigation_button:active,
-.navigation_button:hover,
-.navigation_button:focus {
-  border-bottom: 2px solid #5f2eea;
-  color: #14142b;
+.e {
+  border: none;
 }
-.detail-information_card {
-  margin-top: 30px;
-  background-color: #fff;
-  height: 368px;
-  border-radius: 24px;
-  border-color: #fff;
-}
-.detail-information_card-body {
-  padding: 35px;
-}
-.privacy_card {
-  margin-top: 30px;
-  background-color: #fff;
-  height: 247px;
-  border-radius: 24px;
-  border-color: #fff;
-}
-.privacy_card-body {
-  padding: 35px;
-}
-.detail_title {
-  font-family: "Mulish", sans-serif;
-  font-size: 16px;
-  font-weight: 400px;
-  color: #14142b;
-}
-.detail_label-input {
-  font-family: "Mulish", sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  color: #4e4b66;
-  margin-top: 20px;
-}
-.detail_input {
-  width: 100%;
-  height: 64px;
-  border: 1px solid #dedede;
-  background-color: #fcfdfe;
-  border-radius: 16px;
-  padding: 10px 20px;
-  margin-top: 5px;
-}
-.update_button {
-  width: 360px;
-  height: 56px;
-  margin: auto;
-  background-color: #5f2eea;
-  border-radius: 16px;
-  color: #fff;
+.navigation_button::after {
+  border: none;
 }

@@ -1,17 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import "./navbar.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import TickitzBrandTwo from "../../assets/img1/Tickitz2.png";
+import { isLogin } from "../../stores/action/auth";
+// component navbar
 import Admin from "./admin";
 import User from "./user";
-import { useSelector } from "react-redux";
-// component navbar
 import AfterLogin from "./afterlogin,";
 import BeforeLogin from "./beforelogin";
 
 function Navbar() {
-  const role = useSelector((state) => state.login.data.role);
-  const isLogin = useSelector((state) => state.setIsLogin.isLogin);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const role = useSelector((state) => state.user.role);
+  const login = useSelector((state) => state.setIsLogin.isLogin);
+
+  const handleLogout = () => {
+    localStorage.clear();
+    dispatch(isLogin(true));
+    navigate("/home");
+  };
 
   return (
     <>
@@ -59,11 +68,11 @@ function Navbar() {
             </form>
             {/* menu navbar */}
 
-            {/* {!isLogin === true ? <User /> :  */}
             {role === "admin" ? <Admin /> : <User />}
 
             {/* isLogin=false */}
-            {isLogin ? <BeforeLogin /> : <AfterLogin />}
+            {login === true ? <BeforeLogin /> : <AfterLogin />}
+
             {/* menu profile when burgermenu  */}
 
             <hr className="dropdown-divider" />
@@ -71,9 +80,12 @@ function Navbar() {
               Profil
             </Link>
             <hr className="dropdown-divider" />
-            <Link className="dropdown-item mb-3 mt-3 d-lg-none navbar_item-show" to="/home">
+            <button
+              className="dropdown-item mb-3 mt-3 d-lg-none navbar_item-show bg-white"
+              onClick={() => handleLogout()}
+            >
               Logout
-            </Link>
+            </button>
             <hr className="dropdown-divider" />
             <p
               className="dropdown-item mb-4 mt-4 d-lg-none navbar_item-show"

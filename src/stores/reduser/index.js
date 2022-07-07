@@ -12,6 +12,8 @@ import schedule from "./schedule";
 import dataOrder from "./dataOrder";
 import postMovie from "./postMovie";
 import booking from "./booking";
+import orderHistory from "./orderHistory";
+import bookingById from "./bookingById";
 // import pathnya yg di reducer
 //import (nama fungsi) from "./letak folder(namafile)"
 
@@ -26,5 +28,7 @@ export default combineReducers({
   schedule,
   dataOrder,
   postMovie,
-  booking
+  booking,
+  orderHistory,
+  bookingById
 });

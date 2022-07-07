@@ -14,6 +14,7 @@ import Detail from "./pages/detail/detail";
 import Order from "./pages/order/order";
 import Payment from "./pages/payment/payment";
 import Profile from "./pages/Profile/profile";
+import Tickets from "./pages/tickets/tickets";
 import ManageMovie from "./pages/managemovie/managemovie";
 import ManageSchedule from "./pages/manageschedule/manageschedule";
 import Dasboard from "./pages/dasboard/dasboard";
@@ -34,10 +35,11 @@ function App() {
           <Route path="basic/detail/:id" element={<BasicDetail />} />
           <Route path="basic/order" element={<BasicOrder />} />
           <Route path="login" element={<SignIn />} />
-          {/* <Route path="/" element={<Home />} /> */}
-          <Route path="home" element={<Home />} />
-          <Route path="unauthorized" element={<Unauthorized />} />
         </Route>
+
+        {/* <Route path="/" element={<Home />} /> */}
+        <Route path="home" element={<Home />} />
+        <Route path="unauthorized" element={<Unauthorized />} />
 
         <Route element={<PrivateRoute isAdmin={false} />}>
           <Route path="viewall" element={<ViewAll />} />
@@ -46,6 +48,7 @@ function App() {
           <Route path="signup" element={<SignUp />} />
           <Route path="payment" element={<Payment />} />
           <Route path="profile" element={<Profile />} />
+          <Route path="tickets/:id" element={<Tickets />} />
         </Route>
 
         <Route element={<PrivateRoute isAdmin={true} />}>

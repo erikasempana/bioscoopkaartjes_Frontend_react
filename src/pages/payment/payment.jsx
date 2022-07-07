@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import dayjs from "dayjs";
-import CurrencyFormat from "react-currency-format";
 import { postBooking } from "../../stores/action/booking";
 import { Link, useNavigate } from "react-router-dom";
 import "./payment.css";
@@ -76,6 +75,13 @@ function Payment() {
     }
   };
 
+  function formatRupiah(money) {
+    return new Intl.NumberFormat(
+      "id-ID",
+      { style: "currency", currency: "IDR", minimumFractionDigits: 0 } // diletakkan dalam object
+    ).format(money);
+  }
+
   return (
     <>
       <Navbar />
@@ -145,15 +151,7 @@ function Payment() {
                         </div>
                         <div className="col-8 text-end">
                           <h5>
-                            <b>
-                              <CurrencyFormat
-                                value={detailOrder.totalPayment}
-                                displayType={"text"}
-                                thousandSeparator={"."}
-                                decimalSeparator={","}
-                                prefix={"Rp "}
-                              />
-                            </b>
+                            <b>{formatRupiah(detailOrder.totalPayment)}</b>
                           </h5>
                         </div>
                       </div>

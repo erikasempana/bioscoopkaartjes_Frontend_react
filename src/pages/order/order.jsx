@@ -10,7 +10,6 @@ import Seat from "../../components/Seat/index";
 import { useSelector, useDispatch } from "react-redux";
 import { dataOrder, getScheduleById } from "../../stores/action/schedule";
 import dayjs from "dayjs";
-import CurrencyFormat from "react-currency-format";
 
 function Order() {
   const navigate = useNavigate();
@@ -70,6 +69,13 @@ function Order() {
   const handleChangeMovie = () => {
     navigate("/home");
   };
+
+  function formatRupiah(money) {
+    return new Intl.NumberFormat(
+      "id-ID",
+      { style: "currency", currency: "IDR", minimumFractionDigits: 0 } // diletakkan dalam object
+    ).format(money);
+  }
 
   useEffect(() => {
     handlePremiereName();
@@ -213,15 +219,7 @@ function Order() {
                           </div>
                           <div className="col-6 text-end">
                             <p className="fs-6">
-                              <b>
-                                <CurrencyFormat
-                                  value={detailOrder.price}
-                                  displayType={"text"}
-                                  thousandSeparator={"."}
-                                  decimalSeparator={","}
-                                  prefix={"Rp "}
-                                />
-                              </b>
+                              <b>{formatRupiah(detailOrder.price)}</b>
                             </p>
                           </div>
                         </div>
@@ -244,15 +242,7 @@ function Order() {
                           </div>
                           <div className="col-6 text-end">
                             <h4>
-                              <b>
-                                <CurrencyFormat
-                                  value={selectedSeat.length * detailOrder.price}
-                                  displayType={"text"}
-                                  thousandSeparator={"."}
-                                  decimalSeparator={","}
-                                  prefix={"Rp "}
-                                />
-                              </b>
+                              <b>{formatRupiah(selectedSeat.length * detailOrder.price)}</b>
                             </h4>
                           </div>
                         </div>

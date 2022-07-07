@@ -1,0 +1,133 @@
+@import url("https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;700;800;900&display=swap");
+
+body {
+  font-family: "Mulish", sans-serif;
+  /* background-color: #f5f6f8; */
+}
+.tickets_container {
+  padding-top: 140px;
+  display: flex;
+}
+.tickets_card {
+  width: 926px;
+  height: 590px;
+  border: none;
+  background-color: #fff;
+  margin: auto;
+  margin-bottom: 50px;
+}
+.tickets_card-body {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.tickets_title {
+  font-family: "Mulish", sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #14142b;
+  text-align: center;
+}
+.tickets-result_card {
+  width: 784px;
+  height: 77px;
+  border-top-right-radius: 16px;
+  border-top-left-radius: 16px;
+  background: #5f2eea;
+}
+.tickets-result_card-body {
+  padding: 15px 30px 15px 40px;
+}
+.tickets-result_brand-image {
+  width: 120px;
+  display: flex;
+}
+.tickets-result_Admit {
+  font-family: "Mulish", sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  margin: 10px 0;
+  text-align: center;
+}
+.tickets-result-content_card {
+  width: 784px;
+  height: 270px;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+}
+.tickets-result-content_card-body {
+  padding: 30px 22px 30px 40px;
+}
+.content_title {
+  font-family: "Mulish", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: #aaa;
+  margin-bottom: 5px;
+}
+.content_value {
+  font-family: "Mulish", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #14142b;
+  margin: 0;
+}
+.content_value-total {
+  font-family: "Mulish", sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #14142b;
+  margin: 0;
+}
+.content_detail-top {
+  margin-top: 25px;
+}
+.content_detail-bottom {
+  margin-top: 25px;
+}
+.content_barcode {
+  width: 176px;
+  height: 176px;
+}
+.content_barcode-used {
+  width: 176px;
+  height: 176px;
+  font-family: "Mulish", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #14142b;
+  line-height: 38px;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  background: #aaa;
+}
+.line-v {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-bottom: -365px;
+  margin-right: -365px;
+  z-index: 2;
+}
+.circleup {
+  width: 40px;
+  height: 40px;
+  border-radius: 40px;
+  background-color: #fff;
+  border-bottom: 1px solid #aaa;
+}
+.circlebottom {
+  width: 40px;
+  height: 40px;
+  border-radius: 40px;
+  background-color: #fff;
+  border-top: 1px solid #aaa;
+}
+.dash {
+  height: 310px;
+  border: 2px dashed #aaa;
+  align-self: center;
+}

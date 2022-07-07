@@ -11,16 +11,14 @@ function AfterLogin() {
   const navigate = useNavigate();
   const [isHide, setIsHide] = useState(false);
   const userData = useSelector((state) => state.login.data.id);
-  const token = useSelector((state) => state.login.data.token);
+  const token = localStorage.getItem("token");
   const userImage = useSelector((state) => state.user.data.image);
 
   const getProfile = async () => {
     try {
       await dispatch(getUserById(userData, token)); //by redux
-      // alert(result.action.payload.data.data.msg);
     } catch (error) {
       console.log(error.response);
-      // alert(error.response);
     }
   };
 
@@ -62,7 +60,8 @@ function AfterLogin() {
           // role="button"
           type="button"
           id="dropdownMenuLink"
-          data-bs-toggle="dropdown"
+          data-toggle="dropdown"
+          // data-bs-toggle="dropdown"
           aria-expanded="false"
         >
           <img
@@ -81,7 +80,10 @@ function AfterLogin() {
             </Link>
           </li>
           <li>
-            <button className="dropdown-item navbar-dropdown-profile-item" onClick={handleLogout()}>
+            <button
+              className="dropdown-item navbar-dropdown-profile-item"
+              onClick={() => handleLogout()}
+            >
               Logout
             </button>
           </li>

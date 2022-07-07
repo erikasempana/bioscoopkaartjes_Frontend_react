@@ -60,7 +60,6 @@ export default function Home() {
   };
 
   const handleDetailMovie = (id) => {
-    console.log("ika", id);
     navigate(`/detail/${id}`);
   };
 
@@ -100,7 +99,7 @@ export default function Home() {
                 </Link>
               </div>
               <div className="col text-end">
-                <Link to="/viewall" classname="p">
+                <Link to="/viewall" className="p">
                   view all
                 </Link>
               </div>
@@ -110,7 +109,9 @@ export default function Home() {
                 <div key={el.id} className="wrapper">
                   <div className="card nowshowing_movie-card" style={{ width: "16rem" }}>
                     <img
-                      src={process.env.REACT_APP_CLOUDINARY_URL + el.image}
+                      src={
+                        el.image ? process.env.REACT_APP_CLOUDINARY_URL + el.image : DefaultImage
+                      }
                       className="card-img-top nowshowing_movie-img"
                       alt="..."
                     />
@@ -185,7 +186,11 @@ export default function Home() {
                 <div key={item.id} className="pe-3 ">
                   <div className="card upcomingmovie-card" style={{ width: "16rem" }}>
                     <img
-                      src={process.env.REACT_APP_CLOUDINARY_URL + item.image}
+                      src={
+                        item.image
+                          ? process.env.REACT_APP_CLOUDINARY_URL + item.image
+                          : DefaultImage
+                      }
                       className="card-img-top upcomingmovie-img"
                       alt="image-movie"
                     />

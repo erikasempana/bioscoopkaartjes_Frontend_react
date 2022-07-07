@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login, isLogin } from "../../stores/action/auth";
 import TickitzBrandTwo from "../../assets/img1/Tickitz2.png";
+import TickitzBrandOne from "../../assets/img1/tickitz1.png";
 
 function SignIn() {
   const navigate = useNavigate();
@@ -22,22 +23,26 @@ function SignIn() {
   const handleSubmit = async (event) => {
     try {
       event.preventDefault();
+      if (form.email === "" || form.password === "") {
+        setIsError(true);
+        setMessage("Please fill your email/password ");
+      } else {
+        const resultLogin = await dispatch(login(form)); //by redux
+        dispatch(isLogin(false));
 
-      const resultLogin = await dispatch(login(form)); //by redux
-      // Output = suatu keadaan yang dapat diinfokan ke user bahwa proses sudah selesai
-      setIsError(false);
-      setMessage(resultLogin.action.payload.data.msg);
-      localStorage.setItem("token", resultLogin.action.payload.data.data.token);
-      localStorage.setItem("refreshToken", resultLogin.data.data.refreshToken);
-      localStorage.setItem("id", resultLogin.data.data.id);
-      localStorage.setItem("role", resultLogin.data.data.role);
-      dispatch(isLogin(false));
-      // localStorage.setItem("dataUser", JSON.stringify(resultUser[0])); //ini LocalStorage
-      navigate("/home");
+        localStorage.setItem("token", resultLogin.action.payload.data.data.token);
+        localStorage.setItem("refreshToken", resultLogin.action.payload.data.data.refreshToken);
+        localStorage.setItem("id", resultLogin.action.payload.data.data.id);
+        localStorage.setItem("role", resultLogin.action.payload.data.data.role);
+
+        // Output = suatu keadaan yang dapat diinfokan ke user bahwa proses sudah selesai
+        setIsError(false);
+        setMessage(resultLogin.action.payload.data.msg);
+        navigate("/home");
+      }
     } catch (error) {
-      console.log(error.response);
       setIsError(true);
-      setMessage(error.response.data.msg);
+      setMessage(error.response);
       setForm({
         email: "",
         password: ""

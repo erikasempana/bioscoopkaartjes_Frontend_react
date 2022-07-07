@@ -1,7 +1,7 @@
 import React from "react";
 import "./monthbutton.css";
 
-function MonthButton() {
+function MonthButton(props) {
   const monthList = [
     { id: 1, month: "January" },
     { id: 2, month: "February" },
@@ -17,14 +17,8 @@ function MonthButton() {
     { id: 12, month: "December" }
   ];
 
-  const handleMonth = async (id) => {
-    try {
-      const resultUpComingMovie = await axios.get(`movie/?searchRelease=${id}`);
-      console.log("upcomingmovie", resultUpComingMovie.data.data);
-      setUpComingMovie(resultUpComingMovie.data.data);
-    } catch (error) {
-      console.log(error.response);
-    }
+  const handlePressMonth = (item) => {
+    props.sortMonth(item.id);
   };
 
   return (
@@ -33,42 +27,16 @@ function MonthButton() {
         <div className="container">
           <div className="row home_month-wrap overflow-auto mt-5">
             <div className="col home_month">
-              <button type="button" className="btn btn-outline-primary btn-white">
-                september
-              </button>
-              <button type="button" className="btn btn-outline-primary btn-white">
-                Oktober
-              </button>
-              <button type="button" className="btn btn-outline-primary btn-white">
-                November
-              </button>
-              <button type="button" className="btn btn-outline-primary btn-white">
-                Desember
-              </button>
-              <button type="button" className="btn btn-outline-primary btn-white">
-                January
-              </button>
-              <button type="button" className="btn btn-outline-primary btn-white">
-                February
-              </button>
-              <button type="button" className="btn btn-outline-primary btn-white">
-                March
-              </button>
-              <button type="button" className="btn btn-outline-primary btn-white">
-                April
-              </button>
-              <button type="button" className="btn btn-outline-primary btn-white">
-                Mey
-              </button>
-              <button type="button" className="btn btn-outline-primary btn-white">
-                June
-              </button>
-              <button type="button" className="btn btn-outline-primary btn-white">
-                July
-              </button>
-              <button type="button" className="btn btn-outline-primary btn-white">
-                August
-              </button>
+              {monthList.map((item) => (
+                <button
+                  key={item.id}
+                  type="button"
+                  className="btn btn-outline-primary btn-white"
+                  onClick={() => handlePressMonth(item)}
+                >
+                  {item.month}
+                </button>
+              ))}
             </div>
           </div>
         </div>

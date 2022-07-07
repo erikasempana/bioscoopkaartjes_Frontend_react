@@ -33,6 +33,75 @@ const user = (state = initialState, action) => {
         msg: action.payload.response.data.msg
       };
     }
+    case "UPDATE_PROFILE_PENDING": {
+      return {
+        ...state,
+        isLoading: true,
+        isError: false
+      };
+    }
+    case "UPDATE_PROFILE_FULFILLED": {
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        msg: action.payload.data.msg
+      };
+    }
+    case "UPDATE_PROFILE_REJECTED": {
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        msg: action.payload.data.msg
+      };
+    }
+    case "UPDATE_IMAGE_PENDING": {
+      return {
+        ...state,
+        isLoading: true,
+        isError: false
+      };
+    }
+    case "UPDATE_IMAGE_FULFILLED": {
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        msg: action.payload.data.msg
+      };
+    }
+    case "UPDATE_IMAGE_REJECTED": {
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        msg: action.payload.response.data.msg
+      };
+    }
+    case "UPDATE_PASSWORD_PENDING": {
+      return {
+        ...state,
+        isLoading: true,
+        isError: false
+      };
+    }
+    case "UPDATE_PASSWORD_FULFILLED": {
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        msg: action.payload.data.msg
+      };
+    }
+    case "UPDATE_PASSWORD_REJECTED": {
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        msg: action.payload.response.data.msg
+      };
+    }
     default: {
       return state;
     }
