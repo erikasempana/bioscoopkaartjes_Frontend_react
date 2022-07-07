@@ -42,7 +42,7 @@ function SignIn() {
       }
     } catch (error) {
       setIsError(true);
-      setMessage(error.response);
+      setMessage(error.response.data.msg);
       setForm({
         email: "",
         password: ""

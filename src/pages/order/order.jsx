@@ -21,8 +21,6 @@ function Order() {
   const detailOrder = useSelector((state) => state.dataOrder.dataOrder);
   const movieById = useSelector((state) => state.getMovieByIdMovie.data);
   const userId = useSelector((state) => state.user.data.id);
-  const premiereName = useSelector((state) => state.schedule.data[0].premiere);
-  console.log("detailOrder", detailOrder);
 
   const handlePremiereName = async () => {
     try {
@@ -76,10 +74,6 @@ function Order() {
       { style: "currency", currency: "IDR", minimumFractionDigits: 0 } // diletakkan dalam object
     ).format(money);
   }
-
-  useEffect(() => {
-    handlePremiereName();
-  }, []);
 
   return (
     <>
@@ -178,18 +172,18 @@ function Order() {
                         <img
                           className="mx-auto d-block premiere-img "
                           src={
-                            premiereName === "Hiflix"
+                            detailOrder.premiere === "Hiflix"
                               ? Hiflix
-                              : premiere === "cineOne21"
+                              : detailOrder.premiere === "cineOne21"
                               ? Cineone
-                              : premiereName === "Ebu.id"
+                              : detailOrder.premiere === "Ebu.id"
                               ? Ebuid
                               : ""
                           }
                           alt=""
                         />
                         <h4 className="card-title text-center fw-bolder premiere-name">
-                          {premiereName} Cinema
+                          {detailOrder.premiere} Cinema
                         </h4>
                         <div className="row">
                           <div className="col-6">

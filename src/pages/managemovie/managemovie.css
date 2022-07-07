@@ -35,6 +35,13 @@ body {
   color: #5f2eea;
 }
 
+.manage_image {
+  font-size: 12px;
+  width: 200px;
+  text-overflow: ellipsis;
+  margin-left: 3px;
+}
+
 .manage_image-card {
   display: grid;
   place-items: center;
@@ -169,8 +176,16 @@ body {
   height: 340px;
 }
 
+.card-title {
+  height: 30px;
+}
+.card-text {
+  height: 30px;
+}
+
 .manage_viewall-card {
   width: 16rem;
+  height: 530px;
 }
 
 .manage_viewall_border-card {

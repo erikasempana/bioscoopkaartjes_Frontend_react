@@ -77,6 +77,56 @@ const schedule = (state = initialState, action) => {
         data
       };
     }
+    case "UPDATE_SCHEDULE_PENDING": {
+      console.log(action.payload);
+      return {
+        ...state,
+        isLoading: true,
+        isError: false
+      };
+    }
+    case "UPDATE_SCHEDULE_FULFILLED": {
+      console.log(action.payload);
+      return {
+        ...state,
+        isLoading: false,
+        data: action.payload.data.data,
+        msg: action.payload.data.msg
+      };
+    }
+    case "UPDATE_SCHEDULE_REJECTED": {
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        data,
+        msg: action.payload.data.msg
+      };
+    }
+    case "DELETE_SCHEDULE_PENDING": {
+      console.log(action.payload);
+      return {
+        ...state,
+        isLoading: true,
+        isError: false
+      };
+    }
+    case "DELETE_SCHEDULE_FULFILLED": {
+      console.log(action.payload);
+      return {
+        ...state,
+        isLoading: false,
+        msg: action.payload.data.msg
+      };
+    }
+    case "DELETE_SCHEDULE_REJECTED": {
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        msg: action.payload.data.msg
+      };
+    }
     default: {
       return state;
     }

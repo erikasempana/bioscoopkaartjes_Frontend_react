@@ -13,7 +13,7 @@ import BeforeLogin from "./beforelogin";
 function Navbar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const role = useSelector((state) => state.user.role);
+  const role = useSelector((state) => state.user.data.role);
   const login = useSelector((state) => state.setIsLogin.isLogin);
 
   const handleLogout = () => {

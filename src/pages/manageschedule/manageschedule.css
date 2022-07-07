@@ -50,6 +50,12 @@ body {
   display: grid;
   place-items: center;
 }
+.manageschedule_image {
+  font-size: 12px;
+  width: 200px;
+  margin-left: 3px;
+  text-overflow: ellipsis;
+}
 
 .manageschedule_image-movie {
   width: 200px;
@@ -102,11 +108,25 @@ body {
   align-content: space-between;
 }
 
-.manage_time button {
-  width: 40px;
+.manageschedule_input-new-time__hide {
+  display: none;
+}
+
+.manageschedule_input-new-time {
+  width: 100px;
   height: 40px;
+  padding: 5px;
+  font-size: 14px;
+  font-weight: 600;
+  margin-left: 5px;
+  font-family: "Mulish", sans-serif;
+  outline: none;
+  border: none;
   text-align: center;
-  border-radius: 10px;
+}
+.manageschedule_input-new-time:active {
+  border: none;
+  outline: none;
 }
 
 .time_wrapper {
@@ -196,6 +216,11 @@ body {
   border-radius: 10px;
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
   width: auto;
+}
+
+.img_premiere {
+  width: 130px;
+  object-fit: contain;
 }
 
 .manageschedule_time-wrapper {

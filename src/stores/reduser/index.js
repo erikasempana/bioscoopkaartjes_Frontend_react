@@ -5,7 +5,6 @@ import { combineReducers } from "redux";
 import user from "./user";
 import login from "./login";
 import getAllMovie from "./getAllMovie";
-// import postMovie from "./postMovie";
 import setIsLogin from "./isLogin";
 import getMovieByIdMovie from "./getMovieByIdMovie";
 import schedule from "./schedule";
@@ -13,7 +12,8 @@ import dataOrder from "./dataOrder";
 import postMovie from "./postMovie";
 import booking from "./booking";
 import orderHistory from "./orderHistory";
-import bookingById from "./bookingById";
+import boookingById from "./bookingById";
+import deleteMovie from "./deleteMovie.js";
 // import pathnya yg di reducer
 //import (nama fungsi) from "./letak folder(namafile)"
 
@@ -30,5 +30,6 @@ export default combineReducers({
   postMovie,
   booking,
   orderHistory,
-  bookingById
+  boookingById,
+  deleteMovie
 });

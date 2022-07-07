@@ -29,6 +29,7 @@ const getAllMovie = (state = initialState, action) => {
         data: []
       };
     }
+
     default: {
       return state;
     }

@@ -1,38 +1,39 @@
 const initialState = {
   isLoading: false,
   isError: false,
-  data: {}
+  msg: ""
 };
 
-const postMovie = (state = initialState, action) => {
+const deleteMovie = (state = initialState, action) => {
   switch (action.type) {
-    case "POST_MOVIE_PENDING": {
+    case "DELETE_MOVIE_PENDING": {
       return {
         ...state,
         isLoading: true,
         isError: false
       };
     }
-    case "POST_MOVIE_FULFILLED": {
+    case "DELETE_MOVIE_FULFILLED": {
       console.log(action.payload);
       return {
         ...state,
         isLoading: false,
-        data: { ...action.payload.data.data }
+        msg: action.payload.data.msg
       };
     }
-    case "POST_MOVIE_REJECTED": {
+    case "DELETE_MOVIE_REJECTED": {
       return {
         ...state,
         isLoading: false,
         isError: true,
-        data: {}
+        msg: action.payload.response.data.msg
       };
     }
+
     default: {
       return state;
     }
   }
 };
 
-export default postMovie;
+export default deleteMovie;

@@ -238,7 +238,11 @@ export default function Detail() {
                           <button
                             key={itemTime}
                             onClick={() =>
-                              changeDataBooking({ timeBooking: itemTime, scheduleId: item.id })
+                              changeDataBooking({
+                                timeBooking: itemTime,
+                                scheduleId: item.id,
+                                premiere: item.premiere
+                              })
                             }
                             className="col-3 mb-3 btn btn-white  time"
                           >

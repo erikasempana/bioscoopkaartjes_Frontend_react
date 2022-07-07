@@ -1,17 +1,46 @@
-import React, { useState } from "react";
-import Footer from "../../components/Footer/footer";
-import Navbar from "../../components/Navbar/navbar";
-import "./managemovie.css";
-import DefaultImage from "../../assets/img1/default.png";
-import SpidermanImage from "../../assets/img1/spiderman.png";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { postMovie, updateMovie, getAllMovie } from "../../stores/action/movie";
+import {
+  postMovie,
+  updateMovie,
+  getAllMovie,
+  getMovieByIdMovie,
+  deleteMovie
+} from "../../stores/action/movie";
+import Pagination from "react-paginate";
+import axios from "../../utils/axios";
+import "./managemovie.css";
+
+import dayjs from "dayjs";
+import customParseFormat from "dayjs/plugin/customParseFormat";
+dayjs.extend(customParseFormat);
+
+import Navbar from "../../components/Navbar/navbar";
+import Footer from "../../components/Footer/footer";
+
+import DefaultImage from "../../assets/img1/default.png";
+import SpidermanImage from "../../assets/img1/spiderman.png";
 
 function ManageMovie() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const [items] = useState([
+    { label: "ASC", value: "ASC" },
+    { label: "DESC", value: "DESC" }
+  ]);
+  const [limit] = useState(6);
+  const [data, setData] = useState([]);
+  const [page, setPage] = useState(1);
+  const [sort, setSort] = useState("ASC");
+  const [sortBy, setSortBy] = useState("");
+  const [releaseDate, setReleaseDate] = useState("");
+  const [searchName, setSearchName] = useState("");
+  const [pageInfo, setPageInfo] = useState({});
+  const [image, setImage] = useState(null);
+  const [isUpdate, setIsUpdate] = useState(false);
+  const [idMovieUpdate, setIdMovieUpdate] = useState("");
   const [form, setForm] = useState({
     name: "",
     category: "",
@@ -23,9 +52,33 @@ function ManageMovie() {
     synopsis: "",
     image: ""
   });
-  const [idMovie, setIdMovie] = useState("");
-  const [image, setImage] = useState(null);
-  const [isUpdate, setIsUpdate] = useState(false);
+
+  const getAllDataMovie = async () => {
+    try {
+      const resultMovie = await axios.get(
+        `movie/?limit=${limit}&page=${page}&sort=${sort}&sortBy=${sortBy}&searchRelease=${releaseDate}&searchName=${searchName}`
+      );
+      setData(resultMovie.data.data);
+      setPageInfo(resultMovie.data.pagination);
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+
+  const handlePagination = (data) => {
+    console.log(data.selected + 1);
+    setPage(data.selected + 1);
+  };
+
+  const handleSearch = (searchValue) => {
+    const searchInput = searchValue.toLowerCase();
+    setSearchName(searchInput);
+  };
+
+  const handleSort = (event) => {
+    setSortBy("name");
+    setSort(event.target.value);
+  };
 
   const handleChangeForm = (event) => {
     const { name, value, files } = event.target;
@@ -37,16 +90,17 @@ function ManageMovie() {
     }
   };
 
-  const handleSubmit = async (event) => {
+  // NEW MOVIE
+
+  const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("form yukss", form);
     const body = {
       name: form.name,
       category: form.category,
       director: form.director,
       casts: form.casts,
       releaseDate: form.releaseDate,
-      duration: form.duration_hours + "h" + form.duration_minutes + "m",
+      duration: form.duration,
       synopsis: form.synopsis,
       image: form.image
     };
@@ -56,46 +110,90 @@ function ManageMovie() {
     }
     // console.log(postMovie(formData));
     dispatch(postMovie(formData));
-    // setImage(null);
+    getAllDataMovie();
+    setImage(null);
+    handleResetForm();
   };
 
   // NEW UPDATE
-  const allMovie = useSelector((state) => state.getAllMovie.data);
-  console.log("movie", allMovie);
-
-  const setUpdate = (data) => {
-    const { id, name, category, synopsis, image } = data;
-    setForm({
-      ...form,
-      name,
-      category,
-      synopsis,
-      image
-    });
-
-    setIdMovie(id);
-    setIsUpdate(true); //update data lama
+  const handleClickUpdate = async (data) => {
+    try {
+      console.log("data", data);
+      setForm({
+        ...form,
+        name: data.name,
+        category: data.category,
+        director: data.director,
+        casts: data.casts,
+        releaseDate: data.releaseDate.split("T")[0],
+        duration: data.duration,
+        synopsis: data.synopsis,
+        image: process.env.REACT_APP_CLOUDINARY_URL + data.image
+      });
+      console.log(data.releaseDate);
+      dispatch(getMovieByIdMovie(data.id));
+      setIsUpdate(true);
+      setIdMovieUpdate(data.id);
+    } catch (error) {
+      console.log(error.response);
+    }
   };
 
-  const handleUpdate = (e) => {
-    e.preventDefault();
-    console.log(form);
-    console.log(idMovie);
+  const HandleUpdateDataMovie = (event) => {
+    event.preventDefault();
+    const id = idMovieUpdate;
+    const body = {
+      name: form.name,
+      category: form.category,
+      director: form.director,
+      casts: form.casts,
+      releaseDate: form.releaseDate,
+      duration: form.duration,
+      synopsis: form.synopsis,
+      image: form.image
+    };
     const formData = new FormData();
-    for (const data in form) {
-      formData.append(data.form[data]);
+    for (const data in body) {
+      formData.append(data, body[data]);
     }
-    // formData.append("name", form.name)
-    // axios.post("...", formData);
-
-    dispatch(updateMovie(idMovie, formData));
-    getAllMovie(); //supaya datanya lgsg terupdate di getdatamovie (home)
-    setIdMovie();
+    dispatch(updateMovie(id, formData));
+    getAllDataMovie();
     setIsUpdate(false);
     setImage(null);
+    handleResetForm();
   };
 
+  const handleResetForm = () => {
+    setForm({
+      name: "",
+      category: "",
+      director: "",
+      casts: "",
+      releaseDate: "",
+      duration_hours: "",
+      duration_minutes: "",
+      synopsis: "",
+      image: ""
+    });
+  };
   // END OF NEW UPDATE
+
+  // DELETE MOVIE
+  const handleDeleteMovie = async (id) => {
+    try {
+      await dispatch(deleteMovie(id));
+      getAllDataMovie();
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+  useEffect(() => {
+    getAllDataMovie();
+  }, []);
+
+  useEffect(() => {
+    getAllDataMovie();
+  }, [page, searchName, sort]);
 
   return (
     <>
@@ -110,24 +208,22 @@ function ManageMovie() {
             <div className="col">
               <div className="card p-4">
                 <div className="card-body">
-                  <form onSubmit={isUpdate ? handleUpdate : handleSubmit}>
+                  <form onSubmit={isUpdate === true ? HandleUpdateDataMovie : handleSubmit}>
                     <div className="row">
-                      <div className="col-lg-4 manage_image-card m-auto">
-                        <div className="card" style={{ width: "fit-content" }}>
-                          <div className="card-body m-auto manage_image">
+                      <div className="col-lg-3 manage_image-card m-auto">
+                        <div className="card" style={{ width: "240px" }}>
+                          <div className="card-body manage_image">
+                            <img
+                              src={image ? image : form.image ? form.image : DefaultImage}
+                              alt="Image Movie Preview"
+                              className="manage_image-movie"
+                            />
+
                             <input
                               type="file"
                               name="image"
                               onChange={(event) => handleChangeForm(event)}
                             />
-                            {image && (
-                              <img
-                                src={image}
-                                alt="Image Movie Preview"
-                                className="manage_image-movie"
-                              />
-                            )}
-                            {/* <img className="manage_image-movie" src={SpidermanImage} alt="" /> */}
                           </div>
                         </div>
                       </div>
@@ -208,29 +304,15 @@ function ManageMovie() {
                           <div className="row">
                             <div className="col-6">
                               <label htmlFor="duration-hour" className="form-label">
-                                Duration Hour
+                                Duration
                               </label>
                               <input
                                 type="text"
                                 className="form-control"
-                                id="duration_hours"
-                                placeholder="hour..."
+                                id="duration"
+                                placeholder="00h 00m"
                                 value={form.duration}
-                                name="duration_hours"
-                                onChange={handleChangeForm}
-                              />
-                            </div>
-                            <div className="col-6">
-                              <label htmlFor="duration-minute" className="form-label">
-                                Duration Minute
-                              </label>
-                              <input
-                                type="text"
-                                className="form-control"
-                                id="duration_minutes"
-                                placeholder="minute..."
-                                value={form.duration}
-                                name="duration_minutes"
+                                name="duration"
                                 onChange={handleChangeForm}
                               />
                             </div>
@@ -292,10 +374,13 @@ function ManageMovie() {
               <div className="d-flex flex-row">
                 <div className="col-lg text-end datamovie_sort">
                   <form>
-                    <select name="sort" id="sort" value="Sort">
-                      <option value="">Sort</option>
-                      <option value="ASC">Ascending</option>
-                      <option value="DESC">Descending</option>
+                    <select onChange={handleSort} name="sort" id="sort" value={sort}>
+                      <option selected>Sort</option>
+                      {items.map((el) => (
+                        <option key={el} value={el.value}>
+                          {el.label}
+                        </option>
+                      ))}
                     </select>
                   </form>
                 </div>
@@ -307,6 +392,8 @@ function ManageMovie() {
                       className="form-control manage_viewall_input"
                       placeholder="Search Movie Name ..."
                       aria-label="Search"
+                      name="search"
+                      onChange={(event) => handleSearch(event.target.value)}
                     />
                   </div>
                 </div>
@@ -320,85 +407,85 @@ function ManageMovie() {
         <div className="container">
           <div className="card bg-white manage_viewall-wrap">
             <div className="row manage_viewall_overflow-movie">
-              {allMovie.map((item) => (
-                <div key={item.id} className="col d-lg-3 d-sm-6 d-md-3 manage_viewall_border-card ">
-                  <div className="card manage_viewall-card">
-                    <img
-                      src={process.env.REACT_APP_CLOUDINARY_URL + item.image}
-                      className="card-img-top manage_viewall-img m-auto"
-                      alt="..."
-                    />
-                    <div className="card-body row text-center align-items-end manage_viewall-detail py-1">
-                      <div className="align-self-end py-1">
-                        <h5
-                          className="card-title pt-0 fs-5 fw-bolder"
-                          style={{ color: "rgba(20, 20, 43, 1)" }}
-                        >
-                          {item.name}
-                        </h5>
-                      </div>
-                      <div className="align-self-start pb-2">
-                        <p className="card-text" style={{ color: "#a0a3bd", fontSize: "15px" }}>
-                          {item.category}
-                        </p>
-                      </div>
-                      <div className="align-items-end pb-2">
-                        <button
-                          className="btn btn-outline-primary"
-                          style={{
-                            width: "100%",
-                            border: "2px solid rgba(95, 46, 234, 1)",
-                            color: "rgba(95, 46, 234, 1)"
-                          }}
-                          onClick={setUpdate}
-                        >
-                          Update
-                        </button>
-                        <div className="align-items-end pt-2 pb-2">
+              {data[0] ? (
+                data.map((elemen, index) => (
+                  <div key={index} className="col d-lg-3 d-sm-6 d-md-3 manage_viewall_border-card ">
+                    <div className="card manage_viewall-card">
+                      <img
+                        src={process.env.REACT_APP_CLOUDINARY_URL + elemen.image}
+                        className="card-img-top manage_viewall-img m-auto"
+                        alt="..."
+                      />
+                      <div className="card-body row text-center align-items-end manage_viewall-detail py-1">
+                        <div className="align-self-end py-1">
+                          <h5
+                            className="card-title pt-2 fs-5 fw-bolder text-truncate"
+                            style={{ color: "rgba(20, 20, 43, 1)" }}
+                          >
+                            {elemen.name}
+                          </h5>
+                        </div>
+                        <div className="align-self-start pb-2">
+                          <p
+                            className="card-text text-truncate"
+                            style={{ color: "#a0a3bd", fontSize: "15px" }}
+                          >
+                            {elemen.category}
+                          </p>
+                        </div>
+                        <div className="align-items-end pb-2">
                           <button
-                            className="btn btn-outline-danger"
+                            className="btn btn-outline-primary"
                             style={{
                               width: "100%",
-                              border: "2px solid red",
-                              color: "red"
+                              border: "2px solid rgba(95, 46, 234, 1)",
+                              color: "rgba(95, 46, 234, 1)"
                             }}
+                            onClick={() => handleClickUpdate(elemen)}
                           >
-                            Reset
+                            Update
                           </button>
+                          <div className="align-items-end pt-2 pb-2">
+                            <button
+                              className="btn btn-outline-danger"
+                              style={{
+                                width: "100%",
+                                border: "2px solid red",
+                                color: "red"
+                              }}
+                              onClick={() => handleDeleteMovie(elemen.id)}
+                            >
+                              Delete
+                            </button>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))
+              ) : (
+                <h4 className="no_data">
+                  <b>THERE IS NO MOVIE</b>
+                </h4>
+              )}
             </div>
           </div>
         </div>
       </section>
 
       {/* manage_viewall pagination */}
-      <section id="pagination">
-        <div className="container">
-          <div className="row">
-            <nav aria-label="Page navigation example">
-              <ul className="pagination justify-content-center">
-                <li className="page-item px-1">
-                  <button className="page-link btn-outline-primary">1</button>
-                </li>
-                <li className="page-item px-1">
-                  <button className="page-link btn-outline-primary">2</button>
-                </li>
-                <li className="page-item px-1">
-                  <button className="page-link btn-outline-primary">3</button>
-                </li>
-                <li className="page-item px-1">
-                  <button className="page-link btn-outline-primary">4</button>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </section>
+      <Pagination
+        previousLabel={"<<"}
+        nextLabel={">>"}
+        breakLabel={"..."}
+        pageCount={pageInfo.totalPage}
+        onPageChange={handlePagination}
+        marginPagesDisplayed={3}
+        pageRangeDisplayed={4}
+        containerClassName={"pagination"}
+        subContainerClassName={"pages pagination"}
+        activeClassName={"active"}
+      />
       {/* end of manage_viewall pagination */}
       <Footer />
     </>

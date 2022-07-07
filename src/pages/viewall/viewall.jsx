@@ -13,15 +13,14 @@ import Navbar from "../../components/Navbar/navbar";
 import Pagination from "react-paginate";
 
 function ViewAll(props) {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const allMovie = useSelector((state) => state.getAllMovie.data);
 
-  const [items, setItems] = useState([
+  const [items] = useState([
     { label: "ASC", value: "ASC" },
     { label: "DESC", value: "DESC" }
   ]);
-  const [limit, setLimit] = useState(6);
+  const [limit] = useState(6);
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
   const [sort, setSort] = useState("ASC");
