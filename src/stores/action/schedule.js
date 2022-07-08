@@ -18,16 +18,22 @@ export const getScheduleById = (id) => {
     payload: axios.get(`schedule/${id}`)
   };
 };
+export const createSchedule = (body) => {
+  return {
+    type: "CREATE_SCHEDULE",
+    payload: axios.post("schedule/", body)
+  };
+};
 export const deleteSchedule = (id) => {
   return {
     type: "DELETE_SCHEDULE",
     payload: axios.delete(`schedule/${id}`)
   };
 };
-export const updateSchedule = (id) => {
+export const updateSchedule = (id, body) => {
   return {
     type: "UPDATE_SCHEDULE",
-    payload: axios.delete(`schedule/${id}`)
+    payload: axios.patch(`schedule/${id}`, body)
   };
 };
 

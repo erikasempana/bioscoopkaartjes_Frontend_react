@@ -127,6 +127,30 @@ const schedule = (state = initialState, action) => {
         msg: action.payload.data.msg
       };
     }
+    case "CREATE_SCHEDULE_PENDING": {
+      console.log(action.payload);
+      return {
+        ...state,
+        isLoading: true,
+        isError: false
+      };
+    }
+    case "CREATE_SCHEDULE_FULFILLED": {
+      console.log(action.payload);
+      return {
+        ...state,
+        isLoading: false,
+        msg: action.payload.msg
+      };
+    }
+    case "CREATE_SCHEDULE_REJECTED": {
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        msg: action.payload.msg
+      };
+    }
     default: {
       return state;
     }

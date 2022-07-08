@@ -15,6 +15,7 @@ import Navbar from "../../components/Navbar/navbar";
 import Footer from "../../components/Footer/footer";
 
 import { getAllMovie, getMovieByIdMovie } from "../../stores/action/movie";
+import { createSchedule, deleteSchedule, updateSchedule } from "../../stores/action/schedule";
 
 function ManageSchedule() {
   const dispatch = useDispatch();
@@ -44,25 +45,23 @@ function ManageSchedule() {
   const [movie, setMovie] = useState({});
   const [allSchedule, setAllSchedule] = useState([]);
   const [pageInfo, setPageInfo] = useState({});
-  const [form, setForm] = useState({
-    movieId: "",
-    premiere: "",
-    price: "",
-    location: "",
-    dateStart: "",
-    dateEnd: "",
-    time: ""
-  });
+
   // update
   const [hide, setHide] = useState(true);
   const [isUpdate, setIsUpdate] = useState(false);
   const [newMovieId, setNewMovieId] = useState("");
-  const [ticketPrice, setTicketPrice] = useState("");
+  const [formPrice, setFormPrice] = useState({ price: "" });
   const [selectedPremiere, setSelectedPremiere] = useState("");
   const [updateLocation, setUpdateLocation] = useState("");
-  const [dateStart, setDateStart] = useState("");
-  const [dateEnd, setDateEnd] = useState("");
-  const [formTime, setFormTime] = useState({ time: "" });
+  const [formDate, setFormDate] = useState({
+    dateStart: "",
+    dateEnd: ""
+  });
+  const [formTime, setFormTime] = useState({
+    time: []
+  });
+  const [dataUpdatingSchedule, setDataUpdatingSchedule] = useState();
+  const [dataMovieUpdate, setDataMovieUpdate] = useState();
 
   const dataSchedule = async () => {
     try {
@@ -99,7 +98,7 @@ function ManageSchedule() {
   // Filter
   const handleSort = (event) => {
     setSortBy("premiere");
-    console.log(event.target.value);
+
     setSort(event.target.value);
   };
 
@@ -112,31 +111,57 @@ function ManageSchedule() {
   };
 
   const handlePagination = (data) => {
-    console.log(data.selected + 1);
+    // console.log(data.selected + 1);
     setPage(data.selected + 1);
   };
 
   //SUBMIT NEW DATA
-  const handleChangeForm = (event) => {
-    setForm({ ...form, [event.target.name]: event.target.value });
-  };
 
   const handleSubmit = (event) => {
-    event.preventDefault();
-    const body = {
-      movieId: newMovieId,
-      premiere: selectedPremiere,
-      price: form.price,
-      location: selectedPremiere,
-      dateStart: form.dateStart,
-      dateEnd: form.dateEnd,
-      time: formTime.time
-    };
+    try {
+      event.preventDefault();
+
+      const body = {
+        movieId: newMovieId,
+        premiere: selectedPremiere,
+        price: formPrice.price,
+        location: updateLocation,
+        dateStart: formDate.dateStart,
+        dateEnd: formDate.dateEnd,
+        time: formTime.time.join(", ")
+      };
+      dispatch(createSchedule(body));
+      handleReset();
+      dataSchedule();
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+
+  const handleDeleteSchedule = async (item) => {
+    try {
+      await alert();
+      const id = item.id;
+      dispatch(deleteSchedule(id));
+      dataSchedule();
+      alert(`Success Delete schedule with id: ${id} in ${item.premiere} cinema`);
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+
+  const handleReset = () => {
+    setNewMovieId("");
+    setSelectedPremiere("");
+    setFormPrice({ price: "" });
+    setUpdateLocation("");
+    setFormDate({ dateStart: "", dateEnd: "" });
+    setFormTime({ time: [] });
   };
 
   // UPDATE
-  const handlePrice = () => {
-    setTicketPrice();
+  const handlePrice = (event) => {
+    setFormPrice({ ...formPrice, price: event.target.value });
   };
   const handleSelectPremiere = (e, name) => {
     e.preventDefault();
@@ -146,23 +171,77 @@ function ManageSchedule() {
     setUpdateLocation(e.target.value);
   };
 
-  const handleDate = () => {
-    setDateStart();
-    setDateEnd();
+  const handleChangeFormDate = (event) => {
+    setFormDate({ ...formDate, [event.target.name]: event.target.value });
   };
 
   const handleFormTime = (event) => {
-    e.preventDefault();
-    if (event.key === "Enter" || event.key === 13) {
-      setFormTime({ ...form, [event.target.name]: event.target.value });
+    if (event.key === "Enter") {
       setHide(true);
+      setFormTime({ ...formTime, time: [...formTime.time, event.target.value] });
     }
   };
-  console.log(formTime.time);
 
   const onClickPlus = (e) => {
     e.preventDefault();
     setHide(false);
+  };
+
+  const handleClickUpdateButton = async (item) => {
+    try {
+      setIsUpdate(true);
+      setDataUpdatingSchedule(item);
+      const result = await dispatch(getMovieByIdMovie(item.movieId));
+      setDataMovieUpdate(result.action.payload.data.data[0]);
+
+      setSelectedPremiere(dataUpdatingSchedule.premiere);
+      setFormPrice({ price: dataUpdatingSchedule.price });
+      setUpdateLocation(dataUpdatingSchedule.location);
+      setFormDate({
+        dateStart: dataUpdatingSchedule.dateStart.split("T")[0],
+        dateEnd: dataUpdatingSchedule.dateEnd.split("T")[0]
+      });
+      setFormTime({
+        time: dataUpdatingSchedule.time.split(", ")
+      });
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+
+  console.log(
+    "From Clicking Update Button 1",
+    selectedPremiere,
+    formPrice,
+    updateLocation,
+    formDate,
+    formTime
+  );
+
+  const handleUpdate = async (event) => {
+    try {
+      event.preventDefault();
+
+      const id = dataUpdatingSchedule.id;
+      const body = {
+        movieId: dataUpdatingSchedule.movieId,
+        premiere: selectedPremiere ?? "",
+        price: formPrice.price ?? "",
+        location: updateLocation ?? "",
+        dateStart: formDate.dateStart ?? "",
+        dateEnd: formDate.dateEnd ?? "",
+        time: formTime.time.join(", ") ?? ""
+      };
+      console.log("Data Send", body);
+      await dispatch(updateSchedule(id, body));
+      alert("Success Update Data Schedule");
+      handleReset();
+      dataSchedule();
+      setIsUpdate(false);
+    } catch (error) {
+      console.log(error.response);
+      alert("Something wrong with the server");
+    }
   };
 
   function formatRupiah(money) {
@@ -198,22 +277,34 @@ function ManageSchedule() {
                 <div className="card-body">
                   <form>
                     <div className="row">
-                      <div className="col-lg-3 manageschedule_image-card m-auto">
-                        <div className="card" style={{ width: "240px" }}>
+                      <div className="col-lg-3 manageschedule_image-card mt-4 ms-4">
+                        <div className="card" style={{ width: "240px", height: "305px" }}>
                           <div className="card-body manageschedule_image">
-                            <img
-                              className="manageschedule_image-movie"
-                              src={
-                                movie.image
-                                  ? process.env.REACT_APP_CLOUDINARY_URL + movie.image
-                                  : DefaultPict
-                              }
-                              alt="movie-picture"
-                            />
+                            {isUpdate ? (
+                              <img
+                                className="manageschedule_image-movie"
+                                src={
+                                  dataMovieUpdate
+                                    ? process.env.REACT_APP_CLOUDINARY_URL + dataMovieUpdate.image
+                                    : DefaultPict
+                                }
+                                alt="movie-picture"
+                              />
+                            ) : (
+                              <img
+                                className="manageschedule_image-movie"
+                                src={
+                                  movie.image
+                                    ? process.env.REACT_APP_CLOUDINARY_URL + movie.image
+                                    : DefaultPict
+                                }
+                                alt="movie-picture"
+                              />
+                            )}
                           </div>
                         </div>
                       </div>
-                      <div className="col-lg-4 manageschedule_data-movie-one m-auto">
+                      <div className="col-lg-4 manageschedule_data-movie-one ms-3 mt-4">
                         <div className="mb-3 select-movie-wrapper">
                           <label htmlFor="movie-name" className="form-label">
                             Movie Name
@@ -224,11 +315,17 @@ function ManageSchedule() {
                             onChange={handleSelectMovie}
                           >
                             <option selected>Select Movie</option>
-                            {allMovie.map((item) => (
-                              <option key={item.id} value={item.id}>
-                                {item.name}
+                            {isUpdate ? (
+                              <option selected value={dataUpdatingSchedule.movieId}>
+                                {dataUpdatingSchedule.name}
                               </option>
-                            ))}
+                            ) : (
+                              allMovie.map((item) => (
+                                <option key={item.id} value={item.id}>
+                                  {item.name}
+                                </option>
+                              ))
+                            )}
                           </select>
                         </div>
                         <div className="mb-3">
@@ -236,12 +333,13 @@ function ManageSchedule() {
                             Price
                           </label>
                           <input
-                            type="text"
+                            type="number"
                             className="form-control"
                             id="price"
                             placeholder="movie Price..."
-                            onChange={(event) => handleChangeForm(event)}
-                            value={form.price}
+                            value={formPrice.price}
+                            name="price"
+                            onChange={handlePrice}
                           />
                         </div>
                         <div className="mb-3">
@@ -251,24 +349,39 @@ function ManageSchedule() {
                           <div className="premiere_wrap">
                             {sortPremiere.map((item) => (
                               <div key={item.id}>
-                                <button
-                                  onClick={(e) => handleSelectPremiere(e, item.name)}
-                                  name={item.name}
-                                  type="button"
-                                  className="btn btn-outline-white premiere_button"
-                                >
-                                  <img
-                                    src={item.premiere}
-                                    alt="premiere"
-                                    className="premiere_img"
-                                  />
-                                </button>
+                                {selectedPremiere === item.name ? (
+                                  <button
+                                    onClick={(e) => handleSelectPremiere(e, item.name)}
+                                    name={item.name}
+                                    type="button"
+                                    className="btn btn-outline-primary premiere_button"
+                                  >
+                                    <img
+                                      src={item.premiere}
+                                      alt="premiere"
+                                      className="premiere_img"
+                                    />
+                                  </button>
+                                ) : (
+                                  <button
+                                    onClick={(e) => handleSelectPremiere(e, item.name)}
+                                    name={item.name}
+                                    type="button"
+                                    className="btn btn-outline-white premiere_button"
+                                  >
+                                    <img
+                                      src={item.premiere}
+                                      alt="premiere"
+                                      className="premiere_img"
+                                    />
+                                  </button>
+                                )}
                               </div>
                             ))}
                           </div>
                         </div>
                       </div>
-                      <div className="col-lg-4 manageschedule_data-movie-two m-auto">
+                      <div className="col-lg-4 manageschedule_data-movie-two ms-4 mt-4">
                         <div className="mb-3">
                           <label htmlFor="category" className="form-label">
                             Location
@@ -279,60 +392,81 @@ function ManageSchedule() {
                             aria-label="Default select example"
                           >
                             <option selected>Select Location</option>
-                            {sortLocation.map((item) => (
-                              <option key={item.id} value={item.value}>
-                                {item.label}
+                            {isUpdate ? (
+                              <option selected value={dataUpdatingSchedule.location.value}>
+                                {dataUpdatingSchedule.location}
                               </option>
-                            ))}
+                            ) : (
+                              sortLocation.map((item) => (
+                                <option key={item.id} value={item.value}>
+                                  {item.label}
+                                </option>
+                              ))
+                            )}
                           </select>
                         </div>
                         <div className="mb-3">
                           <div className="row">
                             <div className="col-6">
-                              <label htmlFor="duration-hour" className="form-label">
+                              <label htmlFor="date" className="form-label">
                                 Date Start
                               </label>
-                              <input type="date" className="form-control" />
+                              <input
+                                type="date"
+                                className="form-control"
+                                value={formDate.dateStart}
+                                name="dateStart"
+                                onChange={handleChangeFormDate}
+                              />
                             </div>
                             <div className="col-6">
-                              <label htmlFor="duration-minute" className="form-label">
+                              <label htmlFor="date" className="form-label">
                                 Date End
                               </label>
-                              <input type="date" className="form-control" />
+                              <input
+                                type="date"
+                                className="form-control"
+                                value={formDate.dateEnd}
+                                name="dateEnd"
+                                onChange={handleChangeFormDate}
+                              />
                             </div>
                           </div>
                         </div>
-                        <div className="mb-3">
+                        <div className="mb-2">
                           <div className="row m-1">
-                            <label htmlFor="duration-hour" className="ps-0 form-label">
+                            <label htmlFor="duration-hour" className="ps-0 mb-0 form-label">
                               Time
                             </label>
 
-                            <div className="manage_time">
-                              <button
-                                className="col me-0 time-plus btn btn-outline-primary"
-                                onClick={(e) => onClickPlus(e)}
-                              >
-                                +
-                              </button>
-                              <input
-                                type="time"
-                                placeholder="00:00"
-                                className={
-                                  hide === true
-                                    ? "manageschedule_input-new-time__hide"
-                                    : "manageschedule_input-new-time"
-                                }
-                                name="time"
-                                onChange={(event) => handleFormTime(event)}
-                              />
-                              <button className="col">08:30 am</button>
-                              <button className="col">08:30 am</button>
-                              <button className="col">08:30 am</button>
-                              <button className="col">08:30 am</button>
-                              <button className="col">08:30 am</button>
-                              <button className="col">08:30 am</button>
-                              <button className="col">08:30 am</button>
+                            <div className="manage_time mt-1 ">
+                              {hide ? (
+                                <button
+                                  className="col-6 me-0  time-plus btn btn-outline-primary"
+                                  onClick={(e) => onClickPlus(e)}
+                                >
+                                  +
+                                </button>
+                              ) : (
+                                <input
+                                  type="time"
+                                  placeholder="00:00"
+                                  className={"col-6  manageschedule_input-new-time"}
+                                  name="time"
+                                  value={formTime.time}
+                                  onKeyPress={handleFormTime}
+                                />
+                              )}
+
+                              <div className="row timewrapper" style={{ minHeight: "70px" }}>
+                                {formTime
+                                  ? formTime.time.map((item, index) => (
+                                      <button key={index} className="col-4 ">
+                                        {dayjs(item, "HH:mm").format("hh:mm a")}
+                                      </button>
+                                    ))
+                                  : ""}
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -343,18 +477,32 @@ function ManageSchedule() {
                         <button
                           type="submit"
                           className="btn btn-outline-primary reset-manageschedule-button"
+                          onClick={handleReset}
                         >
                           Reset
                         </button>
                       </div>
-                      <div className="submit-manageschedule">
-                        <button
-                          type="submit"
-                          className="col-lg-6 btn btn-outline-primary submit-manageschedule-button"
-                        >
-                          Submit
-                        </button>
-                      </div>
+                      {isUpdate ? (
+                        <div className="submit-manageschedule">
+                          <button
+                            type="submit"
+                            className="col-lg-6 btn btn-outline-primary submit-manageschedule-button"
+                            onClick={handleUpdate}
+                          >
+                            Update
+                          </button>
+                        </div>
+                      ) : (
+                        <div className="submit-manageschedule">
+                          <button
+                            type="submit"
+                            className="col-lg-6 btn btn-outline-primary submit-manageschedule-button"
+                            onClick={handleSubmit}
+                          >
+                            Submit
+                          </button>
+                        </div>
+                      )}
                     </div>
                   </form>
                 </div>
@@ -381,8 +529,8 @@ function ManageSchedule() {
                 value={sort}
               >
                 <option selected>Sort</option>
-                {SortList.map((item) => (
-                  <option key={item} value={item.value}>
+                {SortList.map((item, index) => (
+                  <option key={index} value={item.value}>
                     {item.label}
                   </option>
                 ))}
@@ -398,8 +546,8 @@ function ManageSchedule() {
                 value={location}
               >
                 <option selected>Location</option>
-                {sortLocation.map((item) => (
-                  <option key={item} value={item.value}>
+                {sortLocation.map((item, index) => (
+                  <option key={index} value={item.value}>
                     {item.label}
                   </option>
                 ))}
@@ -479,12 +627,18 @@ function ManageSchedule() {
                       </div>
                       <div className="row p-auto">
                         <div className="col-6 text-start">
-                          <button className="btn btn-outline-primary managedataschedule_update-button">
+                          <button
+                            className="btn btn-outline-primary managedataschedule_update-button"
+                            onClick={() => handleClickUpdateButton(item)}
+                          >
                             Update
                           </button>
                         </div>
                         <div className="col-6 text-end">
-                          <button className="btn btn-outline-danger managedataschedule_delete-button">
+                          <button
+                            className="btn btn-outline-danger managedataschedule_delete-button"
+                            onClick={() => handleDeleteSchedule(item)}
+                          >
                             Delete
                           </button>
                         </div>

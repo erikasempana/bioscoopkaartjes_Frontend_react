@@ -48,7 +48,7 @@ body {
 }
 .manageschedule_image-card {
   display: grid;
-  place-items: center;
+  place-items: top;
 }
 .manageschedule_image {
   font-size: 12px;
@@ -142,7 +142,7 @@ body {
 }
 
 .manage_time button {
-  width: 80px;
+  width: 100px;
   height: 40px;
   text-align: center;
   border-radius: 10px;
