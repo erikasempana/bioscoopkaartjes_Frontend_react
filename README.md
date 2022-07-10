@@ -35,9 +35,14 @@
 
    <br/>
 
+## API
+
+- link to github: [github](https://github.com/erikasempana/bioscoopkaartjes_Backend.git)
+- API-Bioscoopkaartjes : "https://bioscoopkaartjes.herokuapp.com/"
+
 ## Deployment
 
-- integrate deployment [Here](https://www.google.com)
+- integrate deployment [Here](https://bioscoopkaartjes.vercel.app/home)
 
 <br/>
 
