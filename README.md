@@ -1,40 +1,79 @@
-# TICKITZ
+<div align="center">
+<img src="./src/assets/img1/logoViolet.png" alt="Logo" width="450">
 
-Tickitz is one of my project about cinema online ticketing. It will help you on ordering ticket and saving your time.
+<p align="center">Bioscoopkaartjes is one of my project about cinema online ticketing. It will help you on ordering ticket and saving your time.</p>
 
-This project was developed with:
+<br/>
 
-- [REACTJS](https://reactjs.org/).
-- [BOOTSTRAP](https://getbootstrap.com/docs/5.0/getting-started/introduction/).
-- [AXIOS](https://www.npmjs.com/package/axios).
-- [REACT-PAGINATE](https://www.npmjs.com/package/react-paginate).
-- [REACT-REDUX](https://react-redux.js.org/).
-- [REDUX-PERSIST](https://www.npmjs.com/package/redux-persist).
+[![REACTJS](https://img.shields.io/npm/v/reactjs?label=reactjs)](https://reactjs.org/)
+[![BOOTSTRAP](https://img.shields.io/npm/v/bootstrap?label=bootstrap)](https://getbootstrap.com/docs/5.0/getting-started/introduction/)
+[![AXIOS](https://img.shields.io/npm/v/axios?label=axios)](https://www.npmjs.com/package/axios)
+[![REACT-PAGINATE](https://img.shields.io/npm/v/react-paginate?label=react-paginate)](https://www.npmjs.com/package/react-paginate)
+[![REACT-REDUX](https://img.shields.io/npm/v/react-redux?label=react-redux)](https://react-redux.js.org/)
+[![REDUX-PERSIST](https://img.shields.io/npm/v/redux-persist?label=redux-persist)](https://www.npmjs.com/package/redux-persist)
 
-## Available Scripts
+[**Instalation**](#instalation) | [**Deployment**](#deployment) | [**Preview**](#preview)
 
-In the project directory, you can run:
+<hr/>
+</div>
 
-### `npm start`
+<br/>
 
-Runs the app in the development mode.
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Installation
 
-### `npm test`
+1. Clone repo
 
-Launches the test runner in the interactive watch mode.
+   ```git
+   https://github.com/erikasempana/bioscoopkaartjes_Frontend_react.git
+   ```
 
-### `npm run build`
+2. Install Depedencies
 
-Builds the app for production to the `build` folder.) for more information.
+   ```
+   npm install
+   ```
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+   <br/>
 
 ## Deployment
 
-- you can see result deployment without integration [Here](https://bioscoopkaartjes.netlify.app/home1.html)
 - integrate deployment [Here](https://www.google.com)
+
+<br/>
+
+## Preview
+
+This is how the website look like:
+
+<p align="center">
+<img src="./src/assets/githu-Img/mobile5.png" title="" alt="ScreenShot" data-align="center" width="138">
+<img src="./src/assets/githu-Img/laptop5.png" title="" alt="ScreenShot" data-align="center" width="500">
+</p>
+
+<br/>
+
+<p align="center">
+<img src="./src/assets/githu-Img/mobile1.png" title="" alt="ScreenShot" data-align="center" width="138">
+<img src="./src/assets/githu-Img/laptop1.png" title="" alt="ScreenShot" data-align="center" width="500">
+</p>
+
+<br/>
+
+<p align="center">
+<img src="./src/assets/githu-Img/mobile2.png" title="" alt="ScreenShot" data-align="center" width="138">
+<img src="./src/assets/githu-Img/laptop2.png" title="" alt="ScreenShot" data-align="center" width="500">
+</p>
+
+<br/>
+
+<p align="center">
+<img src="./src/assets/githu-Img/mobile3.png" title="" alt="ScreenShot" data-align="center" width="138">
+<img src="./src/assets/githu-Img/laptop3.png" title="" alt="ScreenShot" data-align="center" width="500">
+</p>
+
+<br/>
+
+<p align="center">
+<img src="./src/assets/githu-Img/mobile4.png" title="" alt="ScreenShot" data-align="center" width="138">
+<img src="./src/assets/githu-Img/laptop4.png" title="" alt="ScreenShot" data-align="center" width="500">
+</p>

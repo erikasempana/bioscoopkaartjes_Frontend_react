@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateStatusBooking } from "../../stores/action/booking";
+import { getBookingById, updateStatusBooking } from "../../stores/action/booking";
 import { useParams } from "react-router-dom";
 import "./tickets.css";
 
@@ -16,7 +16,7 @@ import QrCode from "../../assets/img1/QRCode.png";
 
 export default function Tickets() {
   const dispatch = useDispatch();
-  const detailTickets = useSelector((state) => state.bookingById.data);
+  const detailTickets = useSelector((state) => state.boookingById.data);
   // react-router-dom
   // [1] menangkap data page lain dari URL params => useSearchParams
   // const [searchParams] = useSearchParams();
@@ -31,11 +31,21 @@ export default function Tickets() {
   // console.log(params.id);
   // --------------------
 
+  const bookingById = async () => {
+    try {
+      const bookingId = params.id;
+      await dispatch(getBookingById(bookingId));
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+
   const handleTicketStatus = async () => {
     try {
       console.log("UPDATE STATUS");
       const bookingId = params.id;
       await dispatch(updateStatusBooking(bookingId));
+      bookingById();
     } catch (error) {
       console.log(error.response);
     }

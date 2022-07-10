@@ -56,18 +56,18 @@ function AfterLogin() {
       {/* dropdown profile navbar */}
       <div className="dropdown navbar-dropdown-profile">
         <button
-          className="btn btn-white"
-          // role="button"
-          type="button"
+          className="btn btn-white "
+          role="button"
           id="dropdownMenuLink"
-          data-toggle="dropdown"
-          // data-bs-toggle="dropdown"
+          href="#"
+          // data-toggle="dropdown"
+          data-bs-toggle="dropdown"
           aria-expanded="false"
         >
           <img
             src={userImage ? process.env.REACT_APP_CLOUDINARY_URL + userImage : Default}
             alt="dropdown"
-            className="img-responsive user_image"
+            className="img-responsive user_image "
           />
         </button>
         <ul
