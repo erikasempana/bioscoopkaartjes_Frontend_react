@@ -12,7 +12,7 @@
 [![REACT-REDUX](https://img.shields.io/npm/v/react-redux?label=react-redux)](https://react-redux.js.org/)
 [![REDUX-PERSIST](https://img.shields.io/npm/v/redux-persist?label=redux-persist)](https://www.npmjs.com/package/redux-persist)
 
-[**Instalation**](#instalation) | [**Deployment**](#deployment) | [**Preview**](#preview)
+[**Instalation**](#instalation) | [**API**](#api) | [**Deployment**](#deployment) | [**Preview**](#preview)
 
 <hr/>
 </div>
@@ -37,12 +37,14 @@
 
 ## API
 
-- link to github: [github](https://github.com/erikasempana/bioscoopkaartjes_Backend.git)
-- API-Bioscoopkaartjes : "https://bioscoopkaartjes.herokuapp.com/"
+- REPOSITORY - Bioscoopkaartjes >> [github](https://github.com/erikasempana/bioscoopkaartjes_Backend.git)
+- API - Bioscoopkaartjes >> "https://bioscoopkaartjes.herokuapp.com/"
+
+<br/>
 
 ## Deployment
 
-- integrate deployment [Here](https://bioscoopkaartjes.vercel.app/home)
+- integrate deployment - Bioscoopkaartjes >> [Here](bioscoopkaartjess.netlify.app/home)
 
 <br/>
 
