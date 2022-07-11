@@ -44,7 +44,7 @@
 
 ## Deployment
 
-- integrate deployment - Bioscoopkaartjes >> [Here](bioscoopkaartjess.netlify.app/home)
+- integrate deployment - Bioscoopkaartjes >> [Here](https://bioscoopkaartjess.netlify.app/home)
 
 <br/>
 
